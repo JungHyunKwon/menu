@@ -921,7 +921,7 @@ try {
 									$secondParentDepthNextItem.removeClass(_className.activeNext);
 
 									//상태 클래스 추가
-									option.addStateClass($parentsDepthItem.eq(2).find('a[data-menu-text], button[data-menu-text]').first());
+									option.addStateClass($parentsDepthItem.eq(2).find('a[data-menu-text], button[data-menu-text]').first()[0]);
 
 									//메뉴 닫기
 									$parentsDepthItem.first().closest('div[data-menu-depth]').css('max-height', '');
