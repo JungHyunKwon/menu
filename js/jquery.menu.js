@@ -20,7 +20,7 @@ try {
 					has : 'has', //다음메뉴가 있을때
 					solo : 'solo', //다음메뉴가 없을때
 					rule : 'rule', //nth-child 대체
-					open : 'open', //열기
+					open : 'open', //닫기
 					prev : 'prev', //이전
 					next : 'next', //다음
 					cut : 'cut' //자르기
@@ -506,9 +506,7 @@ try {
 								_register[registIndex].option.$openElement.off('click.' + _register[registIndex].option.namespace + ' focusin.' + _register[registIndex].option.namespace);
 								_register[registIndex].option.$closeElement.off('click.' + _register[registIndex].option.namespace + ' focusout.' + _register[registIndex].option.namespace);
 								$thisFirst.off('mouseleave.' + _register[registIndex].option.namespace);
-								_register[registIndex].option.$depthFirstText.off('focusout.' + _register[registIndex].option.namespace);
-								_register[registIndex].option.$depthLastText.off('focusout.' + _register[registIndex].option.namespace);
-								_register[registIndex].option.$depthText.off('focusin.' + _register[registIndex].option.namespace + ' click.' + _register[registIndex].option.namespace);
+								_register[registIndex].option.$depthText.off('focusin.' + _register[registIndex].option.namespace + ' focusout.' + _register[registIndex].option.namespace + ' click.' + _register[registIndex].option.namespace);
 								_register[registIndex].option.$depthAndText.off('mouseover.' + _register[registIndex].option.namespace);
 								
 								//배열에서 제거
@@ -607,7 +605,6 @@ try {
 						option.$depth2List = option.$depth2.find('ul[data-menu-list="2"]');
 						option.$depthItem = option.$depthList.children('li');
 						option.$depthText = option.$depthItem.find('a[data-menu-text], button[data-menu-text]');
-						option.$depthFirstText = option.$depthText.first();
 						option.$depthLastText = option.$depthText.last();
 						option.$depthAndText = option.$depth.add(option.$depthText);
 						option.$activedDepthText = option.$depthItem.find('a[data-menu-text][data-menu-actived="true"], button[data-menu-text][data-menu-actived="true"]').last();
@@ -1091,19 +1088,9 @@ try {
 							if(option.isPressTabKey) {
 								option.openMenu.call(this, event);
 							}
-						});
-
-						//첫번째 a나가고 추적
-						option.$depthFirstText.on('focusout.' + option.namespace, function(event) {
-							//shift키와 tab키를 눌러서 나갔을때
-							if(option.isPressShiftKey && option.isPressTabKey) {
-								option.setSpy(this);
-							}
-						});
-
-						//마지막 a나가고 추적
-						option.$depthLastText.on('focusout.' + option.namespace, function(event) {
-							if(!option.isPressShiftKey && option.isPressTabKey) {
+						}).on('focusout.' + option.namespace, function(event) {
+							//메뉴 닫기
+							if(option.isPressTabKey) {
 								option.setSpy(this);
 							}
 						});
