@@ -468,7 +468,7 @@ try {
 				/**
 				 * @name menu
 				 * @since 2018-02-23
-				 * @param {object} option({branchPoint : number, cut : number, namespace : string, openElement : element, closeElement : element})
+				 * @param {object} option({event : string, cut : number, namespace : string, openElement : element, closeElement : element})
 				 * @param {jQueryElement || element} element
 				 * @return {jQueryElement || jQueryObject}
 				 */

@@ -4,6 +4,7 @@
 ## 호출
 ````javascript
 $(selector).menu({
+    event : string,
     cut : number,
     namespace : string,
     openElement : jQueryElement || element,
@@ -15,6 +16,7 @@ $(selector).menu({
 
 이름 | 형태 | 설명
 | :-- | :-- | :-- |
+event | string(mouse, click) | 사용할 이벤트를 지정합니다.
 cut | number | 지정한 숫자의 배수마다 2차메뉴에 cut요소를 생성합니다.
 namespace | string | 메뉴의 명칭을 지정합니다.
 openElement | jQueryElement \|\| element | 메뉴를 열게할 요소를 지정하며 토글기능이 들어가 있습니다.
