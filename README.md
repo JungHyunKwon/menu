@@ -47,7 +47,7 @@ list | number | 목록요소(ul)를 지정합니다.
 이름 | 형태 | 설명
 | :-- | :-- | :-- |
 text | number | 글자요소(a, button)를 지정합니다.
-actived | boolean | 처음에 활성화시킬 요소를 지정하며 글자요소에 사용할 수 있습니다.
+actived | boolean | 초기에 활성화시킬 요소를 지정할때 사용합니다.
 
 ### 클래스
 
