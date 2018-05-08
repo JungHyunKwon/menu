@@ -1082,7 +1082,7 @@ try {
 						//depthText에 포커스가 갔을때 && 클릭했을때
 						option.$depthText.on('focusin.' + option.namespace, function(event) {
 							//메뉴 열기
-							if(!option.isPressShiftKey && option.isPressTabKey) {
+							if(option.isPressTabKey) {
 								option.openMenu.call(this, event);
 							}
 						});
