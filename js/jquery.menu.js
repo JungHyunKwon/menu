@@ -502,7 +502,7 @@ try {
 								$thisFirst.css('padding-bottom', '');
 
 								//이벤트 핸들러 제거
-								_$document.off('keydown.' + _register[registIndex].option.namespace + ' keyup.' + _register[registIndex].option.namespace);
+								_$document.off('keydown.' + _register[registIndex].option.namespace);
 								_register[registIndex].option.$openElement.off('click.' + _register[registIndex].option.namespace + ' focusin.' + _register[registIndex].option.namespace);
 								_register[registIndex].option.$closeElement.off('click.' + _register[registIndex].option.namespace + ' focusout.' + _register[registIndex].option.namespace);
 								$thisFirst.off('mouseleave.' + _register[registIndex].option.namespace);
@@ -874,7 +874,8 @@ try {
 						 * @param {object} event
 						 */
 						option.closeMenu = function(event) {
-							var $this = $(this),
+							var element = this,
+								$this = $(element),
 								$parentsDepthItem = $this.parents('li'),
 								$parentDepthItem = $parentsDepthItem.first(),
 								$depthPrevItem = $parentDepthItem.prev('li'),
@@ -882,8 +883,7 @@ try {
 								$nextDepth = $parentDepthItem.find('div[data-menu-depth]:first'),
 								$secondParentDepthItem = $parentsDepthItem.eq(1),
 								$secondParentDepthPrevItem = $secondParentDepthItem.prev('li'),
-								$secondParentDepthNextItem = $secondParentDepthItem.next('li'),
-								$secondParentDepthText = $secondParentDepthItem.find('a[data-menu-text], button[data-menu-text]').first();
+								$secondParentDepthNextItem = $secondParentDepthItem.next('li');
 
 							//mouse이벤트일때
 							if(option.event === 'mouse') {
@@ -902,6 +902,8 @@ try {
 							}else{
 								//부모메뉴 닫기
 								if($this.is(option.$depthLastText)) {
+									element = $secondParentDepthItem.find('a[data-menu-text], button[data-menu-text]').first();
+
 									//이전 아이템이 cut아이템일때
 									if(option.$depth2CutItem.is($secondParentDepthPrevItem)) {
 										$secondParentDepthPrevItem = $secondParentDepthPrevItem.prev('li');
@@ -922,14 +924,18 @@ try {
 									$secondParentDepthNextItem.removeClass(_className.activeNext);
 
 									//상태 클래스 추가
-									option.addStateClass($secondParentDepthText[0]);
+									if(option.$depth1Text.is(element)) {
+										_removePrefixClass($thisFirst, _className.state);
+									}else{
+										option.addStateClass(element);
+									}
 
 									//메뉴 닫기
 									$parentsDepthItem.first().closest('div[data-menu-depth]').css('max-height', '');
 
 									//높이 재조정
 									option.setHeight({
-										element : $secondParentDepthText[0],
+										element : element,
 										nextDepth : false,
 										parentsDepth : true
 									});
@@ -963,14 +969,14 @@ try {
 
 									//높이 재조정
 									option.setHeight({
-										element : this,
+										element : element,
 										nextDepth : false,
 										parentsDepth : true
 									});
 								}
 
 								//1차 메뉴를 닫을때
-								if(option.$depth1Text.is(this)) {
+								if(option.$depth1Text.is(element)) {
 									//전역 활성화 클래스 제거
 									_$body.removeClass(option.className.globalActive);
 									
@@ -1115,18 +1121,18 @@ try {
 							if(event.shiftKey) {
 								option.isPressShiftKey = true;
 							}
-						}).on('keyup.' + option.namespace, function(event) {
-							var keyCode = event.keyCode || event.which;
-
-							//tab키를 눌렀을때
-							if(keyCode === 9) {
+							
+							//타이머가 존재하면
+							if(option.timer) {
+								clearTimeout(option.timer);
+								option.timer = 0;
+							}
+							
+							//0.25초마다 타이머 실행
+							option.timer = setTimeout(function() {
 								option.isPressTabKey = false;
-							}
-
-							//shift키를 눌렀을때
-							if(event.shiftKey) {
 								option.isPressShiftKey = false;
-							}
+							}, 250);
 						});
 
 						//객체 등록
