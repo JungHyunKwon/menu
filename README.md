@@ -22,28 +22,28 @@ namespace | string | 메뉴의 명칭을 지정합니다.
 openElement | jQueryElement \|\| element | 메뉴를 열게할 요소를 지정하며 토글기능이 들어가 있습니다.
 closeElement | jQueryElement \|\| element | 메뉴를 닫게할 요소를 지정합니다.
 
-#### data-menu-*
+### data-menu-*
 
-##### selector
+#### selector
 이름 | 형태 | 설명
 | :-- | :-- | :-- |
 top-background | string(full, wrap) | 상단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다. 
 bottom-background | string(full, wrap) | 하단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다.
 type | number | 메뉴유형을 지정합니다.<ol><li>풀다운</li><li>풀다운2</li><li>드롭다운</li><li>드롭다운2</li></ol>
-effect | number | openElement에 지정한 요소를 눌렀을때의 효과를 지정합니다. <ol><li>토글</li><li>슬라이드</li><li>왼쪽에서 오른쪽으로 슬라이드</li><li>오른쪽에서 왼쪽으로 슬라이드</li></ol>
+effect | number | openElement에 지정한 요소를 눌렀을때의 효과를 지정합니다. <ol><li>토글</li><li>위에서 아래로 슬라이드</li><li>왼쪽에서 오른쪽으로 슬라이드</li><li>오른쪽에서 왼쪽으로 슬라이드</li></ol>
 
-##### div
+#### div
 이름 | 형태 | 설명
 | :-- | :-- | :-- |
 depth | number | 깊이요소(div)를 지정합니다.
 title | number | div요소 왼쪽 제목상자를 넣을때 사용하며 list의 이전요소에 기입해야 합니다.
 
-##### ul
+#### ul
 이름 | 형태 | 설명
 | :-- | :-- | :-- |
 list | number | 목록요소(ul)를 지정합니다.
 
-##### a, button
+#### a, button
 이름 | 형태 | 설명
 | :-- | :-- | :-- |
 text | number | 글자요소(a, button)를 지정합니다.
