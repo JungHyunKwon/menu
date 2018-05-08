@@ -604,10 +604,10 @@ try {
 						option.$depthList = option.$depth.find('ul[data-menu-list]');
 						option.$depth2List = option.$depth2.find('ul[data-menu-list="2"]');
 						option.$depthItem = option.$depthList.children('li');
-						option.$depthText = option.$depthItem.find('a[data-menu-text], button[data-menu-text]');
+						option.$depthText = option.$depth1.find('a[data-menu-text], button[data-menu-text]');
 						option.$depthLastText = option.$depthText.last();
 						option.$depthAndText = option.$depth.add(option.$depthText);
-						option.$activedDepthText = option.$depthItem.find('a[data-menu-text][data-menu-actived="true"], button[data-menu-text][data-menu-actived="true"]').last();
+						option.$activedDepthText = option.$depth1.find('a[data-menu-text][data-menu-actived="true"], button[data-menu-text][data-menu-actived="true"]').last();
 						option.$activedDepthItem = option.$activedDepthText.parents('li');
 
 						//actived클래스 추가
@@ -921,11 +921,7 @@ try {
 									$secondParentDepthNextItem.removeClass(_className.activeNext);
 
 									//상태 클래스 추가
-									if(option.$depth1Text.is(element)) {
-										_removePrefixClass($thisFirst, _className.state);
-									}else{
-										option.addStateClass(element);
-									}
+									option.addStateClass($parentsDepthItem.eq(2).find('a[data-menu-text], button[data-menu-text]').first());
 
 									//메뉴 닫기
 									$parentsDepthItem.first().closest('div[data-menu-depth]').css('max-height', '');
@@ -992,9 +988,7 @@ try {
 						//mouse이벤트일때
 						if(option.event === 'mouse') {
 							//depthText와 depth에 마우스가 접근했을때						
-							option.$depthAndText.on('mouseover.' + option.namespace, function(event) {
-								option.openMenu.call(this, event);
-							});
+							option.$depthAndText.on('mouseover.' + option.namespace, option.openMenu);
 
 							//지정객체 나가면 추적
 							$thisFirst.on('mouseleave.' + option.namespace, function(event) {
@@ -1079,7 +1073,9 @@ try {
 							option.$openElement.focus();
 
 							//이벤트 중단
-							event.preventDefault();
+							if(event.type === 'click') {
+								event.preventDefault();
+							}
 						});
 
 						//depthText에 포커스가 갔을때 && 클릭했을때
