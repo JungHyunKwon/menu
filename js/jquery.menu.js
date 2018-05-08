@@ -871,8 +871,7 @@ try {
 						 * @param {object} event
 						 */
 						option.closeMenu = function(event) {
-							var element = this,
-								$this = $(element),
+							var $this = $(this),
 								$parentsDepthItem = $this.parents('li'),
 								$parentDepthItem = $parentsDepthItem.first(),
 								$depthPrevItem = $parentDepthItem.prev('li'),
@@ -880,7 +879,8 @@ try {
 								$nextDepth = $parentDepthItem.find('div[data-menu-depth]:first'),
 								$secondParentDepthItem = $parentsDepthItem.eq(1),
 								$secondParentDepthPrevItem = $secondParentDepthItem.prev('li'),
-								$secondParentDepthNextItem = $secondParentDepthItem.next('li');
+								$secondParentDepthNextItem = $secondParentDepthItem.next('li'),
+								$secondParentDepthText = $secondParentDepthItem.find('a[data-menu-text], button[data-menu-text]').first();
 
 							//mouse이벤트일때
 							if(option.event === 'mouse') {
@@ -899,8 +899,6 @@ try {
 							}else{
 								//부모메뉴 닫기
 								if($this.is(option.$depthLastText)) {
-									element = $secondParentDepthItem.find('a[data-menu-text], button[data-menu-text]').first();
-
 									//이전 아이템이 cut아이템일때
 									if(option.$depth2CutItem.is($secondParentDepthPrevItem)) {
 										$secondParentDepthPrevItem = $secondParentDepthPrevItem.prev('li');
@@ -948,7 +946,7 @@ try {
 									$depthNextItem.removeClass(_className.activeNext);
 
 									//상태 클래스 추가
-									option.addStateClass($parentsDepthItem.eq(1).find('a[data-menu-text], button[data-menu-text]').first()[0]);
+									option.addStateClass($secondParentDepthText[0]);
 
 									//다음 메뉴 닫기
 									$nextDepth.css('max-height', '');
@@ -956,13 +954,13 @@ try {
 
 								//높이 재조정
 								option.setHeight({
-									element : element,
+									element : $secondParentDepthText[0],
 									nextDepth : false,
 									parentsDepth : true
 								});
 
 								//1차 메뉴를 닫을때
-								if(option.$depth1Text.is(element)) {
+								if(option.$depth1Text.is($secondParentDepthText[0])) {
 									//전역 활성화 클래스 제거
 									_$body.removeClass(option.className.globalActive);
 									
