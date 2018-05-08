@@ -1103,11 +1103,6 @@ try {
 							if(keyCode === 9) {
 								option.isPressTabKey = true;
 							}
-
-							//shift키를 눌렀을때
-							if(event.shiftKey) {
-								option.isPressShiftKey = true;
-							}
 							
 							//타이머가 존재하면
 							if(option.timer) {
@@ -1118,7 +1113,6 @@ try {
 							//0.25초마다 타이머 실행
 							option.timer = setTimeout(function() {
 								option.isPressTabKey = false;
-								option.isPressShiftKey = false;
 							}, 250);
 						});
 
