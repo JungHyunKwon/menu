@@ -509,7 +509,7 @@ try {
 								_register[registIndex].option.$depthFirstText.off('focusout.' + _register[registIndex].option.namespace);
 								_register[registIndex].option.$depthLastText.off('focusout.' + _register[registIndex].option.namespace);
 								_register[registIndex].option.$depthText.off('focusin.' + _register[registIndex].option.namespace + ' click.' + _register[registIndex].option.namespace);
-								_register[registIndex].option.$depthAndText.off('mouseenter.' + _register[registIndex].option.namespace);
+								_register[registIndex].option.$depthAndText.off('mouseover.' + _register[registIndex].option.namespace);
 								
 								//배열에서 제거
 								_register.splice(registIndex, 1);
@@ -989,7 +989,7 @@ try {
 						//mouse이벤트일때
 						if(option.event === 'mouse') {
 							//depthText와 depth에 마우스가 접근했을때						
-							option.$depthAndText.on('mouseenter.' + option.namespace, function(event) {
+							option.$depthAndText.on('mouseover.' + option.namespace, function(event) {
 								option.openMenu.call(this, event);
 							});
 
