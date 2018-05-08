@@ -926,13 +926,6 @@ try {
 									//메뉴 닫기
 									$parentsDepthItem.first().closest('div[data-menu-depth]').css('max-height', '');
 
-									//높이 재조정
-									option.setHeight({
-										element : element,
-										nextDepth : false,
-										parentsDepth : true
-									});
-
 								//다음메뉴 닫기
 								}else{
 									//이전 아이템이 cut아이템일때
@@ -959,14 +952,14 @@ try {
 
 									//다음 메뉴 닫기
 									$nextDepth.css('max-height', '');
-
-									//높이 재조정
-									option.setHeight({
-										element : element,
-										nextDepth : false,
-										parentsDepth : true
-									});
 								}
+
+								//높이 재조정
+								option.setHeight({
+									element : element,
+									nextDepth : false,
+									parentsDepth : true
+								});
 
 								//1차 메뉴를 닫을때
 								if(option.$depth1Text.is(element)) {
