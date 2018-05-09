@@ -23,7 +23,8 @@ try {
 					open : 'open', //닫기
 					prev : 'prev', //이전
 					next : 'next', //다음
-					cut : 'cut' //자르기
+					cut : 'cut', //자르기
+					initialized : _namespace + _separator + 'initialized' //초기화된
 				};
 
 			//활성화의 이전
@@ -205,7 +206,7 @@ try {
 				/**
 				 * @name 넓이 또는 높이 구하기
 				 * @since 2017-12-06
-				 * @param {object} option({element : element || jQueryElement, method : string, noneDuration : boolean || string, showElement : boolean, showParents : boolean, changeAuto : boolean})
+				 * @param {object} option({element : element || jQueryElement, method : string, noneDuration : boolean || string, showElement : boolean, showParents : boolean, changeAuto : array})
 				 * @return {array || number || string}
 				 */
 				function _getSize(option) {
@@ -241,9 +242,9 @@ try {
 						option.showParents = false;
 					}
 					
-					//불린이 아닐때
-					if(_getTypeof(option.changeAuto) !== 'boolean') {
-						option.changeAuto = false;
+					//배열이 아닐때
+					if(_getTypeof(option.changeAuto) !== 'array') {
+						option.changeAuto = [];
 					}
 					
 					//제이쿼리로 변환
@@ -255,11 +256,11 @@ try {
 						var $this = $(element),
 							value = '';
 							
-						//엘리먼트일때
+						//요소일때
 						if(_isElement(element)) {
 							var $clone = $this.clone(false);
 							
-							//보이지않게 css처리
+							//보이지않게 스타일처리
 							$clone.css({
 								visibility : 'hidden',
 								position : 'absolute',
@@ -302,30 +303,29 @@ try {
 								$clone.css('transition-property', 'none');
 							}
 							
-							//width, min-width, max-width, height, min-height, max-height를 자동으로 변경하는걸로 설정했을때
-							if(option.changeAuto) {
-								if(option.method === 'outerwidth(true)' || option.method === 'outerwidth' || option.method === 'innerwidth' || option.method === 'width') {
-									$clone.css({
-										width : 'auto',
-										minWidth : 0,
-										maxWidth : 'none'
-									});
-								}else if(option.method === 'outerheight(true)' || option.method === 'outerheight' || option.method === 'innerheight' || option.method === 'height') {
-									$clone.css({
-										height : 'auto',
-										minHeight : 0,
-										maxHeight : 'none'
-									});
-								}else{
-									$clone.css({
-										width : 'auto',
-										minWidth : 0,
-										maxWidth : 'none',
-										height : 'auto',
-										minHeight : 0,
-										maxHeight : 'none'
-									});	
-								}
+							//초기화해줄 속성이 있을때
+							if(option.changeAuto.length) {
+								$.each(option.changeAuto, function(index, value) {
+									//문자열일때
+									if(_getTypeof(value) === 'string') {
+										value = value.toLowerCase();
+									}
+									
+									//value값에 맞게 초기화
+									if(value === 'width') {
+										$clone.width('auto');
+									}else if(value === 'minwidth') {
+										$clone.css('min-width', 0);
+									}else if(value === 'maxwidth') {
+										$clone.css('max-width', 'none');
+									}else if(value === 'height') {
+										$clone.height('auto');
+									}else if(value === 'minheight') {
+										$clone.css('min-height', 0);
+									}else if(value === 'maxheight') {
+										$clone.css('max-height', 'none');
+									}
+								});
 							}
 							
 							//width, height설정
@@ -488,6 +488,7 @@ try {
 								_register[registIndex].option.$depth2CutItem.remove();
 								
 								//클래스 제거
+								$thisFirst.removeClass(_className.initialized);
 								_removePrefixClass(_register[registIndex].option.$depthItem, _className.rule);
 								_$body.removeClass(_register[registIndex].option.className.globalActive + ' ' + _register[registIndex].option.className.globalOpen);
 								_removePrefixClass($thisFirst, _className.state);
@@ -575,6 +576,9 @@ try {
 
 						//닫기버튼 제이쿼리 엘리먼트로 변환
 						option.$closeElement = $(option.closeElement);
+						
+						//초기화 클래스 추가
+						$thisFirst.addClass(_className.initialized);
 
 						//클래스이름 합성
 						option.className = {
@@ -678,7 +682,7 @@ try {
 										noneDuration : true,
 										showElement : true,
 										showParents : true,
-										changeAuto : true
+										changeAuto : ['height', 'minheight', 'maxheight']
 									}));
 								}
 
@@ -692,7 +696,7 @@ try {
 											noneDuration : true,
 											showElement : true,
 											showParents : true,
-											changeAuto : true
+											changeAuto : ['height', 'minheight', 'maxheight']
 										}));
 									});
 								}
@@ -707,12 +711,14 @@ try {
 										method : 'outerheight(true)',
 										noneDuration : true,
 										showElement : true,
-										changeAuto : true,
-										showParents : true
+										showParents : true,
+										changeAuto : ['height', 'minheight', 'maxheight']
 									}));
 									
-									option.$depth1Title.css('max-height', opt.depth2Height);
-
+									//depth1Title이 있을때
+									if(option.$depth1Title.length) {
+										option.$depth1Title.css('max-height', opt.depth2Height);
+									}
 								//풀다운2, 드롭다운1
 								}else if(option.type === 2 || option.type === 3) {
 									//선택된 depthText에 depth2에서 outerHeight(height, padding)를 구하기
@@ -722,7 +728,7 @@ try {
 										noneDuration : true,
 										showElement : true,
 										showParents : true,
-										changeAuto : true
+										changeAuto : ['height', 'minheight', 'maxheight']
 									});
 								}
 								
@@ -783,11 +789,7 @@ try {
 								$parentsDepthItem = $this.parents('li'),
 								$parentsDepthLastItem = $parentsDepthItem.last(),
 								$depthPrevItem = $parentsDepthItem.prev('li'),
-								$depthNextItem = $parentsDepthItem.next('li'),
-								$siblingsDepthText = $parentsDepthItem.find('[data-menu-text]:first').filter('a, button'),
-								$siblingsParentDepthItem = $siblingsDepthText.closest('li'),
-								$siblingsDepthItem = $siblingsParentDepthItem.siblings('li'),
-								$siblingsNextDepth = $siblingsDepthItem.find('div[data-menu-depth]:first');
+								$depthNextItem = $parentsDepthItem.next('li');
 
 							//이전 아이템이 cut아이템일때
 							if(option.$depth2CutItem.is($depthPrevItem)) {
@@ -804,11 +806,15 @@ try {
 								//초기화
 								option.closeMenu.call(this, event);
 							}else if(option.event === 'click') {
+								var $siblingsDepthText = $parentsDepthItem.find('[data-menu-text]:first').filter('a, button'),
+									$siblingsParentDepthItem = $siblingsDepthText.closest('li'),
+									$siblingsDepthItem = $siblingsParentDepthItem.siblings('li');
+
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
 								$siblingsParentDepthItem.add($siblingsDepthItem).removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
 
 								//메뉴 닫기
-								$siblingsNextDepth.css('max-height', '');
+								$siblingsDepthItem.find('div[data-menu-depth]:first').css('max-height', '');
 								
 								//높이 재조정
 								$siblingsDepthText.each(function(index, element) {
@@ -852,17 +858,7 @@ try {
 						 * @param {object} event
 						 */
 						option.closeMenu = function(event) {
-							var element = this,
-								$this = $(element),
-								$parentsDepthItem = $this.parents('li'),
-								$parentDepthItem = $parentsDepthItem.first(),
-								$depthPrevItem = $parentDepthItem.prev('li'),
-								$depthNextItem = $parentDepthItem.next('li'),
-								$nextDepth = $parentDepthItem.find('div[data-menu-depth]:first'),
-								$secondParentDepthItem = $parentsDepthItem.eq(1),
-								$secondParentDepthPrevItem = $secondParentDepthItem.prev('li'),
-								$secondParentDepthNextItem = $secondParentDepthItem.next('li'),
-								$secondParentDepthText = $secondParentDepthItem.find('a[data-menu-text], button[data-menu-text]').first();
+							var $this = $(this);
 
 							//mouse이벤트일때
 							if(option.event === 'mouse') {
@@ -874,14 +870,25 @@ try {
 
 								//max-height, padding-bottom초기화
 								option.$depth.css('max-height', '');
-								option.$depth1Title.css('max-height', '');
 								$thisFirst.css('padding-bottom', '');
 								
+								//depth1Title이 있을때
+								if(option.$depth1Title.length) {
+									option.$depth1Title.css('max-height', '');
+								}
+
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
 								option.$depthItem.removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
 							}else{
+								var element = this,
+									$secondParentDepthItem = $parentsDepthItem.eq(1),
+									$parentsDepthItem = $this.parents('li');
+
 								//부모메뉴 닫기
 								if($this.is(option.$depthLastText)) {
+									var $secondParentDepthPrevItem = $secondParentDepthItem.prev('li'),
+										$secondParentDepthNextItem = $secondParentDepthItem.next('li');
+
 									element = $parentsDepthItem.eq(2).find('a[data-menu-text], button[data-menu-text]').first()[0];
 
 									//이전 아이템이 cut아이템일때
@@ -911,6 +918,10 @@ try {
 
 								//다음메뉴 닫기
 								}else{
+									var $parentDepthItem = $parentsDepthItem.first(),
+										$depthPrevItem = $parentDepthItem.prev('li'),
+										$depthNextItem = $parentDepthItem.next('li');
+
 									//이전 아이템이 cut아이템일때
 									if(option.$depth2CutItem.is($depthPrevItem)) {
 										$depthPrevItem = $depthPrevItem.prev('li');
@@ -934,7 +945,7 @@ try {
 									option.addStateClass($secondParentDepthItem.find('a[data-menu-text], button[data-menu-text]').first()[0]);
 
 									//다음 메뉴 닫기
-									$nextDepth.css('max-height', '');
+									$parentDepthItem.find('div[data-menu-depth]:first').css('max-height', '');
 								}
 
 								//높이 재조정
@@ -981,8 +992,6 @@ try {
 								var $this = $(this),
 									$parentDepthItem = $this.closest('li'),
 									$nextDepth = $parentDepthItem.find('div[data-menu-depth]:first'),
-									tagName = this.tagName.toLowerCase(),
-									isActive = $parentDepthItem.hasClass(_className.active),
 									time = new Date().getTime(),
 									nextDepthTransitionDuration = $nextDepth.css('transition-duration');
 
@@ -1007,6 +1016,9 @@ try {
 
 								//다음 메뉴의 transition-duration을 구해 그 시간이 지난후에 실행
 								if((time - option.time) >= nextDepthTransitionDuration) {
+									var tagName = this.tagName.toLowerCase(),
+										isActive = $parentDepthItem.hasClass(_className.active);
+
 									option.time = time;
 
 									//(선택된 태그의 주소와 다음 메뉴의 첫번째 a태그의 주소와 같을때 || 선택된 태그가 button태그일때) && 활성화 상태일때
