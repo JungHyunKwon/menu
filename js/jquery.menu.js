@@ -11,7 +11,7 @@ try {
 		(function($) {
 			var _$document = $(document),
 				_consoleType = _getTypeof(window.console),
-				_register = [], //등록된 객체
+				_register = [], //등록된 요소
 				_namespace = 'menu', //네임스페이스
 				_separator = '_', //구분자
 				_className = { //클래스 이름
@@ -250,89 +250,74 @@ try {
 					option.$element = $(option.element);
 					option.result = [];
 					
-					//받은객체만큼 루핑
+					//받은요소만큼 루핑
 					option.$element.each(function(index, element) {
 						var $this = $(element),
 							value = '';
 							
 						//엘리먼트일때
 						if(_isElement(element)) {
-							//타임스탬프 생성
-							var timestamp = 'clone' + new Date().getTime();
-							
-							//클래스 추가로 색인
-							$this.addClass(timestamp);
-
-							var $lastParent = $($this.parents().eq(-3)[0] || $this[0]), //html, body를 제외한 최상위 부모 찾기
-								$clone = $lastParent.clone(true); //부모 복사
+							var $clone = $this.clone(false);
 							
 							//보이지않게 css처리
 							$clone.css({
 								visibility : 'hidden',
-								width : $lastParent.width(),
-								height : $lastParent.height(),
 								position : 'absolute',
-								top : -100 + '%',
-								left : -100 + '%',
+								top : 0,
+								left : 0,
 								zIndex : -1
 							});
 							
-							//body태그 자손으로 추가
-							$clone.appendTo('body');
-
-							//색인클래스 삭제
-							$this.removeClass(timestamp);
-							
-							//복사된 요소에서 색인된 엘리먼트 찾기
-							var $cloneThis = $clone.find('.' + timestamp);
-
-							//복사된 요소에서 색인된 엘리먼트에서 색인클래스 삭제
-							$cloneThis.removeClass(timestamp);
+							//받은 요소의 다음으로 클론요소 추가
+							$this.after($clone);
 							
 							//부모들을 강제로 보이게 설정했을때
 							if(option.showParents) {
-								var $cloneParents = $cloneThis.parents().not('html, body'); //html, body예외처리
+								var $cloneParents = $clone.parents().not('html, body'),
+									cloneParentsStyle = $.map($cloneParents, function(element, index) {
+										return element.style.display || '';
+									});
 
 								$cloneParents.show(0);
 							}
 							
-							//색인된 객체를 보이게 설정했을때
+							//요소를 보이게 설정했을때
 							if(option.showElement) {
-								$cloneThis.show(0);
+								$clone.show(0);
 							}
 
 							//불린으로 들어왔을때
 							if(option.noneDuration) {
-								$cloneThis.css({
+								$clone.css({
 									animationName : 'none',
 									transitionProperty : 'none'
 								});
 							
 							//animation으로 들어왔을때
 							}else if(option.noneDuration === 'animation') {
-								$cloneThis.css('animation-name', 'none');
+								$clone.css('animation-name', 'none');
 							
 							//transition으로 들어왔을때
 							}else if(option.noneDuration === 'transition') {
-								$cloneThis.css('transition-property', 'none');
+								$clone.css('transition-property', 'none');
 							}
 							
 							//width, min-width, max-width, height, min-height, max-height를 자동으로 변경하는걸로 설정했을때
 							if(option.changeAuto) {
 								if(option.method === 'outerwidth(true)' || option.method === 'outerwidth' || option.method === 'innerwidth' || option.method === 'width') {
-									$cloneThis.css({
+									$clone.css({
 										width : 'auto',
 										minWidth : 0,
 										maxWidth : 'none'
 									});
 								}else if(option.method === 'outerheight(true)' || option.method === 'outerheight' || option.method === 'innerheight' || option.method === 'height') {
-									$cloneThis.css({
+									$clone.css({
 										height : 'auto',
 										minHeight : 0,
 										maxHeight : 'none'
 									});
 								}else{
-									$cloneThis.css({
+									$clone.css({
 										width : 'auto',
 										minWidth : 0,
 										maxWidth : 'none',
@@ -342,26 +327,40 @@ try {
 									});	
 								}
 							}
-
+							
+							//width, height설정
+							$clone.css({
+								width : $clone.outerWidth(),
+								height : $clone.outerHeight()
+							});
+							
+							//width, height설정이 끝나면 값을 변수에 담는다.
 							if(option.method === 'outerwidth(true)') {
-								value = $cloneThis.outerWidth(true);
+								value = $clone.outerWidth(true);
 							}else if(option.method === 'outerwidth') {
-								value = $cloneThis.outerWidth();
+								value = $clone.outerWidth();
 							}else if(option.method === 'innerwidth') {
-								value = $cloneThis.innerWidth();
+								value = $clone.innerWidth();
 							}else if(option.method === 'width') {
-								value = $cloneThis.width();
+								value = $clone.width();
 							}else if(option.method === 'outerheight(true)') {
-								value = $cloneThis.outerHeight(true);
+								value = $clone.outerHeight(true);
 							}else if(option.method === 'outerheight') {
-								value = $cloneThis.outerHeight();
+								value = $clone.outerHeight();
 							}else if(option.method === 'innerheight') {
-								value = $cloneThis.innerHeight();
+								value = $clone.innerHeight();
 							}else if(option.method === 'height') {
-								value = $cloneThis.height();
+								value = $clone.height();
 							}
 							
-							//복사객체 제거
+							//부모들을 강제로 보이게 설정했을때
+							if(option.showParents) {
+								$cloneParents.each(function(index, element) {
+									$(element).css('display', cloneParentsStyle[index]);
+								});
+							}
+
+							//복사요소 제거
 							$clone.remove();
 						}
 						
@@ -429,7 +428,7 @@ try {
 				
 
 				/**
-				 * @name 등록된 객체 인덱스 구하기
+				 * @name 등록된 요소 인덱스 구하기
 				 * @since 2017-12-06
 				 * @param {element || jQueryElement} element
 				 * @return {array || number}
@@ -981,7 +980,7 @@ try {
 							//depthText와 depth에 마우스가 접근했을때						
 							option.$depthAndText.on('mouseover.' + option.namespace, option.openMenu);
 
-							//지정객체 나가면 추적
+							//지정요소 나가면 추적
 							$thisFirst.on('mouseleave.' + option.namespace, function(event) {
 								option.setSpy();
 							});
@@ -1103,7 +1102,7 @@ try {
 							}, 250);
 						});
 
-						//객체 등록
+						//요소 등록
 						_register.push({
 							element : $thisFirst[0],
 							option : option
@@ -1113,7 +1112,7 @@ try {
 						$thisFirst.menu('spy');
 					}
 					
-					//객체반환
+					//요소반환
 					return $thisFirst;
 				};
 			});
