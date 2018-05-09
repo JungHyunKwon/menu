@@ -819,10 +819,10 @@ try {
 							}
 
 							//mouse이벤트일때
-							if(option.event === 'mouse') {
+							if(option.event === 'mouse' && event.type !== 'focusin') {
 								//초기화
 								option.closeMenu.call(this, event);
-							}else{
+							}else if(option.event === 'click') {
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
 								$siblingsParentDepthItem.add($siblingsDepthItem).removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
 
