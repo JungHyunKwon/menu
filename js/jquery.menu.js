@@ -881,8 +881,8 @@ try {
 								option.$depthItem.removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
 							}else{
 								var element = this,
-									$secondParentDepthItem = $parentsDepthItem.eq(1),
-									$parentsDepthItem = $this.parents('li');
+									$parentsDepthItem = $this.parents('li'),
+									$secondParentDepthItem = $parentsDepthItem.eq(1);
 
 								//부모메뉴 닫기
 								if($this.is(option.$depthLastText)) {
