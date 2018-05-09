@@ -3,7 +3,7 @@
 @media screen and (max-width:1000px) {
 	/* 플러그인 공통 */
 	div[data-menu-title] {display:none; position:static; left:auto;}
-	div[data-menu-title='1'] {top:auto;}
+	div[data-menu-title='1'] {top:auto; height:auto;}
 	div[data-menu-title='2'] {top:auto; height:auto;}
 	div[data-menu-depth='1'].clearfix div[data-menu-title='1'] + ul[data-menu-list='1'] {float:none;}
 	div[data-menu-depth='1'] {visibility:hidden; transition-property:visibility;}

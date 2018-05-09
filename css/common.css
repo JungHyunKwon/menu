@@ -32,7 +32,7 @@ ul[data-menu-list] > li.has > a[data-menu-text]:before, ul[data-menu-list] > li.
 ul[data-menu-list] > li.has > a[data-menu-text]:before, ul[data-menu-list] > li.has > button[data-menu-text]:before {content:'하위메뉴가 존재하는';}
 a[data-menu-text][target='_blank']:after {content:'새창';}
 div[data-menu-title] {position:absolute; left:0;}
-div[data-menu-title='1'] {top:100%;}
+div[data-menu-title='1'] {top:100%; height:10000px;}
 div[data-menu-title='2'] {top:0; height:100%;}
 div[data-menu-depth] {visibility:hidden; overflow-x:hidden; overflow-y:hidden; position:relative; max-height:0; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
 div[data-menu-depth='1'] {visibility:visible; overflow-x:visible; overflow-y:visible; max-height:none; transition-property:none;}

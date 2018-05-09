@@ -498,6 +498,7 @@ try {
 
 								//특성제거
 								_register[registIndex].option.$depth.css('max-height', '');
+								_register[registIndex].option.$depth1Title.css('max-height', '');
 								$thisFirst.css('padding-bottom', '');
 
 								//이벤트 핸들러 제거
@@ -595,6 +596,7 @@ try {
 						//요소 정의
 						option.$depth = $thisFirst.find('div[data-menu-depth]');
 						option.$depth1 = option.$depth.filter('div[data-menu-depth="1"]');
+						option.$depth1Title = option.$depth1.find('div[data-menu-title="1"]');
 						option.$depth1List = option.$depth1.find('ul[data-menu-list="1"]');
 						option.$depth1Item = option.$depth1List.children('li');
 						option.$depth1FirstItem = option.$depth1Item.first();
@@ -713,7 +715,8 @@ try {
 											changeAuto : true,
 											showParents : true
 										}));
-									
+										
+										option.$depth1Title.css('max-height', opt.depth2Height);
 									//풀다운2, 드롭다운1
 									}else if(option.type === 2 || option.type === 3) {
 										//선택된 depthText에 depth2에서 outerHeight(height, padding)를 구하기
@@ -870,7 +873,8 @@ try {
 						 * @param {object} event
 						 */
 						option.closeMenu = function(event) {
-							var $this = $(this),
+							var element = this,
+								$this = $(element),
 								$parentsDepthItem = $this.parents('li'),
 								$parentDepthItem = $parentsDepthItem.first(),
 								$depthPrevItem = $parentDepthItem.prev('li'),
@@ -891,6 +895,7 @@ try {
 
 								//max-height, padding-bottom초기화
 								option.$depth.css('max-height', '');
+								option.$depth1Title.css('max-height', '');
 								$thisFirst.css('padding-bottom', '');
 								
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
@@ -898,6 +903,8 @@ try {
 							}else{
 								//부모메뉴 닫기
 								if($this.is(option.$depthLastText)) {
+									element = $parentsDepthItem.eq(2).find('a[data-menu-text], button[data-menu-text]').first()[0];
+
 									//이전 아이템이 cut아이템일때
 									if(option.$depth2CutItem.is($secondParentDepthPrevItem)) {
 										$secondParentDepthPrevItem = $secondParentDepthPrevItem.prev('li');
@@ -918,7 +925,7 @@ try {
 									$secondParentDepthNextItem.removeClass(_className.activeNext);
 
 									//상태 클래스 추가
-									option.addStateClass($parentsDepthItem.eq(2).find('a[data-menu-text], button[data-menu-text]').first()[0]);
+									option.addStateClass(element);
 
 									//메뉴 닫기
 									$parentsDepthItem.first().closest('div[data-menu-depth]').css('max-height', '');
@@ -945,7 +952,7 @@ try {
 									$depthNextItem.removeClass(_className.activeNext);
 
 									//상태 클래스 추가
-									option.addStateClass($secondParentDepthText[0]);
+									option.addStateClass($secondParentDepthItem.find('a[data-menu-text], button[data-menu-text]').first()[0]);
 
 									//다음 메뉴 닫기
 									$nextDepth.css('max-height', '');
@@ -953,13 +960,13 @@ try {
 
 								//높이 재조정
 								option.setHeight({
-									element : $secondParentDepthText[0],
+									element : element,
 									nextDepth : false,
 									parentsDepth : true
 								});
 
 								//1차 메뉴를 닫을때
-								if(option.$depth1Text.is($secondParentDepthText[0])) {
+								if(option.$depth1Text.is(element)) {
 									//전역 활성화 클래스 제거
 									_$body.removeClass(option.className.globalActive);
 									
@@ -967,6 +974,9 @@ try {
 									if(option.isHorizontalLayout()) {
 										//padding-bottom 초기화
 										$thisFirst.css('padding-bottom', '');
+
+										//max-height 초기화
+										option.$depth1Title.css('max-height', '');
 									}
 								}
 							}
