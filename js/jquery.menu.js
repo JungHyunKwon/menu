@@ -806,8 +806,7 @@ try {
 								//초기화
 								option.closeMenu.call(this, event);
 							}else if(option.event === 'click') {
-								var $siblingsDepthText = $parentsDepthItem.find('[data-menu-text]:first').filter('a, button'),
-									$siblingsParentDepthItem = $siblingsDepthText.closest('li'),
+								var $siblingsParentDepthItem = $parentsDepthItem.find('[data-menu-text]:first').filter('a, button').closest('li'),
 									$siblingsDepthItem = $siblingsParentDepthItem.siblings('li');
 
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
@@ -815,15 +814,6 @@ try {
 
 								//메뉴 닫기
 								$siblingsDepthItem.find('div[data-menu-depth]:first').css('max-height', '');
-								
-								//높이 재조정
-								$siblingsDepthText.each(function(index, element) {
-									option.setHeight({
-										element : element,
-										nextDepth : false,
-										parentsDepth : true
-									});
-								});
 							}
 
 							//전역 활성화 클래스 추가
@@ -1109,8 +1099,21 @@ try {
 							option : option
 						});
 						
+						//메뉴가 열렸는지 확인
+						option.isOpen = _$body.hasClass(option.className.globalOpen);
+						
+						//spy요소가 있을때
+						if(option.$activedDepthText.length) {
+							_$body.addClass(option.className.globalActive + ' ' + option.className.globalOpen);
+						}
+
 						//추적시작
 						$thisFirst.menu('spy');
+						
+						//spy요소가 있고 메뉴가 열려있지 않았을때
+						if(option.$activedDepthText.length && !option.isOpen) {
+							_$body.removeClass(option.className.globalOpen);
+						}
 					}
 					
 					//요소반환

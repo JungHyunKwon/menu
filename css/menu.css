@@ -32,8 +32,8 @@
 .nav[data-menu-type='4'] .depth1_text {text-align:left;}
 .nav[data-menu-type='4'] .depth2 {transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
 .nav[data-menu-type='4'] .depth2_text {color:#fff; text-align:left;}
-.nav[data-menu-type='4'] .depth3 {display:block; padding-right:20px; padding-left:20px;}
-.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2_item.active .depth3 {margin-top:20px; padding-top:20px; padding-bottom:20px;}
+.nav[data-menu-type='4'] .depth3 {display:block;}
+.nav[data-menu-type='4'] .depth3_list {padding-top:20px; padding-right:20px; padding-bottom:20px; padding-left:20px; border-top-width:20px; border-top-style:solid; border-top-color:#175898; background-color:#24478b;}
 .nav[data-menu-type='4'] .depth3_text {color:#fff;}
 .nav[data-menu-type='4'] .depth4 {display:none;}
 
@@ -46,7 +46,6 @@
 .nav[data-menu-type='4'] {background-color:#3072c4;}
 .nav[data-menu-type='4'] .depth2 {background-color:#175898;}
 .menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2 {background-color:#175898;}
-.nav[data-menu-type='4'] .depth3 {background-color:#24478b;}
 
 /* 메뉴 높이 */
 .nav, .nav[data-menu-top-background]:before {height:40px;}

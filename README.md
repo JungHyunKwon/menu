@@ -57,6 +57,7 @@ actived | boolean | 초기에 활성화시킬 요소를 지정할때 사용합�
 
 #### selector
 * state : state라는 단어뒤에 접근한 요소의 순번이 부여됩니다.
+* menu_initialized : 메뉴 플러그인이 셋팅되었을때 부여됩니다.
 
 #### li
 * active : 활성화됬을때 지정됩니다.

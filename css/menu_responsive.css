@@ -11,13 +11,11 @@
 	.nav ul[data-menu-list] > li.has.active > a:before {background-image:url('../images/has_depth_ico_on.png');}
 	.nav .depth1_item {width:auto;}
 	.nav .depth1_text {text-align:left;}
-	.nav .depth2 {background-color:#175898; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
-	.menu_active .nav .depth1_item.active .depth2 {background-color:transparent;}
-	.menu_open.menu_active .nav .depth1_item.active .depth2 {background-color:#175898;}
+	.nav .depth2 {transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
 	.nav .depth2_text {color:#fff; text-align:left;}
-	.nav .depth3 {display:block; padding-right:20px; padding-left:20px; background-color:#24478b;}
+	.nav .depth3 {display:block;}
 	.nav .depth4 {display:none;}
-	.menu_open.menu_active .nav .depth1_item.active .depth2_item.active .depth3 {margin-top:20px; padding-top:20px; padding-bottom:20px;}
+	.nav .depth3_list {padding-top:20px; padding-right:20px; padding-bottom:20px; padding-left:20px; border-top-width:20px; border-top-style:solid; border-top-color:#175898; background-color:#24478b;}
 	.nav .depth3_item {margin-top:10px;}
 	.nav .depth3_item:first-child {margin-top:0;}
 	.nav .depth3_text {color:#fff;}
@@ -25,22 +23,19 @@
 	/* 풀다운2 */
 	.nav[data-menu-type='2'] .depth2 {transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
 	.nav[data-menu-type='2'] .depth3_text {color:#fff;}
-	
-	/* 드롭다운 */
-	.nav[data-menu-type='3'] .depth2 {background-color:#175898;}
-
-	/* 드롭다운2 */
-	.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2_item.active .depth3 {margin-top:0; padding-top:0; padding-bottom:0;}
-	.menu_open.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2_item.active .depth3 {margin-top:20px; padding-top:20px; padding-bottom:20px;}
 
 	/* 메뉴 배경 */
 	.nav[data-menu-top-background]:before {background-color:transparent;}
 	.nav[data-menu-bottom-background]:after {background-color:transparent;}
-	.menu_active .nav[data-menu-type='2'] .depth1_item.active .depth2 {background-color:transparent;}
+	.nav .depth2 {background-color:#175898;}
+	.menu_active .nav .depth1_item.active .depth2 {background-color:#175898;}
+	.menu_open.menu_active .nav .depth1_item.active .depth2 {background-color:#175898;}
+	.menu_active .nav[data-menu-type='2'] .depth1_item.active .depth2 {background-color:#175898;}
 	.menu_open.menu_active .nav[data-menu-type='2'] .depth1_item.active .depth2 {background-color:#175898;}
-	.menu_active .nav[data-menu-type='2'] .depth3 {background-color:transparent;}
+	.menu_active .nav[data-menu-type='2'] .depth3 {background-color:#24478b;}
 	.menu_open.menu_active .nav[data-menu-type='2'] .depth3 {background-color:#24478b;}
-	.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2 {background-color:transparent;}
+	.nav[data-menu-type='3'] .depth2 {background-color:#175898;}
+	.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2 {background-color:#175898;}
 	.menu_open.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2 {background-color:#175898;}
 
 	/* 우측에서 나오는 효과 */
