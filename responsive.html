@@ -17,7 +17,7 @@
 		
 		$(function() {
 			var $nav = $('.nav'),
-				navMenuType = $nav.attr('data-menu-type'),
+				navMenuType = $nav.attr('data-menu-type') || 1,
 				navOption = {
 					cut : 0,
 					namespace : 'menu',
