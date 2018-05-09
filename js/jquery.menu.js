@@ -273,7 +273,7 @@ try {
 							
 							//부모들을 강제로 보이게 설정했을때
 							if(option.showParents) {
-								var $cloneParents = $clone.parents().not('html, body'),
+								var $cloneParents = $clone.parents(':not(html, body)'),
 									cloneParentsStyle = $.map($cloneParents, function(element, index) {
 										return element.style.display || '';
 									});
@@ -398,19 +398,16 @@ try {
 						
 						//클래스가 있을때
 						if(className) {
-							//클래스를 공백단위로 자르기
-							className = className.split(/\s/);
-
-							for(var i = 0, classNameLength = className.length; i < classNameLength; i++) {
+							$.each(className.split(/\s/), function(index, value) {
 								//클래스이름이 namespace값으로 시작할때
-								if(className[i].substring(0, namespaceLength) === namespace) {
+								if(value.substring(0, namespaceLength) === namespace) {
 									//클래스 제거
-									$this.removeClass(className[i]);
+									$this.removeClass(value);
 
 									//결과 기입
-									result.push(className[i]);
+									result.push(value);
 								}
-							}
+							});
 						}
 					});
 					
@@ -440,15 +437,15 @@ try {
 					$this.each(function(index, element) {
 						var $this = $(element),
 							isBreak = false;
-
-						for(var i = 0, registerLength = _register.length; i < registerLength; i++) {
+						
+						$.each(_register, function(index, value) {
 							//객체일때 && 들어온 엘리먼트와 등록된 엘리먼트가 같을때
-							if(_getTypeof(_register[i]) === 'object' && $this.is(_register[i].element)) {
-								result.push(i);
+							if(_getTypeof(value) === 'object' && $this.is(value.element)) {
+								result.push(index);
 								isBreak = true;
-								break;
+								return false;
 							}
-						}
+						});
 						
 						//결과가 없을때
 						if(!isBreak) {
@@ -700,49 +697,47 @@ try {
 									});
 								}
 								
-								//가로형 레이아웃을 사용할때
-								if(option.isHorizontalLayout()) {
-									opt.$depth2 = opt.$parentsDepthItem.find('div[data-menu-depth="2"]');
+								opt.$depth2 = opt.$parentsDepthItem.find('div[data-menu-depth="2"]');
+								
+								//풀다운
+								if(option.type === 1) {
+									//depth2중에서 outerHeight(height, padding)를 구해서 최대높이 구하기
+									opt.depth2Height = Math.max.apply(null, _getSize({
+										element : option.$depth2.get(),
+										method : 'outerheight(true)',
+										noneDuration : true,
+										showElement : true,
+										changeAuto : true,
+										showParents : true
+									}));
 									
-									//풀다운
-									if(option.type === 1) {
-										//depth2중에서 outerHeight(height, padding)를 구해서 최대높이 구하기
-										opt.depth2Height = Math.max.apply(null, _getSize({
-											element : option.$depth2.get(),
-											method : 'outerheight(true)',
-											noneDuration : true,
-											showElement : true,
-											changeAuto : true,
-											showParents : true
-										}));
-										
-										option.$depth1Title.css('max-height', opt.depth2Height);
-									//풀다운2, 드롭다운1
-									}else if(option.type === 2 || option.type === 3) {
-										//선택된 depthText에 depth2에서 outerHeight(height, padding)를 구하기
-										opt.depth2Height = _getSize({
-											element : opt.$depth2[0],
-											method : 'outerheight(true)',
-											noneDuration : true,
-											showElement : true,
-											showParents : true,
-											changeAuto : true
-										});
-									}
-									
-									//풀다운 메뉴에 모든 2차메뉴에 적용
-									if(option.type === 1 || option.type === 2) {
-										option.$depth2.css('max-height', opt.depth2Height);
-									
-									//드롭다운1 메뉴에 선택된 2차메뉴에 적용
-									}else if(option.type === 3) {
-										opt.$depth2.css('max-height', opt.depth2Height);
-									}
+									option.$depth1Title.css('max-height', opt.depth2Height);
 
-									//풀다운, 드롭다운1 메뉴에 padding-bottom적용
-									if(option.type === 1 || option.type === 2 || option.type === 3) {
-										$thisFirst.css('padding-bottom', opt.depth2Height);
-									}
+								//풀다운2, 드롭다운1
+								}else if(option.type === 2 || option.type === 3) {
+									//선택된 depthText에 depth2에서 outerHeight(height, padding)를 구하기
+									opt.depth2Height = _getSize({
+										element : opt.$depth2[0],
+										method : 'outerheight(true)',
+										noneDuration : true,
+										showElement : true,
+										showParents : true,
+										changeAuto : true
+									});
+								}
+								
+								//풀다운 메뉴에 모든 2차메뉴에 적용
+								if(option.type === 1 || option.type === 2) {
+									option.$depth2.css('max-height', opt.depth2Height);
+								
+								//드롭다운1 메뉴에 선택된 2차메뉴에 적용
+								}else if(option.type === 3) {
+									opt.$depth2.css('max-height', opt.depth2Height);
+								}
+
+								//풀다운, 드롭다운1 메뉴에 padding-bottom적용
+								if(option.type === 1 || option.type === 2 || option.type === 3) {
+									$thisFirst.css('padding-bottom', opt.depth2Height);
 								}
 							}
 
@@ -776,22 +771,6 @@ try {
 							}else{
 								option.closeMenu.call(element, event);
 							}
-						};
-
-						/**
-						 * @name 가로 레이아웃인지 확인
-						 * @since 2017-12-06
-						 */
-						option.isHorizontalLayout = function() {
-							var result = false,
-								depth1FirstItemFloat = option.$depth1FirstItem.css('float');
-
-							//값이 left이거나 right일때
-							if(depth1FirstItemFloat === 'left' || depth1FirstItemFloat === 'right') {
-								result = true;
-							}
-
-							return result;
 						};
 
 						/**
@@ -970,8 +949,8 @@ try {
 									//전역 활성화 클래스 제거
 									_$body.removeClass(option.className.globalActive);
 									
-									//가로형 레이아웃을 사용할때
-									if(option.isHorizontalLayout()) {
+									//메뉴타입이 1, 2, 3일때
+									if(option.type === 1 || option.type === 2 || option.type === 3) {
 										//padding-bottom 초기화
 										$thisFirst.css('padding-bottom', '');
 
@@ -1132,4 +1111,4 @@ try {
 	}
 }catch(e) {
 	console.error(e);
-} 
+}
