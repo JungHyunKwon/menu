@@ -13,7 +13,6 @@ try {
 				_$document = $(document),
 				_consoleType = _getTypeof(window.console),
 				_register = [], //등록된 요소
-				_namespace = 'menu', //네임스페이스
 				_separator = '_', //구분자
 				_className = { //클래스 이름
 					active : 'active', //활성화
@@ -25,7 +24,7 @@ try {
 					prev : 'prev', //이전
 					next : 'next', //다음
 					cut : 'cut', //자르기
-					initialized : _namespace + _separator + 'initialized' //초기화된
+					initialized : 'menu' + _separator + 'initialized' //초기화된
 				};
 
 			//활성화의 이전
@@ -370,31 +369,33 @@ try {
 
 						//등록되어있을때
 						if(register) {
+							var reigertOption = register.option;
+
 							//파괴
 							if(option === 'destroy') {
 								//cut 엘리먼트 삭제
-								register.option.$depthCutItem.remove();
+								registerOption.$depthCutItem.remove();
 								
 								//클래스 제거
 								$thisFirst.removeClass(_className.initialized);
-								_removePrefixClass(register.option.$depthItem, _className.rule);
-								_$body.removeClass(register.option.className.globalActive + ' ' + register.option.className.globalOpen);
+								_removePrefixClass(registerOption.$depthItem, _className.rule);
+								_$body.removeClass(registerOption.className.globalActive + ' ' + registerOption.className.globalOpen);
 								_removePrefixClass($thisFirst, _className.state);
-								register.option.$depthItem.removeClass(_className.has + ' ' + _className.solo + ' ' + _className.activePrev + ' ' + _className.active + ' ' + _className.activeNext + ' ' + _className.activedPrev + ' ' + _className.actived + ' ' + _className.activedNext);
+								registerOption.$depthItem.removeClass(_className.has + ' ' + _className.solo + ' ' + _className.activePrev + ' ' + _className.active + ' ' + _className.activeNext + ' ' + _className.activedPrev + ' ' + _className.actived + ' ' + _className.activedNext);
 
 								//특성제거
-								register.option.$depth.css('max-height', '');
-								register.option.$depth1Title.css('max-height', '');
+								registerOption.$depth.css('max-height', '');
+								registerOption.$depth1Title.css('max-height', '');
 								$thisFirst.css('padding-bottom', '');
 
 								//이벤트 핸들러 제거
-								_$window.off('resize.' + register.option.namespace);
-								_$document.off('keydown.' + register.option.namespace);
-								register.option.$openElement.off('click.' + register.option.namespace + ' focusin.' + register.option.namespace);
-								register.option.$closeElement.off('click.' + register.option.namespace + ' focusout.' + register.option.namespace);
-								$thisFirst.off('mouseleave.' + register.option.namespace);
-								register.option.$depthText.off('focusin.' + register.option.namespace + ' focusout.' + register.option.namespace + ' click.' + register.option.namespace);
-								register.option.$depthAndText.off('mouseover.' + register.option.namespace);
+								_$window.off('resize.' + registerOption.namespace);
+								_$document.off('keydown.' + registerOption.namespace);
+								registerOption.$openElement.off('click.' + registerOption.namespace + ' focusin.' + registerOption.namespace);
+								registerOption.$closeElement.off('click.' + registerOption.namespace + ' focusout.' + registerOption.namespace);
+								$thisFirst.off('mouseover.' + registerOption.namespace + ' mouseleave.' + registerOption.namespace);
+								registerOption.$depthText.off('focusin.' + registerOption.namespace + ' focusout.' + registerOption.namespace + ' click.' + registerOption.namespace);
+								registerOption.$depthAndText.off('mouseover.' + registerOption.namespace);
 								
 								//배열에서 제거
 								_register.splice(registIndex, 1);
@@ -403,26 +404,26 @@ try {
 							}else if(option === 'spy') {
 								//요소가 아닐때
 								if(!_isElement(element)) {
-									element = register.option.$activedDepthText[0];
+									element = registerOption.$activedDepthText[0];
 								}
 
 								var $element = $(element),
-									depthTextLength = register.option.$depthText.length;
+									depthTextLength = registerOption.$depthText.length;
 
 								for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
 									var hasDepthText = false,
 										elementI = $element[i];
 									
-									for(var j = 0, depthTextLength = register.option.$depthText.length; j < depthTextLength; j++) {
+									for(var j = 0, depthTextLength = registerOption.$depthText.length; j < depthTextLength; j++) {
 										//depthText에 포함된 요소일때
-										if(register.option.$depthText.eq(j).is(elementI)) {
+										if(registerOption.$depthText.eq(j).is(elementI)) {
 											hasDepthText = true;
 										}
 									}
 									
 									//depthText가 있을때
 									if(hasDepthText) {
-										register.option.openMenu.call(elementI, event);
+										registerOption.openMenu.call(elementI, event);
 									}
 								}
 							}
@@ -464,10 +465,20 @@ try {
 
 						//열기버튼 제이쿼리 엘리먼트로 변환
 						option.$openElement = $(option.openElement);
+						
+						//열기버튼이 없을때
+						if(!option.$openElement.length) {
+							option.$openElement = $('div[data-menu-open="' + option.namespace + '"] > button');
+						}
 
 						//닫기버튼 제이쿼리 엘리먼트로 변환
 						option.$closeElement = $(option.closeElement);
 						
+						//닫기버튼이 없을때
+						if(!option.$closeElement.length) {
+							option.$closeElement = $('div[data-menu-close="' + option.namespace + '"] > button');
+						}
+
 						//타이머 간격
 						option.interval = 250;
 
@@ -868,7 +879,12 @@ try {
 							option.$depthAndText.on('mouseover.' + option.namespace, option.openMenu);
 
 							//지정요소 나가면 추적
-							$thisFirst.on('mouseleave.' + option.namespace, function(event) {
+							$thisFirst.on('mouseover.' + option.namespace, function(event) {
+								//메뉴가 활성화되어 있을때
+								if(_$body.hasClass(option.className.globalActive)) {
+									option.openMenu.call(this, event);
+								}
+							}).on('mouseleave.' + option.namespace, function(event) {
 								option.setSpy();
 							});
 						}else{
