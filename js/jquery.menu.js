@@ -373,6 +373,8 @@ try {
 
 							//파괴
 							if(option === 'destroy') {
+								var registerNamespace = registerOption.namepsace;
+
 								//cut 엘리먼트 삭제
 								registerOption.$depthCutItem.remove();
 								
@@ -389,13 +391,13 @@ try {
 								$thisFirst.css('padding-bottom', '');
 
 								//이벤트 핸들러 제거
-								_$window.off('resize.' + registerOption.namespace);
-								_$document.off('keydown.' + registerOption.namespace);
-								registerOption.$openElement.off('click.' + registerOption.namespace + ' focusin.' + registerOption.namespace);
-								registerOption.$closeElement.off('click.' + registerOption.namespace + ' focusout.' + registerOption.namespace);
-								$thisFirst.off('mouseover.' + registerOption.namespace + ' mouseleave.' + registerOption.namespace);
-								registerOption.$depthText.off('focusin.' + registerOption.namespace + ' focusout.' + registerOption.namespace + ' click.' + registerOption.namespace);
-								registerOption.$depthAndText.off('mouseover.' + registerOption.namespace);
+								_$window.off('resize.' + registerNamespace);
+								_$document.off('keydown.' + registerNamespace);
+								registerOption.$openElement.off('click.' + registerNamespace + ' focusin.' + registerNamespace);
+								registerOption.$closeElement.off('click.' + registerNamespace + ' focusout.' + registerNamespace);
+								$thisFirst.off('mouseover.' + registerNamespace + ' mouseleave.' + registerNamespace);
+								registerOption.$depthText.off('focusin.' + registerNamespace + ' focusout.' + registerNamespace + ' click.' + registerNamespace);
+								registerOption.$depthAndText.off('mouseover.' + registerNamespace);
 								
 								//배열에서 제거
 								_register.splice(registIndex, 1);
