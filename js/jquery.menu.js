@@ -888,7 +888,7 @@ try {
 									option.openMenu.call(this, event);
 								}
 							}).on('mouseleave.' + option.namespace, function(event) {
-								option.setSpy();
+								option.setSpy(this);
 							});
 						}else{
 							//transition-duration 전역변수
