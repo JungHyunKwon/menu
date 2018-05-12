@@ -515,7 +515,7 @@ try {
 							i = parseInt(i, 10);
 
 							if(_getTypeof(i) === 'number' && _getTypeof(cutI) === 'number' && cutI > 1) {
-								$thisFirst.find('div[data-menu-depth="' + i + '"] ul[data-menu-list]:first > li:nth-child(' + cutI + ')n').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
+								$thisFirst.find('div[data-menu-depth="' + i + '"]:first-of-type ul[data-menu-list]:first > li:nth-child(' + cutI + 'n)').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
 							}
 						}
 						
@@ -729,7 +729,7 @@ try {
 							$depthNextItem.addClass(_className.activeNext);
 
 							//상태 클래스 추가
-							option.addStateClass($parentsDepthLastItem.add($parentsDepthLastItem.find('div[data-menu-depth]:first-of-type ul[data-menu-list] > li')).filter('.' + _className.active).last().find('[data-menu-text]:first').filter('a, button')[0]);
+							option.addStateClass($parentsDepthLastItem.add($parentsDepthLastItem.find('div[data-menu-depth]:first-of-type ul[data-menu-list]:first > li')).filter('.' + _className.active).last().find('[data-menu-text]:first').filter('a, button')[0]);
 
 							//높이 조정
 							option.setHeight({
