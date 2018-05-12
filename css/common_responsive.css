@@ -32,14 +32,6 @@
 	.nav .depth2_list.clearfix li.cut {overflow-x:visible; overflow-y:visible; float:none; width:auto; height:auto;}
 	.menu_open.menu_active .nav .depth1_item.active .depth2_item.active .depth3 {visibility:visible;}
 
-	/* 메뉴 높이 */
-	.nav[data-menu-top-background]:before {height:auto !important;}
-	.nav[data-menu-top-background]:after {top:auto !important;}
-	.nav[data-menu-bottom-background]:after {height:auto !important;}
-
-	/* 중앙정렬 넓이 */
-	.nav .depth1, .nav[data-menu-top-background='wrap']:before, .nav[data-menu-bottom-background='wrap']:after {width:auto !important;}
-
 	/* 풀다운2 */
 	.nav[data-menu-type='2'] .depth1_item {position:relative;}
 	.nav[data-menu-type='2'] .depth2 {opacity:1; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}

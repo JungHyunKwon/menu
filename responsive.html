@@ -5,26 +5,30 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
 	<title>menu</title>
-	<link href="https://cdn.rawgit.com/JungHyunKwon/responsive/097c1d56/css/responsive.css" type="text/css" rel="stylesheet" />
+	<link href="https://cdn.rawgit.com/JungHyunKwon/responsive/0d9f07f2/css/responsive.css" type="text/css" rel="stylesheet" />
 	<link href="css/common.css" type="text/css" rel="stylesheet" />
 	<link href="css/common_responsive.css" type="text/css" rel="stylesheet" />
 	<link href="css/menu.css" type="text/css" rel="stylesheet" />
 	<link href="css/menu_responsive.css" type="text/css" rel="stylesheet" />
 	<script src="js/jquery-1.12.4.min.js"></script>
 	<script src="https://cdn.rawgit.com/JungHyunKwon/responsive/097c1d56/js/jquery.responsive.min.js"></script>
-	<script src="js/jquery.menu.min.js"></script>
+	<script src="js/jquery.menu.js"></script>
 	<script>
 		'use strict';
 		
 		$(function() {
 			var $nav = $('.nav'),
-				navMenuType = $nav.attr('data-menu-type') || 1,
+				navMenuType = parseInt($nav.attr('data-menu-type'), 10),
 				navOption = {
-					cut : 0,
+					cut : {},
 					namespace : 'menu',
 					openElement : $('.nav_open button'),
 					closeElement : $('.nav_close button')
 				};
+
+			if(isNaN(navMenuType)) {
+				navMenuType = 1;
+			}
 
 			$(window).on('responsive', function(event) {
 				if($.inArray(event.state, event.setting.rangeProperty) > -1) {

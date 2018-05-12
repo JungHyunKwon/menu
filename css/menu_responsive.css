@@ -38,6 +38,15 @@
 	.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2 {background-color:#175898;}
 	.menu_open.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2 {background-color:#175898;}
 
+	/* 메뉴 높이 */
+	.nav[data-menu-top-background]:before {height:auto;}
+	.nav[data-menu-top-background]:after {top:auto;}
+	.nav[data-menu-bottom-background]:after {height:auto;}
+	.nav[data-menu-type='4'] {height:100%;}
+
+	/* 중앙정렬 넓이 */
+	.nav .depth1, .nav[data-menu-top-background='wrap']:before, .nav[data-menu-bottom-background='wrap']:after {width:auto;}
+
 	/* 우측에서 나오는 효과 */
 	.nav[data-menu-effect='4'], .nav[data-menu-effect='4'] + .nav_close {left:auto;}
 }
