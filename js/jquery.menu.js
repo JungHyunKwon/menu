@@ -470,7 +470,7 @@ try {
 						
 						//열기버튼이 없을때
 						if(!option.$openElement.length) {
-							option.$openElement = $('div[data-menu-open="' + option.namespace + '"] button:first');
+							option.$openElement = $('div[data-menu-open="' + option.namespace + '"]').find('button, a').first();
 						}
 
 						//닫기버튼 제이쿼리 엘리먼트로 변환
@@ -478,7 +478,7 @@ try {
 						
 						//닫기버튼이 없을때
 						if(!option.$closeElement.length) {
-							option.$closeElement = $('div[data-menu-close="' + option.namespace + '"] button:first');
+							option.$closeElement = $('div[data-menu-close="' + option.namespace + '"]').find('button, a').first();
 						}
 
 						//타이머 간격
