@@ -264,12 +264,12 @@ try {
 				 * @name 별칭으로 시작하는 클래스 지우기
 				 * @since 2017-12-06
 				 * @param {element || jQueryElement} element
-				 * @param {string} namespace
+				 * @param {string} startName
 				 * @return {array || string || jQueryElement || jQueryObject}
 				 */
-				function _removePrefixClass(element, namespace) {
+				function _removePrefixClass(element, startName) {
 					var $element = $(element),
-						namespaceLength = (typeof namespace === 'string') ? namespace.length : 0, //문자열이 아닐때 0대체
+						namespaceLength = (typeof startName === 'string') ? startName.length : 0, //문자열이 아닐때 0대체
 						result = [];
 					
 					for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
@@ -284,7 +284,7 @@ try {
 								var classNameJ = className[j];
 
 								//클래스이름이 namespace값으로 시작할때
-								if(classNameJ.substring(0, namespaceLength) === namespace) {
+								if(classNameJ.substring(0, namespaceLength) === startName) {
 									//클래스 제거
 									$elementI.removeClass(classNameJ);
 
@@ -357,8 +357,9 @@ try {
 				 */
 				$.fn.menu = function(option, element) {
 					var $thisFirst = this.first(),
+						thisFirst = $thisFirst[0],
 						optionType = _getTypeof(option),
-						registIndex = _getRegistIndex($thisFirst[0]),
+						registIndex = _getRegistIndex(thisFirst),
 						register = _register[registIndex],
 						event = $.Event('menu');
 
@@ -443,7 +444,7 @@ try {
 
 						//네임스페이스가 문자열이 아니거나 공백일때
 						if(typeof option.namespace !== 'string' || option.namespace === '') {
-							option.namespace = _namespace;
+							option.namespace = $thisFirst.attr('id') || ($thisFirst.attr('class') || '').split(/\s/)[0] || thisFirst.tagName.toLowercase() + (_register.length + 1);
 						}
 
 						//컷팅이 객체가 아닐때
@@ -632,7 +633,7 @@ try {
 
 								//풀다운, 드롭다운1 메뉴에 padding-bottom적용
 								if(option.type === 1 || option.type === 2 || option.type === 3) {
-									$thisFirst[0].style.paddingBottom = opt.depth2Height + 'px';
+									thisFirst.style.paddingBottom = opt.depth2Height + 'px';
 								}
 								
 								//활성화되지 않았을때
@@ -761,7 +762,7 @@ try {
 								//max-height, padding-bottom초기화
 								option.$depth.css('max-height', '');
 								option.$depth1Title.css('max-height', '');
-								$thisFirst[0].style.paddingBottom = '';
+								thisFirst.style.paddingBottom = '';
 
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
 								option.$depthItem.removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
@@ -849,7 +850,7 @@ try {
 									//메뉴타입이 1, 2, 3일때
 									if(option.type === 1 || option.type === 2 || option.type === 3) {
 										//padding-bottom 초기화
-										$thisFirst[0].style.paddingBottom = '';
+										thisFirst.style.paddingBottom = '';
 
 										//max-height 초기화
 										option.$depth1Title.css('max-height', '');
@@ -1014,7 +1015,7 @@ try {
 
 						//요소 등록
 						_register.push({
-							element : $thisFirst[0],
+							element : thisFirst,
 							option : option
 						});
 
