@@ -579,8 +579,8 @@ try {
 							//제이쿼리로 변환
 							opt.$element = $(opt.element);
 
-							//제이쿼리 엘리먼트가 존재할때
-							if(_isElement(opt.element)) {
+							//제이쿼리 엘리먼트가 존재할때 && setSpy가 잘못들어오지않았을때
+							if(_isElement(opt.element) && _getTypeof(opt.element) !== 'window') {
 								//활성화 되었는지, 열려있진 않은지 확인하는 변수
 								opt.isActive = true;
 								opt.isOpen = true;
@@ -653,7 +653,7 @@ try {
 								if(!opt.isActive) {
 									_$body.removeClass(option.className.globalActive);
 								}
-								
+
 								//열려있지 않았을때
 								if(!opt.isOpen) {
 									_$body.removeClass(option.className.globalOpen);
@@ -867,6 +867,7 @@ try {
 
 										//max-height 초기화
 										option.$depth1Title.css('max-height', '');
+										option.$depth2.css('max-height', '');
 									}
 								}
 							}
