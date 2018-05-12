@@ -373,7 +373,7 @@ try {
 
 							//파괴
 							if(option === 'destroy') {
-								var registerNamespace = registerOption.namepsace;
+								var registerNamespace = registerOption.namespace;
 
 								//cut 엘리먼트 삭제
 								registerOption.$depthCutItem.remove();
