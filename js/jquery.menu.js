@@ -369,7 +369,7 @@ try {
 
 						//등록되어있을때
 						if(register) {
-							var reigertOption = register.option;
+							var registerOption = register.option;
 
 							//파괴
 							if(option === 'destroy') {
