@@ -7,6 +7,7 @@
 	div[data-menu-title='2'] {top:auto; height:auto;}
 	div[data-menu-depth='1'].clearfix div[data-menu-title='1'] + ul[data-menu-list='1'] {float:none;}
 	div[data-menu-depth='1'] {visibility:hidden; transition-property:visibility;}
+	ul[data-menu-list] > li.cut {display:none; overflow-x:visible; overflow-y:visible; float:none; width:auto; height:auto;}
 
 	/* 풀다운1 */
 	.menu_open {overflow-x:hidden; overflow-y:hidden;}
@@ -29,7 +30,6 @@
 	.menu_active .nav .depth2 {visibility:hidden;}
 	.menu_open.menu_active .nav .depth1_item.active .depth2 {visibility:visible;}
 	.nav .depth2_list.clearfix .depth2_item {float:none;}
-	.nav .depth2_list.clearfix li.cut {overflow-x:visible; overflow-y:visible; float:none; width:auto; height:auto;}
 	.menu_open.menu_active .nav .depth1_item.active .depth2_item.active .depth3 {visibility:visible;}
 
 	/* 풀다운2 */

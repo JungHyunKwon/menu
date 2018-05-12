@@ -30,6 +30,7 @@ ul[data-menu-list] > li:before, ul[data-menu-list] > li:after, a[data-menu-text]
 ul[data-menu-list] > li {position:relative;}
 ul[data-menu-list] > li.has > a[data-menu-text]:before, ul[data-menu-list] > li.has > button[data-menu-text]:before, a[data-menu-text][target='_blank']:after {display:inline-block; width:1px; height:1px;}
 ul[data-menu-list] > li.has > a[data-menu-text]:before, ul[data-menu-list] > li.has > button[data-menu-text]:before {content:'하위메뉴가 존재하는';}
+ul[data-menu-list] > li.cut {overflow-x:hidden; overflow-y:hidden; float:left; width:100%; height:0;}
 a[data-menu-text][target='_blank']:after {content:'새창';}
 div[data-menu-title] {position:absolute; left:0;}
 div[data-menu-title='1'] {top:100%; height:10000px;}
@@ -55,7 +56,6 @@ div[data-menu-depth='1'].clearfix div[data-menu-title='1'] + ul[data-menu-list='
 .nav .depth2 {position:absolute; top:100%; left:0; width:100%; height:10000px;}
 .menu_active .nav .depth2 {visibility:visible;}
 .nav .depth2_list.clearfix .depth2_item {float:left;}
-.nav .depth2_list.clearfix li.cut {overflow-x:hidden; overflow-y:hidden; float:left; width:100%; height:0;}
 
 /* 풀다운2 */
 .nav[data-menu-type='2'] .depth1_item {position:static;}
