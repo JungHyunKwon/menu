@@ -1,67 +1,28 @@
 @charset 'utf-8';
 
 @media screen and (max-width:1000px) {
-	/* 플러그인 공통 */
-	div[data-menu-title] {display:none; position:static; left:auto;}
-	div[data-menu-title='1'] {top:auto; height:auto;}
-	div[data-menu-title='2'] {top:auto; height:auto;}
-	div[data-menu-depth='1'].clearfix div[data-menu-title='1'] + ul[data-menu-list='1'] {float:none;}
-	div[data-menu-depth='1'] {visibility:hidden; transition-property:visibility;}
-	ul[data-menu-list] > li.cut {display:none; overflow-x:visible; overflow-y:visible; float:none; width:auto; height:auto;}
+	/* 버튼 */
+	div[data-menu-open] {visibility:visible;}
+	div[data-menu-close] {position:fixed; transition-property:visibility;}
 
 	/* 풀다운1 */
-	.menu_open {overflow-x:hidden; overflow-y:hidden;}
-	.menu_open div[data-menu-depth='1'] {visibility:visible;}
-	.nav {visibility:hidden; overflow-y:auto; position:fixed; transition-property:visibility;}
-	.menu_open .nav {visibility:visible;}
-	.nav[data-menu-top-background]:before, .nav[data-menu-bottom-background]:after {display:none; position:static; right:auto; left:auto; margin-right:0; margin-left:0;}
-	.nav[data-menu-top-background]:before {top:auto; z-index:auto;}
-	.nav[data-menu-top-background]:after {z-index:auto;}
-	.nav[data-menu-top-background='full']:before, .nav[data-menu-bottom-background='full']:after {width:auto;}
-	.nav .nav_wrap {z-index:auto; height:auto;}
-	.nav_open {visibility:visible;}
-	.nav_close {position:fixed; transition-property:visibility;}
-	.menu_open .nav_close {visibility:visible;}
-	.nav .depth1 {height:auto; margin-right:0; margin-left:0;}
-	.nav .depth1_list {height:auto;}
-	.nav .depth1_list.clearfix .depth1_item {float:none;}
-	.nav .depth1_item {height:auto;}
-	.nav .depth2 {position:relative; top:auto; left:auto; width:auto; height:auto;}
-	.menu_active .nav .depth2 {visibility:hidden;}
-	.menu_open.menu_active .nav .depth1_item.active .depth2 {visibility:visible;}
-	.nav .depth2_list.clearfix .depth2_item {float:none;}
-	.menu_open.menu_active .nav .depth1_item.active .depth2_item.active .depth3 {visibility:visible;}
+	[data-menu-type] {visibility:hidden; overflow-y:auto; position:fixed; transition-property:visibility;}
+	[data-menu-type][data-menu-top-background]:before, [data-menu-type][data-menu-bottom-background]:after {display:none; position:static; right:auto; left:auto; margin-right:0; margin-left:0;}
+	[data-menu-type][data-menu-top-background]:before {top:auto; z-index:auto;}
+	[data-menu-type][data-menu-top-background]:after {z-index:auto;}
+	[data-menu-type] div[data-menu-wrap] {z-index:auto; height:auto;}
+	[data-menu-type] div[data-menu-title] {display:none; position:static; left:auto;}
+	[data-menu-type] div[data-menu-title='1'] {top:auto; height:auto; max-height:none; transition-property:none;}
+	[data-menu-type] div[data-menu-title='2'] {top:auto; height:auto;}
+	[data-menu-type] div[data-menu-depth='1'] {visibility:hidden; height:auto; margin-right:0; margin-left:0; transition-property:visibility;}
+	[data-menu-type] div[data-menu-depth='2'] {position:relative; top:auto; left:auto; width:auto; height:auto;}
+	[data-menu-type] ul[data-menu-list='1'] {height:auto;}
+	[data-menu-type] div[data-menu-depth='1'].clearfix div[data-menu-title='1'] + ul[data-menu-list='1'] {float:none;}
+	[data-menu-type] ul[data-menu-list='1'] > li {height:auto;}
+	[data-menu-type] ul[data-menu-list].clearfix > li {float:none;}
+	[data-menu-type] ul[data-menu-list] > li.cut {display:none; overflow-x:visible; overflow-y:visible; width:auto; height:auto;}
 
 	/* 풀다운2 */
-	.nav[data-menu-type='2'] .depth1_item {position:relative;}
-	.nav[data-menu-type='2'] .depth2 {opacity:1; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
-	.menu_active .nav[data-menu-type='2'] .depth2 {visibility:visible;}
-	.menu_active .nav[data-menu-type='2'] .depth1_item.active .depth2 {visibility:hidden; z-index:auto;}
-	.menu_open.menu_active .nav[data-menu-type='2'] .depth1_item.active .depth2 {visibility:visible;}
-
-	/* 드롭다운 */
-	.menu_active .nav[data-menu-type='3'] .depth2 {visibility:visible;}
-	.menu_open.menu_active .nav[data-menu-type='3'] .depth1_item.active .depth2 {visibility:visible;}
-	
-	/* 드롭다운2 */
-	.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2 {visibility:hidden;}
-	.menu_open.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2 {visibility:visible;}
-	.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2_item.active .depth3 {visibility:hidden;}
-	.menu_open.menu_active .nav[data-menu-type='4'] .depth1_item.active .depth2_item.active .depth3 {visibility:visible;}
-
-	/* 슬라이드 효과 */
-	.nav[data-menu-effect='2'] {max-height:0; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
-	.menu_open .nav[data-menu-effect='2'] {max-height:100%;}
-
-	/* 좌측에서 나오는 효과 */
-	.nav[data-menu-effect='3'] {left:-100%; max-height:none; transition-property:visibility, left;}
-	.menu_open .nav[data-menu-effect='3'] {left:0;}
-	.nav[data-menu-effect='3'] + .nav_close {left:-100%; transition-property:visibility, left;}
-	.menu_open .nav[data-menu-effect='3'] + .nav_close {left:0;}
-
-	/* 우측에서 나오는 효과 */
-	.nav[data-menu-effect='4'] {right:-100%; max-height:none; transition-property:visibility, right;}
-	.menu_open .nav[data-menu-effect='4'] {right:0;}
-	.nav[data-menu-effect='4'] + .nav_close {right:-100%; transition-property:visibility, right;}
-	.menu_open .nav[data-menu-effect='4'] + .nav_close {right:0;}
+	[data-menu-type='2'] div[data-menu-depth='2'] {opacity:1; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
+	[data-menu-type='2'] ul[data-menu-list='1'] > li {position:relative;}
 }

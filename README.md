@@ -14,29 +14,31 @@ $(selector).menu({
 
 ### 옵션
 
-이름 | 값 | 설명
-| :-- | :- | :-- |
-event | string(mouse, click) | 사용할 이벤트를 지정합니다
-cut | object(number : number) | 지정한 메뉴깊이에 지정한 숫자의 배수마다 cut요소를 생성합니다.
-namespace | string | 메뉴의 명칭을 지정합니다.
-openElement | jQueryElement \|\| element | 메뉴를 열게할 요소를 지정하며 토글기능이 들어가 있습니다.
-closeElement | jQueryElement \|\| element | 메뉴를 닫게할 요소를 지정합니다.
+이름 | 기본값 | 값 | 설명
+| :-- | :--- | :- | :-- |
+event | click | string(mouse, click) | 사용할 이벤트를 지정합니다.
+cut | | object(number : number) | 지정한 메뉴깊이에 지정한 숫자의 배수마다 cut요소를 생성합니다.
+namespace | <ol><li>id</li><li>첫번째 클래스이름</li><li>태그이름 + 메뉴순번</li></ol> | string | 메뉴의 명칭을 지정합니다.
+openElement | data-menu-open자손에 data-menu-button | jQueryElement \|\| element | 메뉴를 열게할 요소를 지정하며 토글기능이 들어가 있습니다.
+closeElement | data-menu-close자손에 data-menu-button | jQueryElement \|\| element | 메뉴를 닫게할 요소를 지정합니다.
 
 ### data-menu-*
 
 #### selector
-이름 | 값 | 설명
-| :-- | :- | :-- |
-top-background | string(full, wrap) | 상단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다. 
-bottom-background | string(full, wrap) | 하단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다.
-type | number | 메뉴유형을 지정합니다.<ol><li>풀다운</li><li>풀다운2</li><li>드롭다운</li><li>드롭다운2</li></ol>
-effect | number | openElement에 지정한 요소를 눌렀을때의 효과를 지정합니다. <ol><li>토글</li><li>위에서 아래로 슬라이드</li><li>왼쪽에서 오른쪽으로 슬라이드</li><li>오른쪽에서 왼쪽으로 슬라이드</li></ol>
+이름 | 기본값 | 값 | 설명
+| :-- | :--- | :- | :-- |
+top-background | wrap | string(full, wrap) | 상단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다. 
+bottom-background | wrap | string(full, wrap) | 하단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다.
+type | 1 | number | 메뉴유형을 지정합니다.<ol><li>풀다운</li><li>풀다운2</li><li>드롭다운</li><li>드롭다운2</li></ol>
+effect | 1 | number | openElement에 지정한 요소를 눌렀을때의 효과를 지정합니다. <ol><li>토글</li><li>위에서 아래로 슬라이드</li><li>왼쪽에서 오른쪽으로 슬라이드</li><li>오른쪽에서 왼쪽으로 슬라이드</li></ol>
 
 #### div
 이름 | 값 | 설명
 | :-- | :- | :-- |
 depth | number | 깊이요소(div)를 지정합니다.
 title | number | div요소 왼쪽 제목상자를 넣을때 사용하며 list의 이전요소에 기입해야 합니다.
+open | namepsace | openElement를 지정하지 않거나 없을때 참조합니다.
+close | namepsace | closeElement를 지정하지 않거나 없을때 참조합니다.
 
 #### ul
 이름 | 값 | 설명
@@ -47,7 +49,12 @@ list | number | 목록요소(ul)를 지정합니다.
 이름 | 값 | 설명
 | :-- | :- | :-- |
 text | number | 글자요소(a, button)를 지정합니다.
-actived | boolean | 초기에 활성화시킬 요소를 지정할때 사용합니다.
+actived | | 초기에 활성화시킬 요소를 지정할때 사용합니다.
+
+#### button
+이름 | 값 | 설명
+| :-- | :- | :-- |
+button | | 여는버튼 또는 닫는버튼을 지정할때 사용합니다.
 
 ### 클래스
 

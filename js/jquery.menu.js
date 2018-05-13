@@ -268,7 +268,7 @@ try {
 				 */
 				function _removePrefixClass(element, startName) {
 					var $element = $(element),
-						namespaceLength = (typeof startName === 'string') ? startName.length : 0, //문자열이 아닐때 0대체
+						startNameLength = (typeof startName === 'string') ? startName.length : 0, //문자열이 아닐때 0대체
 						result = [];
 					
 					for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
@@ -282,8 +282,8 @@ try {
 							for(var j = 0, classNameLength = className.length; j < classNameLength; j++) {
 								var classNameJ = className[j];
 
-								//클래스이름이 namespace값으로 시작할때
-								if(classNameJ.substring(0, namespaceLength) === startName) {
+								//클래스이름이 startName값으로 시작할때
+								if(classNameJ.substring(0, startNameLength) === startName) {
 									//클래스 제거
 									$elementI.removeClass(classNameJ);
 
@@ -510,8 +510,8 @@ try {
 						option.$depthItem = option.$depthList.children('li');
 						option.$depthText = option.$depth1.find('a[data-menu-text], button[data-menu-text]');
 						option.$depthLastText = option.$depthText.last();
-						option.$depthAndText = option.$depth.add(option.$depthText);
-						option.$activedDepthText = option.$depth1.find('a[data-menu-text][data-menu-actived="true"], button[data-menu-text][data-menu-actived="true"]').last();
+						option.$depthAndText = option.$depth.not('div[data-menu-depth="1"]').add(option.$depthText);
+						option.$activedDepthText = option.$depth1.find('a[data-menu-text][data-menu-actived], button[data-menu-text][data-menu-actived]').last();
 						option.$activedDepthItem = option.$activedDepthText.parents('li');
 
 						//actived클래스 추가

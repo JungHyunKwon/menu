@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+	<title>menu</title>
+	<link href="css/common.css" type="text/css" rel="stylesheet" />
+	<link href="css/menu.css" type="text/css" rel="stylesheet" />
+	<script src="js/jquery-1.12.4.min.js"></script>
+	<script src="js/jquery.menu.min.js"></script>
+	<script>
+		'use strict';
+
+		$(function() {
+			$('[data-menu-type]').menu({
+				cut : {},
+				event : 'mouse',
+				namespace : 'menu',
+				openElement : $(),
+				closeElement : $()
+			});
+		});
+	</script>
+</head>
+<body>
+<h1 class="skip">menu</h1>
+<div>
+	<div data-menu-open="menu">
+		<button type="button" data-menu-button>메뉴 열기</button>
+	</div>
+	<nav data-menu-type="2" data-menu-top-background="full" data-menu-bottom-background="full">
+		<h2 class="skip">메뉴</h2>
+		<div data-menu-wrap>
+			<div data-menu-depth="1">
+				<ul class="clearfix" data-menu-list="1">
+					<li>
+						<a href="#n" title="새창" target="_blank" data-menu-text="1">1차 메뉴(1)</a>
+						<div data-menu-depth="2">
+							<ul data-menu-list="2">
+								<li>
+									<a href="#n" title="새창" target="_blank" data-menu-text="2">2차 메뉴(1)</a>
+								</li>
+								<li>
+									<a href="#n" data-menu-text="2">2차 메뉴(1)</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="#n" data-menu-text="1">1차 메뉴(2)</a>
+						<div data-menu-depth="2">
+							<ul data-menu-list="2">
+								<li>
+									<a href="#n" data-menu-text="2">2차 메뉴(2)</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="#n" data-menu-text="1">1차 메뉴(3)</a>
+						<div data-menu-depth="2">
+							<ul data-menu-list="2">
+								<li>
+									<a href="#n" data-menu-text="2">2차 메뉴(3)</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="#n" data-menu-text="1">1차 메뉴(4)</a>
+						<div data-menu-depth="2">
+							<ul data-menu-list="2">
+								<li>
+									<a href="#n" data-menu-text="2">2차 메뉴(4)</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="#n" data-menu-text="1">1차 메뉴(5)</a>
+						<div data-menu-depth="2">
+							<ul data-menu-list="2">
+								<li>
+									<a href="#n" data-menu-text="2">2차 메뉴(5)</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div data-menu-close="menu">
+		<button type="button" data-menu-button>메뉴 닫기</button>
+	</div>
+</div>
+</body>
+</html>
