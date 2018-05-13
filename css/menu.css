@@ -66,7 +66,7 @@ div[data-menu-close] [data-menu-button] {width:22px; height:23px; background-ima
 
 
 /* 드롭다운 */
-[data-menu-type='3'] div[data-menu-depth='2'] {background-color:#fff; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
+[data-menu-type='3'] div[data-menu-depth='2'] {transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
 
 /* 드롭다운(활성화) */
 .menu_active [data-menu-type='3'] div[data-menu-depth='2'] {visibility:hidden;}
@@ -75,6 +75,7 @@ div[data-menu-close] [data-menu-button] {width:22px; height:23px; background-ima
 /* 드롭다운(배경) */
 [data-menu-type='3'] {background-color:transparent;}
 [data-menu-type='3'][data-menu-bottom-background]:after {background-color:transparent;}
+[data-menu-type='3'] div[data-menu-depth='2'] {background-color:#fff;}
 
 /* 드롭다운(활성화 배경) */
 .menu_active [data-menu-type='3'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {background-color:#fff;}
