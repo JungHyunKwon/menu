@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+	<title>menu</title>
+	<link href="https://cdn.rawgit.com/JungHyunKwon/responsive/0d9f07f2/css/responsive.css" type="text/css" rel="stylesheet" />
+	<link href="css/common.css" type="text/css" rel="stylesheet" />
+	<link href="css/common_responsive.css" type="text/css" rel="stylesheet" />
+	<link href="css/menu.css" type="text/css" rel="stylesheet" />
+	<link href="css/menu_responsive.css" type="text/css" rel="stylesheet" />
+	<script src="js/jquery-1.12.4.min.js"></script>
+	<script src="https://cdn.rawgit.com/JungHyunKwon/responsive/097c1d56/js/jquery.responsive.min.js"></script>
+	<script src="js/jquery.menu.min.js"></script>
+	<script>
+		'use strict';
+		
+		$(function() {
+			var $nav = $('[data-menu-type]'),
+				navMenuType = parseInt($nav.attr('data-menu-type'), 10),
+				navOption = {
+					cut : {},
+					namespace : 'menu',
+					openElement : $(),
+					closeElement : $()
+				};
+			
+			//data-menu-type이 없을때
+			if(isNaN(navMenuType)) {
+				navMenuType = 1;
+			}
+
+			$(window).on('responsive', function(event) {
+				//wide, web, tablet, phone분기에 걸렸을때
+				if($.inArray(event.state, event.setting.rangeProperty) > -1) {
+					var menuEvent = 'click',
+						menuType = 4;
+					
+					//wide 또는 web일때
+					if(event.state === 'wide' || event.state === 'web') {
+						menuEvent = 'mouse';
+						menuType = navMenuType;
+					}
+					
+					//현재 메뉴 이벤트와 분기에 따른 메뉴 이벤트가 다를때
+					if(navOption.event !== menuEvent) {
+						//메뉴가 셋팅되어 있을때 파괴
+						if($nav.hasClass('menu_initialized')) {
+							$nav.menu('destroy');
+						}
+						
+						//메뉴 이벤트 변경
+						navOption.event = menuEvent;
+
+						//data-menu-type변경하고 새로운메뉴 생성
+						$nav.attr('data-menu-type', menuType).menu(navOption);
+					}
+				}
+			});
+				
+			var $effectButton = $('.effect button');
+
+			$effectButton.on('click', function(event) {
+				$nav.attr('data-menu-effect', $effectButton.index(this) + 1);
+			});
+		});
+
+		$(document).on('ready', function(event) {
+			$.responsive({
+				range : {
+					wide : {
+						horizontal : {
+							from : 9999,
+							to : 1201
+						}
+					},
+					web : {
+						horizontal : {
+							from : 1200,
+							to : 1001
+						}
+					},
+					tablet : {
+						horizontal : {
+							from : 1000,
+							to : 641
+						}
+					},
+					phone : {
+						horizontal : {
+							from : 640,
+							to : 0
+						}
+					}
+				},
+				lowIE : {
+					property : ['web']
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+<h1 class="skip">menu</h1>
+<div class="effect">
+	<button type="button">토글</button>
+	<button type="button">위에서 아래로 슬라이드</button>
+	<button type="button">왼쪽에서 오른쪽으로 슬라이드</button>
+	<button type="button">오른쪽에서 왼쪽으로 슬라이드</button>
+	<p>화면을 1000이하로 맞춰보세요.</p>
+</div>
+<div>
+	<div data-menu-open="menu">
+		<button type="button" data-menu-button>메뉴 열기</button>
+	</div>
+	<nav data-menu-type="1" data-menu-effect="1" data-menu-top-background="full" data-menu-bottom-background="full">
+		<h2 class="skip">메뉴</h2>
+		<div data-menu-wrap>
+			<div data-menu-depth="1">
+				<ul class="clearfix" data-menu-list="1">
+					<li>
+						<a href="#n" title="새창" target="_blank" data-menu-text="1">1차 메뉴(1)</a>
+						<div data-menu-depth="2">
+							<ul data-menu-list="2">
+								<li>
+									<a href="#n" title="새창" target="_blank" data-menu-text="2">2차 메뉴(1)</a>
+									<div data-menu-depth="3">
+										<ul data-menu-list="3">
+											<li>
+												<a href="#n" title="새창" target="_blank" data-menu-text="3">3차 메뉴(1)</a>
+											</li>
+											<li>
+												<a href="#n" data-menu-text="3">3차 메뉴(1)</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<a href="#n" data-menu-text="2">2차 메뉴(1)</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="#n" data-menu-text="1">1차 메뉴(2)</a>
+						<div data-menu-depth="2">
+							<ul data-menu-list="2">
+								<li>
+									<a href="#n" data-menu-text="2">2차 메뉴(2)</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="#n" data-menu-text="1">1차 메뉴(3)</a>
+						<div data-menu-depth="2">
+							<ul data-menu-list="2">
+								<li>
+									<a href="#n" data-menu-text="2">2차 메뉴(3)</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="#n" data-menu-text="1">1차 메뉴(4)</a>
+						<div data-menu-depth="2">
+							<ul data-menu-list="2">
+								<li>
+									<a href="#n" data-menu-text="2">2차 메뉴(4)</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="#n" data-menu-text="1">1차 메뉴(5)</a>
+						<div data-menu-depth="2">
+							<ul data-menu-list="2">
+								<li>
+									<a href="#n" data-menu-text="2">2차 메뉴(5)</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div data-menu-close="menu">
+		<button type="button" data-menu-button>메뉴 닫기</button>
+	</div>
+</div>
+</body>
+</html>
