@@ -229,19 +229,21 @@ try {
 							
 						//요소일때
 						if(_isElement(elementI)) {
-							var clone = elementI.cloneNode(true);
+							var clone = elementI.cloneNode(true),
+								elementIParent = elementI.parentNode,
+								cloneComputedStyle = (window.getComputedStyle) ? window.getComputedStyle(clone, null) : clone.currentStyle;
 
 							//css기입
 							clone.style.cssText = cssText + ' width:' + $elementI.width() + 'px;';
 
 							//clone생성
-							$elementI.after(clone);
+							elementIParent.appendChild(clone);
 
 							//높이얻기
-							cloneHeight = $(clone).outerHeight(true);
+							cloneHeight = clone.offsetHeight + parseInt(cloneComputedStyle.marginTop, 10) + parseInt(cloneComputedStyle.marginBottom, 10);
 
 							//clone제거
-							clone.parentNode.removeChild(clone);
+							elementIParent.removeChild(clone);
 						}
 
 						result[i] = cloneHeight;
