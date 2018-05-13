@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
 	<title>menu</title>
 	<link href="css/common.css" type="text/css" rel="stylesheet" />
-	<link href="css/menu.css" type="text/css" rel="stylesheet" />
+	<link href="css/pulldown1.css" type="text/css" rel="stylesheet" />
 	<script src="js/jquery-1.12.4.min.js"></script>
 	<script src="js/jquery.menu.min.js"></script>
 	<script>
@@ -15,7 +15,7 @@
 		$(function() {
 			$('[data-menu-type]').menu({
 				cut : {},
-				event : 'click',
+				event : 'mouse',
 				namespace : 'menu',
 				openElement : $(),
 				closeElement : $()
@@ -23,13 +23,13 @@
 		});
 	</script>
 </head>
-<body>
+<body class="menu_open">
 <h1 class="skip">menu</h1>
 <div>
 	<div data-menu-open="menu">
 		<button type="button" data-menu-button>메뉴 열기</button>
 	</div>
-	<nav data-menu-type="3" data-menu-top-background="full" data-menu-bottom-background="full">
+	<nav data-menu-type="1" data-menu-top-background="full" data-menu-bottom-background="full">
 		<h2 class="skip">메뉴</h2>
 		<div data-menu-wrap>
 			<div data-menu-depth="1">

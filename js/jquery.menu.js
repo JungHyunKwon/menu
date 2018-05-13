@@ -9,7 +9,8 @@ try {
 	if(typeof window.jQuery === 'function') {
 		//$ 중첩 방지
 		(function($) {
-			var _$window = $(window),
+			var _getComputedStyle = window.getComputedStyle,
+				_$window = $(window),
 				_$document = $(document),
 				_consoleType = _getTypeof(window.console),
 				_register = [], //등록된 요소
@@ -229,15 +230,19 @@ try {
 							
 						//요소일때
 						if(_isElement(elementI)) {
-							var clone = elementI.cloneNode(true),
-								elementIParent = elementI.parentNode,
-								cloneComputedStyle = (getComputedStyle) ? getComputedStyle(clone, null) : clone.currentStyle;
+							var elementIParent = elementI.parentNode,
+								clone = elementI.cloneNode(true),
+								cloneComputedStyle = (_getComputedStyle) ? _getComputedStyle(clone, null) : clone.currentStyle,
+								cloneStyle = clone.style;
 
 							//css기입
-							clone.style.cssText = cssText + ' width:' + $elementI.width() + 'px;';
+							cloneStyle.cssText = cssText;
 
 							//clone생성
 							elementIParent.appendChild(clone);
+
+							//css기입
+							cloneStyle.width = clone.clientWidth + 'px';
 
 							//높이얻기
 							cloneHeight = clone.offsetHeight + parseInt(cloneComputedStyle.marginTop, 10) + parseInt(cloneComputedStyle.marginBottom, 10);

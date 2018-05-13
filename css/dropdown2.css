@@ -1,0 +1,29 @@
+@charset 'utf-8';
+
+[data-menu-type='4'] div[data-menu-depth='3'] {display:block;}
+[data-menu-type='4'] div[data-menu-depth='4'] {display:none;}
+[data-menu-type='4'] ul[data-menu-list='2'] {padding-top:15px; padding-right:5px; padding-bottom:15px; padding-left:5px;}
+[data-menu-type='4'] ul[data-menu-list='3'] {padding-top:20px; padding-right:20px; padding-bottom:20px; padding-left:20px; border-top-width:10px; border-top-style:solid;}
+[data-menu-type='4'] ul[data-menu-list='2'] > li, [data-menu-type='4'] ul[data-menu-list='3'] > li {margin-top:10px;}
+[data-menu-type='4'] ul[data-menu-list='2'] > li:first-child, [data-menu-type='4'] ul[data-menu-list='3'] > li:first-child {margin-top:0;}
+[data-menu-type='4'] [data-menu-text] {font-size:16px; line-height:18px;}
+[data-menu-type='4'] [data-menu-text='1'] {padding-top:11px; padding-right:5px; padding-bottom:11px; padding-left:5px; color:#fff;}
+[data-menu-type='4'] [data-menu-text='2'] {color:#fff;}
+[data-menu-type='4'] [data-menu-text='3'] {color:#fff;}
+[data-menu-type='4'] a[data-menu-text][target='_blank']:after {display:inline-block; width:12px; height:12px; margin-left:5px;}
+[data-menu-type='4'] ul[data-menu-list] > li.has > [data-menu-text]:before {width:12px; height:8px; margin-right:10px;}
+
+/* 활성화 */
+.menu_active [data-menu-type='4'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:visible;}
+.menu_active [data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active div[data-menu-depth='3'] {visibility:visible;}
+
+/* 배경 */
+[data-menu-type='4'] {background-color:#3072c4;}
+[data-menu-type='4'] div[data-menu-depth='2'] {background-color:#175898;}
+[data-menu-type='4'] div[data-menu-depth='3'] {background-color:#24478b;}
+[data-menu-type='4'] ul[data-menu-list='3'] {border-top-color:#24478b;}
+[data-menu-type='4'] a[data-menu-text][target='_blank']:after {background-image:url('../images/depth_text_blank_black_ico.png');}
+[data-menu-type='4'] a[data-menu-text='1'][target='_blank']:after {background-image:url('../images/depth_text_blank_white_ico.png');}
+[data-menu-type='4'] ul[data-menu-list] > li.has > [data-menu-text]:before {background-image:url('../images/has_depth_ico_off.png');}
+[data-menu-type='4'] ul[data-menu-list] > li.has.active > [data-menu-text]:before {background-image:url('../images/has_depth_ico_on.png');}
+[data-menu-type='4'] a[data-menu-text][target='_blank']:after {background-image:url('../images/depth_text_blank_white_ico.png');}

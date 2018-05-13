@@ -8,95 +8,33 @@
 	<link href="https://cdn.rawgit.com/JungHyunKwon/responsive/0d9f07f2/css/responsive.css" type="text/css" rel="stylesheet" />
 	<link href="css/common.css" type="text/css" rel="stylesheet" />
 	<link href="css/common_responsive.css" type="text/css" rel="stylesheet" />
-	<link href="css/menu.css" type="text/css" rel="stylesheet" />
-	<link href="css/menu_responsive.css" type="text/css" rel="stylesheet" />
+	<link href="css/pulldown1.css" type="text/css" rel="stylesheet" />
+	<link href="css/pulldown1_responsive.css" type="text/css" rel="stylesheet" />
+	<link href="css/button.css" type="text/css" rel="stylesheet" />
+	<link href="css/button_responsive.css" type="text/css" rel="stylesheet" />
+	<link href="css/effect_responsive.css" type="text/css" rel="stylesheet" />
+	<style>
+		.effect button {display:none; width:100%; margin-top:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; padding-left:5px; border-top-left-radius:5px; border-top-right-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; background-color:#fff;}
+		.effect button:first-child {margin-top:0;}
+		.effect p {padding-bottom:10px; color:#fff; font-size:15px; line-height:17px;}
+		@media screen and (max-width:1000px) {
+			.effect {padding-top:40px;}
+			.effect button {display:block;}
+			.effect p {display:none;}
+		}
+	</style>
 	<script src="js/jquery-1.12.4.min.js"></script>
 	<script src="https://cdn.rawgit.com/JungHyunKwon/responsive/097c1d56/js/jquery.responsive.min.js"></script>
 	<script src="js/jquery.menu.min.js"></script>
+	<script src="js/jquery.menu.responsive.js"></script>
 	<script>
 		'use strict';
-		
 		$(function() {
 			var $nav = $('[data-menu-type]'),
-				navMenuType = parseInt($nav.attr('data-menu-type'), 10),
-				navOption = {
-					cut : {},
-					namespace : 'menu',
-					openElement : $(),
-					closeElement : $()
-				};
-			
-			//data-menu-type이 없을때
-			if(isNaN(navMenuType)) {
-				navMenuType = 1;
-			}
-
-			$(window).on('responsive', function(event) {
-				//wide, web, tablet, phone분기에 걸렸을때
-				if($.inArray(event.state, event.setting.rangeProperty) > -1) {
-					var menuEvent = 'click',
-						menuType = 4;
-					
-					//wide 또는 web일때
-					if(event.state === 'wide' || event.state === 'web') {
-						menuEvent = 'mouse';
-						menuType = navMenuType;
-					}
-					
-					//현재 메뉴 이벤트와 분기에 따른 메뉴 이벤트가 다를때
-					if(navOption.event !== menuEvent) {
-						//메뉴가 셋팅되어 있을때 파괴
-						if($nav.hasClass('menu_initialized')) {
-							$nav.menu('destroy');
-						}
-						
-						//메뉴 이벤트 변경
-						navOption.event = menuEvent;
-
-						//data-menu-type변경하고 새로운메뉴 생성
-						$nav.attr('data-menu-type', menuType).menu(navOption);
-					}
-				}
-			});
-				
-			var $effectButton = $('.effect button');
+				$effectButton = $('.effect button');
 
 			$effectButton.on('click', function(event) {
 				$nav.attr('data-menu-effect', $effectButton.index(this) + 1);
-			});
-		});
-
-		$(document).on('ready', function(event) {
-			$.responsive({
-				range : {
-					wide : {
-						horizontal : {
-							from : 9999,
-							to : 1201
-						}
-					},
-					web : {
-						horizontal : {
-							from : 1200,
-							to : 1001
-						}
-					},
-					tablet : {
-						horizontal : {
-							from : 1000,
-							to : 641
-						}
-					},
-					phone : {
-						horizontal : {
-							from : 640,
-							to : 0
-						}
-					}
-				},
-				lowIE : {
-					property : ['web']
-				}
 			});
 		});
 	</script>
