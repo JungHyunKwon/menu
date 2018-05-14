@@ -232,8 +232,7 @@ try {
 						if(_isElement(elementI)) {
 							var elementIParent = elementI.parentNode,
 								clone = elementI.cloneNode(true),
-								cloneComputedStyle = (_getComputedStyle) ? _getComputedStyle(clone, null) : clone.currentStyle,
-								cloneStyle = clone.style;
+								cloneComputedStyle = (_getComputedStyle) ? _getComputedStyle(clone, null) : clone.currentStyle;
 
 							//css기입
 							clone.style.cssText = cssText + ' width:' + $elementI.width() + 'px;';
