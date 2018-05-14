@@ -357,7 +357,7 @@ try {
 				/**
 				 * @name menu
 				 * @since 2018-02-23
-				 * @param {object} option({event : string, cut : object(number : number), namespace : string, openElement : element, closeElement : element})
+				 * @param {object} option({event : string, cut : object(number : number), namespace : string})
 				 * @param {jQueryElement || element} element
 				 * @return {jQueryElement || jQueryObject}
 				 */
@@ -472,21 +472,11 @@ try {
 							option.event = 'click';
 						}
 
-						//열기버튼 제이쿼리 엘리먼트로 변환
-						option.$openElement = $(option.openElement);
-						
-						//열기버튼이 없을때
-						if(!option.$openElement.length) {
-							option.$openElement = $('div[data-menu-open="' + option.namespace + '"] [data-menu-button]');
-						}
+						//열기버튼
+						option.$openElement = $('div[data-menu-open="' + option.namespace + '"] [data-menu-button]');
 
-						//닫기버튼 제이쿼리 엘리먼트로 변환
-						option.$closeElement = $(option.closeElement);
-						
-						//닫기버튼이 없을때
-						if(!option.$closeElement.length) {
-							option.$closeElement = $('div[data-menu-close="' + option.namespace + '"] [data-menu-button]');
-						}
+						//닫기버튼
+						option.$closeElement = $('div[data-menu-close="' + option.namespace + '"] [data-menu-button]');
 
 						//타이머 간격
 						option.interval = 250;

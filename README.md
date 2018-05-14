@@ -6,9 +6,7 @@
 $(selector).menu({
     event : string,
     cut : object(number : number),
-    namespace : string,
-    openElement : jQueryElement || element,
-    closeElement : jQueryElement || element
+    namespace : string
 });
 ````
 
@@ -19,8 +17,6 @@ $(selector).menu({
 event | click | string(mouse, click) | 사용할 이벤트를 지정합니다.
 cut | | object(number : number) | 지정한 메뉴깊이에 지정한 숫자의 배수마다 cut요소를 생성합니다.
 namespace | <ol><li>id</li><li>첫번째 클래스이름</li><li>태그이름 + 메뉴순번</li></ol> | string | 메뉴의 명칭을 지정합니다.
-openElement | data-menu-open자손에 data-menu-button | jQueryElement \|\| element | 메뉴를 열게할 요소를 지정하며 토글기능이 들어가 있습니다.
-closeElement | data-menu-close자손에 data-menu-button | jQueryElement \|\| element | 메뉴를 닫게할 요소를 지정합니다.
 
 ### data-menu-*
 
@@ -35,10 +31,11 @@ effect | 1 | number | openElement에 지정한 요소를 눌렀을때의 효과�
 #### div
 이름 | 값 | 설명
 | :-- | :- | :-- |
-depth | number | 깊이요소(div)를 지정합니다.
-title | number | div요소 왼쪽 제목상자를 넣을때 사용하며 list의 이전요소에 기입해야 합니다.
-open | namepsace | openElement를 지정하지 않거나 없을때 참조합니다.
-close | namepsace | closeElement를 지정하지 않거나 없을때 참조합니다.
+depth | number | 깊이요소를 지정합니다.
+title | number | 왼쪽 제목상자를 넣을때 사용하며 list의 이전요소에 기입해야 합니다.
+open | namepsace | 메뉴를 열게할 요소를 지정하며 토글기능이 들어가 있습니다.
+close | namepsace | 메뉴를 닫게할 요소를 지정합니다.
+wrap | | selector 자손으로 하나감쌀때 사용합니다.
 
 #### ul
 이름 | 값 | 설명
@@ -54,12 +51,12 @@ actived | | 초기에 활성화시킬 요소를 지정할때 사용합니다.
 #### button
 이름 | 값 | 설명
 | :-- | :- | :-- |
-button | | 여는버튼 또는 닫는버튼을 지정할때 사용하며 부모에 open, close가 있어야하며 openElement 또는 closeElement를 지정하지 않았을때 참조합니다.
+button | | 여는버튼 또는 닫는버튼을 지정할때 사용하며 부모에 open, close가 있어야합니다.
 
 ### 클래스
 
 #### body
-* active : namespace에 지정한 값에 _active을 더하여 메뉴에 접근했을때 부여됩니다.
+* active : namespace에 지정한 값에 _active를 더하여 메뉴에 접근했을때 부여됩니다.
 * open : namespace에 지정한 값에 _open을 더하여 메뉴를 열었을때 부여됩니다.
 
 #### selector
