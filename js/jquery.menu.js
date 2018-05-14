@@ -236,13 +236,10 @@ try {
 								cloneStyle = clone.style;
 
 							//css기입
-							cloneStyle.cssText = cssText;
+							clone.style.cssText = cssText + ' width:' + $elementI.width() + 'px;';
 
 							//clone생성
 							elementIParent.appendChild(clone);
-
-							//css기입
-							cloneStyle.width = clone.clientWidth + 'px';
 
 							//높이얻기
 							cloneHeight = clone.offsetHeight + parseInt(cloneComputedStyle.marginTop, 10) + parseInt(cloneComputedStyle.marginBottom, 10);
