@@ -40,9 +40,7 @@ $(function() {
 			}
 		}
 	});
-});
 
-$(document).on('ready', function(event) {
 	$.responsive({
 		range : {
 			wide : {
