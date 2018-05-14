@@ -5,9 +5,7 @@ $(function() {
 		navMenuType = parseInt($nav.attr('data-menu-type'), 10),
 		navOption = {
 			cut : {},
-			namespace : 'menu',
-			openElement : $(),
-			closeElement : $()
+			namespace : 'menu'
 		};
 	
 	//data-menu-type이 없을때
