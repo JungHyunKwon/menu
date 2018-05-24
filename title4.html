@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
 	<title>menu</title>
 	<link href="css/common.css" type="text/css" rel="stylesheet" />
-	<link href="css/dropdown2.css" type="text/css" rel="stylesheet" />
+	<link href="css/pulldown2.css" type="text/css" rel="stylesheet" />
 	<script src="js/jquery-1.12.4.min.js"></script>
 	<script src="js/jquery.menu.min.js"></script>
 	<script>
@@ -15,7 +15,7 @@
 		$(function() {
 			$('[data-menu-type]').menu({
 				cut : {},
-				event : 'click',
+				event : 'mouse',
 				namespace : 'menu'
 			});
 		});
@@ -27,26 +27,19 @@
 	<div data-menu-open="menu">
 		<button type="button" data-menu-button>메뉴 열기</button>
 	</div>
-	<nav data-menu-type="4">
+	<nav data-menu-type="2" data-menu-top-background="full" data-menu-bottom-background="full">
 		<h2 class="skip">메뉴</h2>
 		<div data-menu-depth="1">
-			<ul data-menu-list="1">
+			<ul class="clearfix" data-menu-list="1">
 				<li>
 					<a href="#n" title="새창" target="_blank" data-menu-text="1">1차 메뉴(1)</a>
 					<div data-menu-depth="2">
+						<div data-menu-title="2">
+							<p>안녕하세요1</p>
+						</div>
 						<ul data-menu-list="2">
 							<li>
 								<a href="#n" title="새창" target="_blank" data-menu-text="2">2차 메뉴(1)</a>
-								<div data-menu-depth="3">
-									<ul data-menu-list="3">
-										<li>
-											<a href="#n" title="새창" target="_blank" data-menu-text="3">3차 메뉴(1)</a>
-										</li>
-										<li>
-											<a href="#n" data-menu-text="3">3차 메뉴(1)</a>
-										</li>
-									</ul>
-								</div>
 							</li>
 							<li>
 								<a href="#n" data-menu-text="2">2차 메뉴(1)</a>
@@ -57,6 +50,9 @@
 				<li>
 					<a href="#n" data-menu-text="1">1차 메뉴(2)</a>
 					<div data-menu-depth="2">
+						<div data-menu-title="2">
+							<p>안녕하세요2</p>
+						</div>
 						<ul data-menu-list="2">
 							<li>
 								<a href="#n" data-menu-text="2">2차 메뉴(2)</a>
@@ -67,6 +63,9 @@
 				<li>
 					<a href="#n" data-menu-text="1">1차 메뉴(3)</a>
 					<div data-menu-depth="2">
+						<div data-menu-title="2">
+							<p>안녕하세요3</p>
+						</div>
 						<ul data-menu-list="2">
 							<li>
 								<a href="#n" data-menu-text="2">2차 메뉴(3)</a>
@@ -77,6 +76,9 @@
 				<li>
 					<a href="#n" data-menu-text="1">1차 메뉴(4)</a>
 					<div data-menu-depth="2">
+						<div data-menu-title="2">
+							<p>안녕하세요4</p>
+						</div>
 						<ul data-menu-list="2">
 							<li>
 								<a href="#n" data-menu-text="2">2차 메뉴(4)</a>
@@ -87,6 +89,9 @@
 				<li>
 					<a href="#n" data-menu-text="1">1차 메뉴(5)</a>
 					<div data-menu-depth="2">
+						<div data-menu-title="2">
+							<p>안녕하세요5</p>
+						</div>
 						<ul data-menu-list="2">
 							<li>
 								<a href="#n" data-menu-text="2">2차 메뉴(5)</a>

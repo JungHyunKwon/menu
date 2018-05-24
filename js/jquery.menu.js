@@ -9,10 +9,7 @@ try {
 	if(typeof window.jQuery === 'function') {
 		//$ 중첩 방지
 		(function($) {
-			var _getComputedStyle = window.getComputedStyle,
-				_$window = $(window),
-				_$document = $(document),
-				_consoleType = _getTypeof(window.console),
+			var _$document = $(document),
 				_register = [], //등록된 요소
 				_separator = '_', //구분자
 				_className = { //클래스 이름
@@ -123,7 +120,7 @@ try {
 			 * @description 콘솔객체가 없을경우 에뮬레이션이 아닌 실제 인터넷 익스플로러9이하에서 콘솔로그 버그를 막을 수 있습니다. 막지 않고 콘솔을 쓸경우 모든 스크립팅은 중단 됩니다. 대체콘솔은 console.comment에 담겨있습니다.
 			 * @since 2017-10-11
 			 */
-			if(_consoleType !== 'object' && _consoleType !== 'console') {
+			if(!window.console instanceof Object) {
 				window.console = {
 					method : [
 						'assert',
@@ -154,7 +151,7 @@ try {
 
 				for(var i = 0, consoleMethodLength = window.console.method.length; i < consoleMethodLength; i++) {
 					//함수가아닐때
-					if(_getTypeof(window.console[window.console.method[i]]) !== 'function') {
+					if(typeof window.console[window.console.method[i]] !== 'function') {
 						window.console[window.console.method[i]] = function() {
 							var result = [],
 								argumentsLength = arguments.length;
@@ -206,57 +203,6 @@ try {
 
 					if(elementType === 'window' || elementType === 'document' || elementType === 'element' || elementType === 'jQueryElement') {
 						result = true;						
-					}
-
-					return result;
-				}
-
-				/**
-				 * @name 높이 구하기
-				 * @since 2017-12-06
-				 * @param {jQueryElement || element} element
-				 * @return {array || number || string}
-				 */
-				function _getOuterHeight(element) {
-					var $element = $(element),
-						result = [],
-						cssText = 'display:block; visibility:hidden !important; position:absolute; top:-9999px; left:-9999px; z-index:-1; height:auto; min-height:0; max-height:none; animation-name:none; transition-property:none;';
-				
-					//받은요소만큼 반복
-					for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
-						var $elementI = $element.eq(i),
-							elementI = $elementI[0],
-							cloneHeight = '';
-							
-						//요소일때
-						if(_isElement(elementI)) {
-							var elementIParent = elementI.parentNode,
-								clone = elementI.cloneNode(true),
-								cloneComputedStyle = (_getComputedStyle) ? _getComputedStyle(clone, null) : clone.currentStyle;
-
-							//css기입
-							clone.style.cssText = cssText + ' width:' + $elementI.width() + 'px;';
-
-							//clone생성
-							elementIParent.appendChild(clone);
-
-							//높이얻기
-							cloneHeight = clone.offsetHeight + parseInt(cloneComputedStyle.marginTop, 10) + parseInt(cloneComputedStyle.marginBottom, 10);
-
-							//clone제거
-							elementIParent.removeChild(clone);
-						}
-
-						result[i] = cloneHeight;
-					}
-					
-					//결과가 1개일때
-					if(result.length === 1) {
-						result = result[0];
-					
-					//결과가 없을때
-					}else if(!result.length) {
-						result = '';
 					}
 
 					return result;
@@ -360,6 +306,7 @@ try {
 				$.fn.menu = function(option, element) {
 					var $thisFirst = this.first(),
 						thisFirst = $thisFirst[0],
+						thisFirstStyle = thisFirst.style,
 						optionType = _getTypeof(option),
 						registIndex = _getRegistIndex(thisFirst),
 						register = _register[registIndex],
@@ -389,19 +336,17 @@ try {
 								registerOption.$depthItem.removeClass(_className.has + ' ' + _className.solo + ' ' + _className.activePrev + ' ' + _className.active + ' ' + _className.activeNext + ' ' + _className.activedPrev + ' ' + _className.actived + ' ' + _className.activedNext);
 
 								//특성제거
-								registerOption.$depth.css('max-height', '');
-								registerOption.$depth1Title.css('max-height', '');
-								$thisFirst.css('padding-bottom', '');
+								thisFirstStyle.height = '';
 
 								//이벤트 핸들러 제거
-								_$window.off('resize.' + registerNamespace);
 								_$document.off('keydown.' + registerNamespace);
 								registerOption.$openElement.off('click.' + registerNamespace + ' focusin.' + registerNamespace);
 								registerOption.$closeElement.off('click.' + registerNamespace + ' focusout.' + registerNamespace);
-								$thisFirst.off('mouseover.' + registerNamespace + ' mouseleave.' + registerNamespace);
+								registerOption.$depth1.off('mouseover.' + registerNamespace + ' mouseleave.' + registerNamespace);
 								registerOption.$depthText.off('focusin.' + registerNamespace + ' focusout.' + registerNamespace + ' click.' + registerNamespace);
 								registerOption.$depthAndText.off('mouseover.' + registerNamespace);
-								
+								registerOption.$depthTitle2.off('mouseout.' + registerNamespace);
+
 								//배열에서 제거
 								_register.splice(registIndex, 1);
 							
@@ -434,7 +379,7 @@ try {
 							}
 						}
 					//적용
-					}else if(_getTypeof($thisFirst) === 'jQueryElement') {
+					}else if(_isElement(thisFirst)) {
 						//기존 이벤트 제거
 						if(register) {
 							$thisFirst.menu('destroy');
@@ -486,18 +431,18 @@ try {
 						//유형 정의
 						option.type = parseInt($thisFirst.attr('data-menu-type'), 10);
 						
-						//속성이 없거나 NaN일때
-						if(!option.type || _getTypeof(option.type) === 'NaN') {
+						//속성이 없을때
+						if(!option.type) {
 							option.type = 1;
 						}
 							
 						//요소 정의
 						option.$depth = $thisFirst.find('div[data-menu-depth]');
 						option.$depth1 = option.$depth.filter('div[data-menu-depth="1"]');
-						option.$depth1Title = option.$depth1.find('div[data-menu-title="1"]');
-						option.$depth1List = option.$depth1.find('ul[data-menu-list="1"]');
-						option.$depth1Item = option.$depth1List.children('li');
-						option.$depth1Text = option.$depth1Item.find('a[data-menu-text="1"], button[data-menu-text="1"]');
+						option.$depth1Text = option.$depth1.find('a[data-menu-text="1"], button[data-menu-text="1"]');
+						option.$depthTitle1 = option.$depth1.find('div[data-menu-title="1"]');
+						option.$depthTitle1WildCard = option.$depthTitle1.add(option.$depthTitle1.find('*'));
+						option.$depthTitle2 = option.$depth1.find('div[data-menu-title="2"]');
 						option.$depth2 = option.$depth.filter('[data-menu-depth="2"]');
 						option.$depthList = option.$depth.find('ul[data-menu-list]');
 						option.$depthItem = option.$depthList.children('li');
@@ -506,6 +451,11 @@ try {
 						option.$depthAndText = option.$depth.not('div[data-menu-depth="1"]').add(option.$depthText);
 						option.$activedDepthText = option.$depth1.find('a[data-menu-text][data-menu-actived], button[data-menu-text][data-menu-actived]').last();
 						option.$activedDepthItem = option.$activedDepthText.parents('li');
+
+						//높이 캐싱
+						thisFirstStyle.transitionProperty = 'none';
+						option.menuHeight = thisFirst.clientHeight;
+						thisFirstStyle.transitionProperty = '';
 
 						//actived클래스 추가
 						option.$activedDepthItem.prev('li').addClass(_className.activedPrev);
@@ -549,114 +499,6 @@ try {
 						}
 
 						/**
-						 * @name 높이반영
-						 * @param {object} opt({element : element || jQueryElement, nextDepth : boolean, parentsDepth : boolean})
-						 * @since 2017-12-06
-						 */
-						option.setHeight = function(opt) {
-							//객체가 아닐때
-							if(_getTypeof(opt) !== 'object') {
-								option = {};
-							}
-							
-							//불린이 아닐때
-							if(typeof opt.nextDepth !== 'boolean') {
-								opt.nextDepth = false;
-							}
-							
-							//불린이 아닐때
-							if(typeof opt.parentsDepth !== 'boolean') {
-								opt.parentsDepth = false;
-							}
-
-							//제이쿼리로 변환
-							opt.$element = $(opt.element);
-
-							//제이쿼리 엘리먼트가 존재할때 && setSpy가 잘못들어오지않았을때
-							if(_isElement(opt.element) && _getTypeof(opt.element) !== 'window') {
-								//활성화 되었는지, 열려있진 않은지 확인하는 변수
-								opt.isActive = true;
-								opt.isOpen = true;
-								
-								//활성화 되지 않았을때
-								if(!_$body.hasClass(option.className.globalActive)) {
-									_$body.addClass(option.className.globalActive);
-									opt.isActive = false;
-								}
-								
-								//열려있지 않았을때
-								if(!_$body.hasClass(option.className.globalOpen)) {
-									_$body.addClass(option.className.globalOpen);
-									opt.isOpen = false;
-								}
-
-								opt.$parentsDepthItem = opt.$element.parents('li');
-
-								//선택된 메뉴 높이 조정
-								if(opt.nextDepth) {
-									opt.$nextDepth = opt.$parentsDepthItem.first().find('div[data-menu-depth]:first');
-
-									//다음 차수메뉴의 outerHeight(height, padding)를 구해서 적용
-									opt.$nextDepth.css('max-height', _getOuterHeight(opt.$nextDepth[0]));
-								}
-
-								//선택된 depthText의 부모 메뉴 높이 조정
-								if(opt.parentsDepth) {
-									opt.$parentsDepth = opt.$element.parents('div[data-menu-depth]:not([data-menu-depth="1"])');
-
-									for(var i = 0, parentDepthLength = opt.$parentsDepth.length; i < parentDepthLength; i++) {
-										var parentDepthI = opt.$parentsDepth[i];
-
-										//부모 차수메뉴의 outerHeight(height, padding)를 구해서 적용
-										parentDepthI.style.maxHeight = _getOuterHeight(parentDepthI) + 'px';
-									}
-								}
-								
-								opt.$depth2 = opt.$parentsDepthItem.find('div[data-menu-depth="2"]');
-
-								//풀다운
-								if(option.type === 1) {
-									//depth2중에서 outerHeight(height, padding)를 구해서 최대높이 구하기
-									opt.depth2Height = Math.max.apply(null, _getOuterHeight(option.$depth2.get()));
-									
-									//depth1Title에 max-height부여
-									option.$depth1Title.css('max-height', opt.depth2Height);
-
-								//풀다운2, 드롭다운1
-								}else if((option.type === 2 || option.type === 3) && opt.$depth2.length) {
-									//선택된 depthText에 depth2에서 outerHeight(height, padding)를 구하기
-									opt.depth2Height = _getOuterHeight(opt.$depth2[0]);
-								}
-								
-								//풀다운 메뉴에 모든 2차메뉴에 적용
-								if(option.type === 1 || option.type === 2) {
-									option.$depth2.css('max-height', opt.depth2Height);
-								
-								//드롭다운1 메뉴에 선택된 2차메뉴에 적용
-								}else if(option.type === 3) {
-									opt.$depth2.css('max-height', opt.depth2Height);
-								}
-
-								//풀다운, 드롭다운1 메뉴에 padding-bottom적용
-								if(option.type === 1 || option.type === 2 || option.type === 3) {
-									thisFirst.style.paddingBottom = opt.depth2Height + 'px';
-								}
-								
-								//활성화되지 않았을때
-								if(!opt.isActive) {
-									_$body.removeClass(option.className.globalActive);
-								}
-
-								//열려있지 않았을때
-								if(!opt.isOpen) {
-									_$body.removeClass(option.className.globalOpen);
-								}
-							}
-
-							return opt.$element;
-						};
-
-						/**
 						 * @name 상태 클래스 추가
 						 * @since 2017-12-06
 						 * @param {element || jQueryElement} element
@@ -694,6 +536,7 @@ try {
 						option.openMenu = function(event) {
 							var $this = $(this),
 								$parentsDepthItem = $this.parents('li'),
+								$depth2 = $parentsDepthItem.find('div[data-menu-depth="2"]'),
 								$parentsDepthLastItem = $parentsDepthItem.last(),
 								$depthPrevItem = $parentsDepthItem.prev('li'),
 								$depthNextItem = $parentsDepthItem.next('li');
@@ -718,9 +561,6 @@ try {
 
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
 								$siblingsParentDepthItem.add($siblingsDepthItem).removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
-
-								//메뉴 닫기
-								$siblingsDepthItem.find('div[data-menu-depth]:first').css('max-height', '');
 							}
 
 							//전역 활성화 클래스 추가
@@ -738,12 +578,44 @@ try {
 							//상태 클래스 추가
 							option.addStateClass($parentsDepthLastItem.add($parentsDepthLastItem.find('div[data-menu-depth]:first-of-type ul[data-menu-list]:first > li')).filter('.' + _className.active).last().find('[data-menu-text]:first').filter('a, button')[0]);
 
-							//높이 조정
-							option.setHeight({
-								element : this,
-								nextDepth : true,
-								parentsDepth : true
-							});
+							//풀다운1
+							if(option.type === 1) {
+								var depth2MaxHeight = [];
+
+								for(var i = 0, depth2Length = option.$depth2.length; i < depth2Length; i++) {
+									depth2MaxHeight[i] = option.$depth2.eq(i).children().filter(function(index, element) {
+										var position = $(element).css('position');
+
+										return (position === 'static' || position === 'relative') ? true : false;
+									}).first().outerHeight() || 0;
+								}
+
+								//depth2 첫번째 자손에서 outerHeight(height, padding, border)를 구해서 최대높이 구하기
+								depth2MaxHeight = Math.max.apply(null, depth2MaxHeight) || '';
+
+								if(depth2MaxHeight) {
+									depth2MaxHeight += option.menuHeight;
+									depth2MaxHeight += 'px';
+								}
+
+								thisFirstStyle.height = depth2MaxHeight;
+
+							//풀다운2
+							}else if(option.type === 2 && $depth2.length) {
+								//선택된 depthText에 depth2 첫번째 자손에서 outerHeight(height, padding, border)를 구하기
+								var depth2Height = $depth2.children().filter(function(index, element) {
+									var position = $(element).css('position');
+
+									return (position === 'static' || position === 'relative') ? true : false;
+								}).first().outerHeight() || '';
+
+								if(depth2Height) {
+									depth2Height += option.menuHeight;
+									depth2Height += 'px';
+								}
+
+								thisFirstStyle.height = depth2Height;
+							}
 
 							//이벤트 전파 방지
 							event.stopPropagation();
@@ -765,10 +637,8 @@ try {
 								//상태 클래스 제거
 								_removePrefixClass($thisFirst, _className.state);
 
-								//max-height, padding-bottom초기화
-								option.$depth.css('max-height', '');
-								option.$depth1Title.css('max-height', '');
-								thisFirst.style.paddingBottom = '';
+								//height초기화
+								$thisFirst.height('');
 
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
 								option.$depthItem.removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
@@ -806,9 +676,6 @@ try {
 									//상태 클래스 추가
 									option.addStateClass(element);
 
-									//메뉴 닫기
-									$parentsDepthItem.first().closest('div[data-menu-depth]').css('max-height', '');
-
 								//다음메뉴 닫기
 								}else{
 									var $parentDepthItem = $parentsDepthItem.first(),
@@ -836,31 +703,17 @@ try {
 
 									//상태 클래스 추가
 									option.addStateClass($secondParentDepthItem.find('[data-menu-text]:first').filter('a, button')[0]);
-
-									//다음 메뉴 닫기
-									$parentDepthItem.find('div[data-menu-depth]:first').css('max-height', '');
 								}
-
-								//높이 재조정
-								option.setHeight({
-									element : element,
-									nextDepth : false,
-									parentsDepth : true
-								});
 
 								//1차 메뉴를 닫을때
 								if(option.$depth1Text.is(element)) {
 									//전역 활성화 클래스 제거
 									_$body.removeClass(option.className.globalActive);
 									
-									//메뉴타입이 1, 2, 3일때
-									if(option.type === 1 || option.type === 2 || option.type === 3) {
-										//padding-bottom 초기화
-										thisFirst.style.paddingBottom = '';
-
-										//max-height 초기화
-										option.$depth1Title.css('max-height', '');
-										option.$depth2.css('max-height', '');
+									//메뉴타입이 1, 2일때
+									if(option.type === 1 || option.type === 2) {
+										//height 초기화
+										thisFirstStyle.height = '';
 									}
 								}
 							}
@@ -873,69 +726,46 @@ try {
 						if(option.event === 'mouse') {
 							//depthText와 depth에 마우스가 접근했을때						
 							option.$depthAndText.on('mouseover.' + option.namespace, option.openMenu);
-
+							
 							//지정요소 나가면 추적
-							$thisFirst.on('mouseover.' + option.namespace, function(event) {
+							option.$depth1.on('mouseover.' + option.namespace, function(event) {
 								//메뉴가 활성화되어 있을때
 								if(_$body.hasClass(option.className.globalActive)) {
-									option.openMenu.call(this, event);
+									if(option.type === 1 && $(this).is(event.target)) {
+										option.setSpy(this);
+									}else if(option.type !== 2 || !option.$depthTitle1WildCard.is(event.target)){
+										option.openMenu.call(this, event);
+									}
 								}
 							}).on('mouseleave.' + option.namespace, function(event) {
 								option.setSpy(this);
 							});
-						}else{
-							//transition-duration 전역변수
-							option.time = 0;
 
+							option.$depthTitle2.on('mouseout', function(event) {
+								if(option.type === 1) {
+									option.setSpy(this);
+								}								
+							});
+						}else{
 							option.$depthText.on('click.' + option.namespace, function(event) {
 								var $this = $(this),
 									$parentDepthItem = $this.closest('li'),
 									$nextDepth = $parentDepthItem.find('div[data-menu-depth]:first'),
-									time = new Date().getTime(),
-									nextDepthTransitionDuration = $nextDepth.css('transition-duration');
+									tagName = this.tagName.toLowerCase(),
+									isActive = $parentDepthItem.hasClass(_className.active);
 
-								//문자열일때
-								if(typeof nextDepthTransitionDuration === 'string') {
-									//second일때
-									if(nextDepthTransitionDuration.substr(-1) !== 'ms') {
-										nextDepthTransitionDuration= parseFloat(nextDepthTransitionDuration, 10) * 1000;
+								//(선택된 태그의 주소와 다음 메뉴의 첫번째 a태그의 주소와 같을때 || 선택된 태그가 button태그일때) && 활성화 상태일때
+								if(((tagName === 'a' && $this.attr('href') === $nextDepth.find('ul[data-menu-list]:first > li:first-child a[data-menu-text]:first').attr('href')) || tagName === 'button') && isActive) {
+									//닫기 또는 추적
+									option.setSpy(this);
 									
-									//millisecond일때
-									}else{
-										nextDepthTransitionDuration = parseFloat(nextDepthTransitionDuration, 10);
-									}
-									
-									//NaN일때
-									if(_getTypeof(nextDepthTransitionDuration) === 'NaN') {
-										nextDepthTransitionDuration = 0;
-									}
-								}else{
-									nextDepthTransitionDuration = 0;
-								}
+									//이벤트 기능 정지
+									event.preventDefault();
+								//다음 메뉴가 있을때 && 활성화 상태가 아닐때
+								}else if($nextDepth.length && !isActive) {
+									//다음 메뉴 열기
+									option.openMenu.call(this, event);
 
-								//다음 메뉴의 transition-duration을 구해 그 시간이 지난후에 실행
-								if((time - option.time) >= nextDepthTransitionDuration) {
-									var tagName = this.tagName.toLowerCase(),
-										isActive = $parentDepthItem.hasClass(_className.active);
-
-									option.time = time;
-
-									//(선택된 태그의 주소와 다음 메뉴의 첫번째 a태그의 주소와 같을때 || 선택된 태그가 button태그일때) && 활성화 상태일때
-									if(((tagName === 'a' && $this.attr('href') === $nextDepth.find('ul[data-menu-list]:first > li:first-child a[data-menu-text]:first').attr('href')) || tagName === 'button') && isActive) {
-										//닫기 또는 추적
-										option.setSpy(this);
-										
-										//이벤트 기능 정지
-										event.preventDefault();
-									//다음 메뉴가 있을때 && 활성화 상태가 아닐때
-									}else if($nextDepth.length && !isActive) {
-										//다음 메뉴 열기
-										option.openMenu.call(this, event);
-
-										//이벤트 기능 정지
-										event.preventDefault();
-									}
-								}else{
 									//이벤트 기능 정지
 									event.preventDefault();
 								}
@@ -999,29 +829,6 @@ try {
 							//0.25초마다 타이머 실행
 							option.keydownTimer = setTimeout(function() {
 								option.isPressTabKey = false;
-							}, option.interval);
-						});
-						
-						//리사이즈 이벤트
-						_$window.on('resize.' + option.namespace, function(event) {
-							//타이머가 존재하면
-							if(option.resizeTimer) {
-								clearTimeout(option.resizeTimer);
-								option.resizeTimer = 0;
-							}
-							
-							//0.25초마다 타이머 실행
-							option.resizeTimer = setTimeout(function() {
-								//활성화된 요소 높이 갱신
-								var activeTextElement = option.$depthItem.filter('.' + _className.active).find('[data-menu-text]:first').filter('a, button').get().reverse();
-								
-								for(var i = 0, activeTextElementLength = activeTextElement.length; i < activeTextElementLength; i++) {
-									option.setHeight({
-										element : activeTextElement[i],
-										nextDepth : true,
-										parentsDepth : true
-									});	
-								}
 							}, option.interval);
 						});
 

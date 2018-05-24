@@ -35,7 +35,6 @@ depth | number | 깊이요소를 지정합니다.
 title | number | 왼쪽 제목상자를 넣을때 사용하며 list의 이전요소에 기입해야 합니다.
 open | namepsace | 메뉴를 열게할 요소를 지정하며 토글기능이 들어가 있습니다.
 close | namepsace | 메뉴를 닫게할 요소를 지정합니다.
-wrap | | selector 자손으로 하나감쌀때 사용합니다.
 
 #### ul
 이름 | 값 | 설명

@@ -10,19 +10,25 @@
 	[data-menu-type][data-menu-top-background]:before, [data-menu-type][data-menu-bottom-background]:after {display:none; position:static; right:auto; left:auto; margin-right:0; margin-left:0;}
 	[data-menu-type][data-menu-top-background]:before {top:auto; z-index:auto;}
 	[data-menu-type][data-menu-top-background]:after {z-index:auto;}
-	[data-menu-type] div[data-menu-wrap] {z-index:auto; height:auto;}
-	[data-menu-type] div[data-menu-title] {display:none; position:static; left:auto;}
-	[data-menu-type] div[data-menu-title='1'] {top:auto; height:auto; max-height:none; transition-property:none;}
+	[data-menu-type] div[data-menu-title] {display:none; position:static; left:auto; z-index:auto;}
+	[data-menu-type] div[data-menu-title='1'] {overflow-x:visible; overflow-y:visible;}
 	[data-menu-type] div[data-menu-title='2'] {top:auto; height:auto;}
-	[data-menu-type] div[data-menu-depth='1'] {visibility:hidden; height:auto; margin-right:0; margin-left:0; transition-property:visibility;}
-	[data-menu-type] div[data-menu-depth='2'] {position:relative; top:auto; left:auto; width:auto; height:auto;}
+	[data-menu-type] div[data-menu-depth='1'].clearfix div[data-menu-title='2'] {visibility:visible; overflow-x:visible; overflow-y:visible; opacity:1; transition-property:none;}
+	[data-menu-type] div[data-menu-depth='1'] {visibility:hidden; z-index:auto; height:auto; margin-right:0; margin-left:0; transition-property:visibility;}
+	[data-menu-type] div[data-menu-depth='2'] {overflow-x:visible; overflow-y:visible; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-position, background-color, color, font-size, line-height;}
+	[data-menu-type] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:relative;}
 	[data-menu-type] ul[data-menu-list='1'] {height:auto;}
-	[data-menu-type] div[data-menu-depth='1'].clearfix div[data-menu-title='1'] + ul[data-menu-list='1'] {float:none;}
-	[data-menu-type] ul[data-menu-list='1'] > li {height:auto;}
+	[data-menu-type] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {float:none;}
 	[data-menu-type] ul[data-menu-list].clearfix > li {float:none;}
+	[data-menu-type] ul[data-menu-list='1'] > li {height:auto;}
+	[data-menu-type] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] > li {position:relative;}
 	[data-menu-type] ul[data-menu-list] > li.cut {display:none; overflow-x:visible; overflow-y:visible; width:auto; height:auto;}
 
 	/* 풀다운2 */
-	[data-menu-type='2'] div[data-menu-depth='2'] {opacity:1; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
+	[data-menu-type='2'] div[data-menu-depth='2'], [data-menu-type='2'] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:relative;}
+	[data-menu-type='2'] div[data-menu-depth='2'] {opacity:1; left:auto; width:auto; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-position, background-color, color, font-size, line-height;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li {position:relative;}
+
+	/* 드롭다운1 */
+	[data-menu-type='3'] div[data-menu-depth='2'] {position:relative; left:auto; width:auto; transform-origin:center center; transform:scaleY(1); transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-position, background-color, color, font-size, line-height;}
 }
