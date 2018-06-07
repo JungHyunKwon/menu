@@ -192,7 +192,7 @@ try {
 				var _$body = $('body');
 
 				/**
-				 * @name 엘리먼트 인지 구하기
+				 * @name 엘리먼트인지 구하기
 				 * @since 2017-12-06
 				 * @param {window || document || element || jQueryElement} element
 				 * @return {boolean}
@@ -300,10 +300,9 @@ try {
 				 * @name menu
 				 * @since 2018-02-23
 				 * @param {object} option({event : string, cut : object(number : number), namespace : string})
-				 * @param {jQueryElement || element} element
 				 * @return {jQueryElement || jQueryObject}
 				 */
-				$.fn.menu = function(option, element) {
+				$.fn.menu = function(option) {
 					var $thisFirst = this.first(),
 						thisFirst = $thisFirst[0],
 						thisFirstStyle = thisFirst.style,
@@ -352,29 +351,18 @@ try {
 							
 							//추적
 							}else if(option === 'spy') {
+								var element = arguments[1];
+
 								//요소가 아닐때
 								if(!_isElement(element)) {
 									element = registerOption.$activedDepthText[0];
 								}
+								
+								element = $(element).first()[0];
 
-								var $element = $(element),
-									depthTextLength = registerOption.$depthText.length;
-
-								for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
-									var hasDepthText = false,
-										elementI = $element[i];
-									
-									for(var j = 0, depthTextLength = registerOption.$depthText.length; j < depthTextLength; j++) {
-										//depthText에 포함된 요소일때
-										if(registerOption.$depthText.eq(j).is(elementI)) {
-											hasDepthText = true;
-										}
-									}
-									
-									//depthText가 있을때
-									if(hasDepthText) {
-										registerOption.openMenu.call(elementI, event);
-									}
+								//depthText에 포함된 요소일때
+								if(registerOption.$depthText.is(element)) {
+									registerOption.openMenu.call(element, event);
 								}
 							}
 						}
@@ -429,19 +417,14 @@ try {
 						};
 
 						//유형 정의
-						option.type = parseInt($thisFirst.attr('data-menu-type'), 10);
-						
-						//속성이 없을때
-						if(!option.type) {
-							option.type = 1;
-						}
+						option.type = parseInt($thisFirst.attr('data-menu-type'), 10) || 1;
 							
 						//요소 정의
+						option.thisFirstData = $thisFirst.data();
 						option.$depth = $thisFirst.find('div[data-menu-depth]');
 						option.$depth1 = option.$depth.filter('div[data-menu-depth="1"]');
 						option.$depth1Text = option.$depth1.find('a[data-menu-text="1"], button[data-menu-text="1"]');
 						option.$depthTitle1 = option.$depth1.find('div[data-menu-title="1"]');
-						option.$depthTitle1WildCard = option.$depthTitle1.add(option.$depthTitle1.find('*'));
 						option.$depthTitle2 = option.$depth1.find('div[data-menu-title="2"]');
 						option.$depth2 = option.$depth.filter('[data-menu-depth="2"]');
 						option.$depthList = option.$depth.find('ul[data-menu-list]');
@@ -454,7 +437,7 @@ try {
 
 						//높이 캐싱
 						thisFirstStyle.transitionProperty = 'none';
-						option.menuHeight = thisFirst.clientHeight;
+						option.thisFirstData.menuHeight = thisFirst.clientHeight;
 						thisFirstStyle.transitionProperty = '';
 
 						//actived클래스 추가
@@ -536,8 +519,9 @@ try {
 						option.openMenu = function(event) {
 							var $this = $(this),
 								$parentsDepthItem = $this.parents('li'),
-								$depth2 = $parentsDepthItem.find('div[data-menu-depth="2"]'),
+								$parentDepthItem = $parentsDepthItem.first(),
 								$parentsDepthLastItem = $parentsDepthItem.last(),
+								$depth2 = $parentsDepthLastItem.find('div[data-menu-depth="2"]'),
 								$depthPrevItem = $parentsDepthItem.prev('li'),
 								$depthNextItem = $parentsDepthItem.next('li');
 
@@ -578,43 +562,61 @@ try {
 							//상태 클래스 추가
 							option.addStateClass($parentsDepthLastItem.add($parentsDepthLastItem.find('div[data-menu-depth]:first-of-type ul[data-menu-list]:first > li')).filter('.' + _className.active).last().find('[data-menu-text]:first').filter('a, button')[0]);
 
-							//풀다운1
-							if(option.type === 1) {
-								var depth2MaxHeight = [];
+							//풀다운1 || 풀다운2
+							if(option.type === 1 || option.type === 2) {
+								var $nextDepth = $parentDepthItem.find('div[data-menu-depth]:first');
+								
+								/**
+								 * @name 2차메뉴 높이부여
+								 * @since 2017-12-06
+								 */ 
+								function setDepth2Height() {
+									var result = '';
 
-								for(var i = 0, depth2Length = option.$depth2.length; i < depth2Length; i++) {
-									depth2MaxHeight[i] = option.$depth2.eq(i).children().filter(function(index, element) {
-										var position = $(element).css('position');
+									//풀다운1
+									if(option.type === 1) {
+										result = [];
 
-										return (position === 'static' || position === 'relative') ? true : false;
-									}).first().outerHeight() || 0;
+										for(var i = 0, depth2Length = option.$depth2.length; i < depth2Length; i++) {
+											result[i] = option.$depth2.eq(i).children().filter(function(index, element) {
+												var position = $(element).css('position');
+
+												return (position === 'static' || position === 'relative') ? true : false;
+											}).first().outerHeight() || 0;
+										}
+
+										//depth2 첫번째 자손에서 outerHeight(height, padding, border)를 구해서 최대높이 구하기
+										result = Math.max.apply(null, result) || '';
+
+									//풀다운2
+									}else if(option.type === 2) {
+										//선택된 depthText에 depth2 첫번째 자손에서 outerHeight(height, padding, border)를 구하기
+										result = $depth2.children().filter(function(index, element) {
+											var position = $(element).css('position');
+
+											return (position === 'static' || position === 'relative') ? true : false;
+										}).first().outerHeight() || '';
+									}
+									
+									if(result) {
+										result += (option.thisFirstData.menuHeight || 0);
+									}
+
+									thisFirstStyle.height = result + 'px';
 								}
-
-								//depth2 첫번째 자손에서 outerHeight(height, padding, border)를 구해서 최대높이 구하기
-								depth2MaxHeight = Math.max.apply(null, depth2MaxHeight) || '';
-
-								if(depth2MaxHeight) {
-									depth2MaxHeight += option.menuHeight;
-									depth2MaxHeight += 'px';
+								
+								//최초실행
+								setDepth2Height();
+								
+								//다음뎁스가 있을때
+								if($nextDepth.length) {
+									$nextDepth.one('transitionend.' + option.namespace, function(event) {
+										//style속성에 height값이 있을때
+										if(thisFirstStyle.height) {
+											setDepth2Height();
+										}
+									});
 								}
-
-								thisFirstStyle.height = depth2MaxHeight;
-
-							//풀다운2
-							}else if(option.type === 2 && $depth2.length) {
-								//선택된 depthText에 depth2 첫번째 자손에서 outerHeight(height, padding, border)를 구하기
-								var depth2Height = $depth2.children().filter(function(index, element) {
-									var position = $(element).css('position');
-
-									return (position === 'static' || position === 'relative') ? true : false;
-								}).first().outerHeight() || '';
-
-								if(depth2Height) {
-									depth2Height += option.menuHeight;
-									depth2Height += 'px';
-								}
-
-								thisFirstStyle.height = depth2Height;
 							}
 
 							//이벤트 전파 방지
@@ -638,7 +640,7 @@ try {
 								_removePrefixClass($thisFirst, _className.state);
 
 								//height초기화
-								$thisFirst.height('');
+								thisFirstStyle.height = '';
 
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
 								option.$depthItem.removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
@@ -733,7 +735,7 @@ try {
 								if(_$body.hasClass(option.className.globalActive)) {
 									if(option.type === 1 && $(this).is(event.target)) {
 										option.setSpy(this);
-									}else if(option.type !== 2 || !option.$depthTitle1WildCard.is(event.target)){
+									}else if(option.type !== 2 || !option.$depthTitle1.add(option.$depthTitle1.find('*')).is(event.target)){
 										option.openMenu.call(this, event);
 									}
 								}

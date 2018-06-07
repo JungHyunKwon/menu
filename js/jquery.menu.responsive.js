@@ -1,17 +1,17 @@
+/**
+ * @name 메뉴 반응형 처리
+ * @author JungHyunKwon
+ * @version 1.0.0
+ */
 'use strict';
 
 $(function() {
 	var $nav = $('[data-menu-type]'),
-		navMenuType = parseInt($nav.attr('data-menu-type'), 10),
+		navMenuType = parseInt($nav.attr('data-menu-type'), 10) || 1,
 		navOption = {
 			cut : {},
 			namespace : 'menu'
 		};
-	
-	//data-menu-type이 없을때
-	if(isNaN(navMenuType)) {
-		navMenuType = 1;
-	}
 
 	$(window).on('responsive', function(event) {
 		//wide, web, tablet, phone분기에 걸렸을때

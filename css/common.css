@@ -31,7 +31,7 @@ div[data-menu-open] [data-menu-button], div[data-menu-close] [data-menu-button] 
 div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:before, div[data-menu-close]:after, div[data-menu-open] [data-menu-button], div[data-menu-open] [data-menu-button]:before, div[data-menu-open] [data-menu-button]:after, div[data-menu-close] [data-menu-button], div[data-menu-close] [data-menu-button]:before, div[data-menu-close] [data-menu-button]:after {background-repeat:no-repeat; background-position:center center; font-size:0; vertical-align:middle;}
 
 /* 풀다운1 */
-[data-menu-type] {position:relative; background-color:#bbb; font-size:0; line-height:0px; transition-property:visibility, height;}
+[data-menu-type] {position:relative; font-size:0; line-height:0px; transition-property:visibility, height;}
 [data-menu-type][data-menu-top-background]:before, [data-menu-type][data-menu-bottom-background]:after {display:block; position:absolute; right:0; left:0; margin-right:auto; margin-left:auto;}
 [data-menu-type][data-menu-top-background]:before {top:0; z-index:10;}
 [data-menu-type][data-menu-top-background]:after {z-index:20;}
