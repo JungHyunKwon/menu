@@ -24,7 +24,6 @@
 
 /* 높이 */
 [data-menu-type='3'], [data-menu-type='3'][data-menu-top-background]:before {height:40px;}
-[data-menu-type='3'] div[data-menu-depth='2'] {top:40px;}
 
 /* 중앙정렬 넓이 */
 [data-menu-type='3'] div[data-menu-depth='1'], [data-menu-type='3'][data-menu-top-background]:before {width:1200px;}

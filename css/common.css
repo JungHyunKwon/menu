@@ -64,7 +64,7 @@ div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:befo
 
 /* 드롭다운1 */
 [data-menu-type='3'] {transition-property:visibility;}
-[data-menu-type='3'] div[data-menu-depth='2'] {overflow-x:visible; overflow-y:visible; position:absolute; left:0; width:100%; transform-origin:center top; transform:scaleY(0); transition-property:visibility, transform, background-position, background-color, color;}
+[data-menu-type='3'] div[data-menu-depth='2'] {overflow-x:visible; overflow-y:visible; position:absolute; top:100%; left:0; width:100%; transform-origin:center top; transform:scaleY(0); transition-property:visibility, transform, background-position, background-color, color;}
 
 /* 드롭다운2 */
 [data-menu-type='4'] {transition-property:visibility;}

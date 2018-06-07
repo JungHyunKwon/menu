@@ -30,5 +30,5 @@
 	[data-menu-type='2'] ul[data-menu-list='1'] > li {position:relative;}
 
 	/* 드롭다운1 */
-	[data-menu-type='3'] div[data-menu-depth='2'] {position:relative; left:auto; width:auto; transform-origin:center center; transform:scaleY(1); transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-position, background-color, color, font-size, line-height;}
+	[data-menu-type='3'] div[data-menu-depth='2'] {position:relative; top:auto; left:auto; width:auto; transform-origin:center center; transform:scaleY(1); transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-position, background-color, color, font-size, line-height;}
 }
