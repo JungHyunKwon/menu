@@ -597,7 +597,8 @@ try {
 											return (position === 'static' || position === 'relative') ? true : false;
 										}).first().outerHeight() || '';
 									}
-									
+
+									//결과가 있을때
 									if(result) {
 										result += (option.thisFirstData.menuHeight || 0);
 									}
@@ -611,8 +612,8 @@ try {
 								//다음뎁스가 있을때
 								if($nextDepth.length) {
 									$nextDepth.one('transitionend.' + option.namespace, function(event) {
-										//style속성에 height값이 있을때
-										if(thisFirstStyle.height) {
+										//style속성에 height값이 있을때 && 선택한 요소의 li가 활성화 클래스를 가지고 있을때
+										if(thisFirstStyle.height && $(this).closest('li').hasClass(_className.active)) {
 											setDepth2Height();
 										}
 									});
@@ -731,19 +732,17 @@ try {
 							
 							//지정요소 나가면 추적
 							option.$depth1.on('mouseover.' + option.namespace, function(event) {
-								//메뉴가 활성화되어 있을때
-								if(_$body.hasClass(option.className.globalActive)) {
-									if(option.type === 1 && $(this).is(event.target)) {
-										option.setSpy(this);
-									}else if(option.type !== 2 || !option.$depthTitle1.add(option.$depthTitle1.find('*')).is(event.target)){
-										option.openMenu.call(this, event);
-									}
+								//메뉴가 활성화되어 있을때 && 풀다운1이면서 뎁스1일때 || 풀다운2이면서 타이틀1의 모든요소에 포함되지 않을때
+								if(_$body.hasClass(option.className.globalActive) && ((option.type === 1 && $(this).is(event.target)) || (option.type === 2 && !option.$depthTitle1.add(option.$depthTitle1.find('*')).is(event.target)))) {
+									option.setSpy(this);
 								}
 							}).on('mouseleave.' + option.namespace, function(event) {
 								option.setSpy(this);
 							});
-
-							option.$depthTitle2.on('mouseout', function(event) {
+							
+							//타이틀2를 나갔을때
+							option.$depthTitle2.on('mouseout.' + option.namespace, function(event) {
+								//풀다운1일때
 								if(option.type === 1) {
 									option.setSpy(this);
 								}								
