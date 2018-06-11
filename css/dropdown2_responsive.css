@@ -6,7 +6,6 @@
 
 	/* 활성화 제거 */
 	.menu_active [data-menu-type='4'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:hidden;}
-	.menu_active [data-menu-type='4'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:hidden;}
 	.menu_active [data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] {padding-top:0; padding-bottom:0;}
 	.menu_active [data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li {margin-top:0;}
 	.menu_active [data-menu-type='4'] ul[data-menu-list='1'] > li.active [data-menu-text='2'] {font-size:0; line-height:0;}
