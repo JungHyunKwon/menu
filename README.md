@@ -82,6 +82,10 @@ button | | 여는버튼 또는 닫는버튼을 지정할때 사용하며 부모�
 [data-menu-list='#'] | .depth#_list
 [data-menu-list='#'] > li | .depth#_item
 [data-menu-text='#'] | .depth#_text
+[data-menu-open='#'] | .nav_open
+[data-menu-open='#'] button | .nav_open .nav_button
+[data-menu-close='#'] | .nav_close
+[data-menu-close='#'] button | .nav_close .nav_button
 
 ### 메소드
 $(selector).menu(메소드명, 매개변수);
