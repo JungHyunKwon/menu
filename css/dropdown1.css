@@ -13,7 +13,7 @@
 [data-menu-type='3'] ul[data-menu-list='1'] > li {width:20%;}
 
 /* 활성화 */
-.menu_active [data-menu-type='3'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:visible; transform:scaleY(1);}
+.menu_active [data-menu-type='3'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:visible; transform:scaleY(1); z-index:10;}
 
 /* 배경 */
 [data-menu-type='3'][data-menu-top-background]:before {background-color:#2b52a7;}
