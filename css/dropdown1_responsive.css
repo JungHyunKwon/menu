@@ -22,7 +22,8 @@
 	[data-menu-type='3'] ul[data-menu-list='1'] > li {width:auto;}
 	
 	/* 활성화 제거 */
-	.menu_active [data-menu-type='3'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:hidden; z-index:auto;}
+	.menu_active [data-menu-type='3'] ul[data-menu-list='1'] > li.active {z-index:auto;}
+	.menu_active [data-menu-type='3'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:hidden;}
 
 	/* 활성화 */
 	.menu_open {overflow-x:hidden; overflow-y:hidden;}

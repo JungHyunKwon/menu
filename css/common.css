@@ -48,7 +48,7 @@ div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:befo
 [data-menu-type] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {float:right;}
 [data-menu-type] ul[data-menu-list] > li {position:relative; transition-property:margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-position, background-color, color, font-size, line-height, font-weight;}
 [data-menu-type] ul[data-menu-list].clearfix > li {float:left;}
-[data-menu-type] ul[data-menu-list='1'] > li {height:100%;}
+[data-menu-type] ul[data-menu-list='1'] > li {height:100%; transition-property:z-index;}
 [data-menu-type] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] > li {position:static;}
 [data-menu-type] ul[data-menu-list] > li:before, [data-menu-type] ul[data-menu-list] > li:after, [data-menu-type] [data-menu-text]:before, [data-menu-type] [data-menu-text]:after {background-repeat:no-repeat; background-position:center center; vertical-align:middle; font-size:0; transition-property:height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-position, background-color, color, font-size, line-height, font-weight;}
 [data-menu-type] ul[data-menu-list] > li.has > [data-menu-text]:before, [data-menu-type] a[data-menu-text][target='_blank']:after {display:inline-block; width:1px; height:1px;}
@@ -64,7 +64,7 @@ div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:befo
 
 /* 드롭다운1 */
 [data-menu-type='3'] {transition-property:visibility;}
-[data-menu-type='3'] div[data-menu-depth='2'] {overflow-x:visible; overflow-y:visible; position:absolute; top:100%; left:0; width:100%; transform-origin:center top; transform:scaleY(0); transition-property:visibility, z-index, background-position, background-color, color, transform;}
+[data-menu-type='3'] div[data-menu-depth='2'] {overflow-x:visible; overflow-y:visible; position:absolute; top:100%; left:0; width:100%; transform-origin:center top; transform:scaleY(0); transition-property:visibility, background-position, background-color, color, transform;}
 
 /* 드롭다운2 */
 [data-menu-type='4'] {transition-property:visibility;}
