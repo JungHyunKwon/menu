@@ -522,18 +522,8 @@ try {
 								$parentDepthItem = $parentsDepthItem.first(),
 								$parentsDepthLastItem = $parentsDepthItem.last(),
 								$depth2 = $parentsDepthLastItem.find('div[data-menu-depth="2"]'),
-								$depthPrevItem = $parentsDepthItem.prev('li'),
-								$depthNextItem = $parentsDepthItem.next('li');
-
-							//이전 아이템이 cut아이템일때
-							if(option.$depthCutItem.is($depthPrevItem)) {
-								$depthPrevItem = $depthPrevItem.prev('li');
-							}
-							
-							//다음 아이템이 cut아이템일때
-							if(option.$depthCutItem.is($depthNextItem)) {
-								$depthNextItem = $depthNextItem.next('li');
-							}
+								$parentsDepthPrevItem = option.filterDepthCutItem($parentsDepthItem.prev('li').get(), 'prev'),
+								$parentsDepthNextItem = option.filterDepthCutItem($parentsDepthItem.next('li').get(), 'next');
 
 							//mouse이벤트일때
 							if(option.event === 'mouse' && event.type !== 'focusin') {
@@ -551,13 +541,13 @@ try {
 							_$body.addClass(option.className.globalActive);
 
 							//활성화의 이전 클래스 추가
-							$depthPrevItem.addClass(_className.activePrev);
+							$parentsDepthPrevItem.addClass(_className.activePrev);
 
 							//활성화 클래스 추가
 							$parentsDepthItem.addClass(_className.active);
 
 							//활성화의 다음 클래스 추가
-							$depthNextItem.addClass(_className.activeNext);
+							$parentsDepthNextItem.addClass(_className.activeNext);
 
 							//상태 클래스 추가
 							option.addStateClass($parentsDepthLastItem.add($parentsDepthLastItem.find('div[data-menu-depth]:first-of-type ul[data-menu-list]:first > li')).filter('.' + _className.active).last().find('[data-menu-text]:first').filter('a, button')[0]);
@@ -623,6 +613,35 @@ try {
 							//이벤트 전파 방지
 							event.stopPropagation();
 						};
+							
+						/**
+						 * @name 컷요소 거르기
+						 * @since 2017-12-06
+						 * @param {jQueryElement || element} element
+						 * @param {string} direction
+						 * @return {jQueryElement}
+						 */
+						option.filterDepthCutItem = function(element, direction) {
+							var $element = $(element);
+							
+							if(typeof direction === 'string') {
+								direction = direction.toLowerCase();
+							}
+
+							for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
+								if(option.$depthCutItem.is($element[i])) {
+									var $elementI = $element.eq(i);
+
+									if(direction === 'prev') {
+										$element[i] = $elementI.prev('li')[0];
+									}else if(direction === 'next') {
+										$element[i] = $elementI.next('li')[0];
+									}
+								}
+							}
+
+							return $element;
+						};
 
 						/**
 						 * @name 메뉴 닫기
@@ -647,65 +666,44 @@ try {
 								option.$depthItem.removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
 							}else{
 								var element = this,
-									$parentsDepthItem = $this.parents('li'),
-									$secondParentDepthItem = $parentsDepthItem.eq(1);
+									$parentsDepthItem = $this.parents('li');
 
-								//부모메뉴 닫기
+								//메뉴 닫기
 								if($this.is(option.$depthLastText)) {
-									var $secondParentDepthPrevItem = $secondParentDepthItem.prev('li'),
-										$secondParentDepthNextItem = $secondParentDepthItem.next('li');
-
-									element = $parentsDepthItem.eq(2).find('[data-menu-text]:first').filter('a, button')[0];
-
-									//이전 아이템이 cut아이템일때
-									if(option.$depthCutItem.is($secondParentDepthPrevItem)) {
-										$secondParentDepthPrevItem = $secondParentDepthPrevItem.prev('li');
-									}
+									var $parentsDepthPrevItem = option.filterDepthCutItem($parentsDepthItem.prev('li').get(), 'prev'),
+										$parentsDepthNextItem = option.filterDepthCutItem($parentsDepthItem.next('li').get(), 'next');
 									
-									//다음 아이템이 cut아이템일때
-									if(option.$depthCutItem.is($secondParentDepthNextItem)) {
-										$secondParentDepthNextItem = $secondParentDepthNextItem.next('li');
-									}
+									element =  $parentsDepthItem.last().find('[data-menu-text="1"]').filter('a, button')[0];
 
 									//활성화의 이전 클래스 제거
-									$secondParentDepthPrevItem.removeClass(_className.activePrev);
+									$parentsDepthPrevItem.removeClass(_className.activePrev);
 
 									//선택된 활성화 클래스 제거
-									$secondParentDepthItem.removeClass(_className.active);
+									$parentsDepthItem.removeClass(_className.active);
 
 									//활성화의 다음 클래스 제거
-									$secondParentDepthNextItem.removeClass(_className.activeNext);
+									$parentsDepthNextItem.removeClass(_className.activeNext);
 
-									//상태 클래스 추가
-									option.addStateClass(element);
+									//상태 클래스 제거
+									_removePrefixClass($thisFirst, _className.state);
 
 								//다음메뉴 닫기
 								}else{
 									var $parentDepthItem = $parentsDepthItem.first(),
-										$depthPrevItem = $parentDepthItem.prev('li'),
-										$depthNextItem = $parentDepthItem.next('li');
-
-									//이전 아이템이 cut아이템일때
-									if(option.$depthCutItem.is($depthPrevItem)) {
-										$depthPrevItem = $depthPrevItem.prev('li');
-									}
-									
-									//다음 아이템이 cut아이템일때
-									if(option.$depthCutItem.is($depthNextItem)) {
-										$depthNextItem = $depthNextItem.next('li');
-									}
+										$parentDepthPrevItem = option.filterDepthCutItem($parentDepthItem.prev('li')[0], 'prev'),
+										$parentDepthNextItem = option.filterDepthCutItem($parentDepthItem.next('li')[0], 'next');
 
 									//활성화의 이전 클래스 제거
-									$depthPrevItem.removeClass(_className.activePrev);
+									$parentDepthPrevItem.removeClass(_className.activePrev);
 
 									//선택된 활성화 클래스 제거
 									$parentDepthItem.removeClass(_className.active);
 
 									//활성화의 다음 클래스 제거
-									$depthNextItem.removeClass(_className.activeNext);
+									$parentDepthNextItem.removeClass(_className.activeNext);
 
 									//상태 클래스 추가
-									option.addStateClass($secondParentDepthItem.find('[data-menu-text]:first').filter('a, button')[0]);
+									option.addStateClass($parentsDepthItem.eq(1).find('[data-menu-text]:first').filter('a, button')[0]);
 								}
 
 								//1차 메뉴를 닫을때
