@@ -512,6 +512,35 @@ try {
 						};
 
 						/**
+						 * @name 컷요소 거르기
+						 * @since 2017-12-06
+						 * @param {jQueryElement || element} element
+						 * @param {string} direction
+						 * @return {jQueryElement}
+						 */
+						option.filterDepthCutItem = function(element, direction) {
+							var $element = $(element);
+							
+							if(typeof direction === 'string') {
+								direction = direction.toLowerCase();
+							}
+
+							for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
+								if(option.$depthCutItem.is($element[i])) {
+									var $elementI = $element.eq(i);
+
+									if(direction === 'prev') {
+										$element[i] = $elementI.prev('li')[0];
+									}else if(direction === 'next') {
+										$element[i] = $elementI.next('li')[0];
+									}
+								}
+							}
+
+							return $($element);
+						};
+
+						/**
 						 * @name 메뉴 열기
 						 * @since 2017-12-06
 						 * @param {object} event
@@ -612,35 +641,6 @@ try {
 
 							//이벤트 전파 방지
 							event.stopPropagation();
-						};
-							
-						/**
-						 * @name 컷요소 거르기
-						 * @since 2017-12-06
-						 * @param {jQueryElement || element} element
-						 * @param {string} direction
-						 * @return {jQueryElement}
-						 */
-						option.filterDepthCutItem = function(element, direction) {
-							var $element = $(element);
-							
-							if(typeof direction === 'string') {
-								direction = direction.toLowerCase();
-							}
-
-							for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
-								if(option.$depthCutItem.is($element[i])) {
-									var $elementI = $element.eq(i);
-
-									if(direction === 'prev') {
-										$element[i] = $elementI.prev('li')[0];
-									}else if(direction === 'next') {
-										$element[i] = $elementI.next('li')[0];
-									}
-								}
-							}
-
-							return $element;
 						};
 
 						/**
