@@ -69,7 +69,7 @@ $(function() {
 			}
 		},
 		lowIE : {
-			property : ['web']
+			property : 'web'
 		}
 	});
 });
