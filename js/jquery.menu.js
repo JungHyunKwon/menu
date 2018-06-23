@@ -17,7 +17,6 @@ try {
 					state : 'state', //상태
 					has : 'has', //다음메뉴가 있을때
 					solo : 'solo', //다음메뉴가 없을때
-					rule : 'rule', //nth-child 대체
 					open : 'open', //닫기
 					prev : 'prev', //이전
 					next : 'next', //다음
@@ -329,7 +328,6 @@ try {
 								
 								//클래스 제거
 								$thisFirst.removeClass(_className.initialized);
-								_removePrefixClass(registerOption.$depthItem, _className.rule);
 								_$body.removeClass(registerOption.className.globalActive + ' ' + registerOption.className.globalOpen);
 								_removePrefixClass($thisFirst, _className.state);
 								registerOption.$depthItem.removeClass(_className.has + ' ' + _className.solo + ' ' + _className.activePrev + ' ' + _className.active + ' ' + _className.activeNext + ' ' + _className.activedPrev + ' ' + _className.actived + ' ' + _className.activedNext);
@@ -462,22 +460,15 @@ try {
 						//요소 정의
 						option.$depthCutItem = option.$depthList.children('li.' + _className.cut);
 
-						//rule, has, solo클래스 추가
-						for(var i = 0, depthListLength = option.$depthList.length; i < depthListLength; i++) {
-							var $depthListI = option.$depthList.eq(i),
-								$depthItemI = $depthListI.children('li');
+						//has, solo클래스 추가
+						for(var i = 0, depthItemLength = option.$depthItem.length; i < depthItemLength; i++) {
+							var $depthItemI = option.$depthItem.eq(i);
 
-							for(var j = 0, depthItemILength = $depthItemI.length; j < depthItemILength; j++) {
-								var $depthItemJ = $depthItemI.eq(j);
-								
-								$depthItemJ.addClass(_className.rule + (j + 1));
-								
-								//다음 메뉴가 있을때
-								if($depthItemJ.find('div[data-menu-depth]:first').length) {
-									$depthItemJ.addClass(_className.has);
-								}else{
-									$depthItemJ.addClass(_className.solo);
-								}
+							//다음 메뉴가 있을때
+							if($depthItemI.find('div[data-menu-depth]:first').length) {
+								$depthItemI.addClass(_className.has);
+							}else{
+								$depthItemI.addClass(_className.solo);
 							}
 						}
 
