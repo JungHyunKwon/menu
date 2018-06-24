@@ -16,7 +16,7 @@ $(selector).menu({
 | :-- | :--- | :- | :-- |
 event | click | string(mouse, click) | 사용할 이벤트를 지정합니다.
 cut | | object(number : number) | 지정한 메뉴깊이에 지정한 숫자의 배수마다 cut요소를 생성합니다.
-namespace | <ol><li>id</li><li>첫번째 클래스이름</li><li>태그이름 + 메뉴순번</li></ol> | string | 메뉴의 명칭을 지정합니다.
+namespace | <ol><li>id</li><li>태그이름 + 메뉴순번</li></ol> | string | 메뉴의 명칭을 지정합니다.
 
 ### data-menu-*
 
