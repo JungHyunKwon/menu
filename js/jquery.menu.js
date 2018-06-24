@@ -381,7 +381,7 @@ try {
 
 						//네임스페이스가 문자열이 아니거나 공백일때
 						if(typeof option.namespace !== 'string' || option.namespace === '') {
-							option.namespace = $thisFirst.attr('id') || ($thisFirst.attr('class') || '').split(/\s/)[0] || thisFirst.tagName.toLowercase() + (_register.length + 1);
+							option.namespace = $thisFirst.attr('id') || thisFirst.tagName.toLowercase() + (_register.length + 1);
 						}
 
 						//컷팅이 객체가 아닐때
