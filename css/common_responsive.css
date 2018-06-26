@@ -2,8 +2,9 @@
 
 @media screen and (max-width:1000px) {
 	/* 버튼 */
+	div[data-menu-open], div[data-menu-close] {transition-property:visibility;}
 	div[data-menu-open] {visibility:visible;}
-	div[data-menu-close] {position:fixed; transition-property:visibility;}
+	[data-menu-type] + div[data-menu-close] {position:fixed;}
 
 	/* 풀다운1 */
 	[data-menu-type] {visibility:hidden; overflow-y:auto; position:fixed; transition-property:visibility;}
@@ -15,7 +16,7 @@
 	[data-menu-type] div[data-menu-title='2'] {top:auto; height:auto;}
 	[data-menu-type] div[data-menu-depth='1'].clearfix div[data-menu-title='2'] {visibility:visible; overflow-x:visible; overflow-y:visible; opacity:1; transition-property:none;}
 	[data-menu-type] div[data-menu-depth='1'] {visibility:hidden; z-index:auto; height:auto; margin-right:0; margin-left:0; transition-property:visibility;}
-	[data-menu-type] div[data-menu-depth='2'] {overflow-x:visible; overflow-y:visible; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-position, background-color, color, font-size, line-height, font-weight;}
+	[data-menu-type] div[data-menu-depth='2'] {overflow-x:visible; overflow-y:visible; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color, color, font-size, line-height, font-weight;}
 	[data-menu-type] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:relative;}
 	[data-menu-type] ul[data-menu-list='1'] {height:auto;}
 	[data-menu-type] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {float:none;}
@@ -26,9 +27,20 @@
 
 	/* 풀다운2 */
 	[data-menu-type='2'] div[data-menu-depth='2'], [data-menu-type='2'] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:relative;}
-	[data-menu-type='2'] div[data-menu-depth='2'] {opacity:1; left:auto; width:auto; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-position, background-color, color, font-size, line-height, font-weight;}
+	[data-menu-type='2'] div[data-menu-depth='2'] {opacity:1; left:auto; width:auto; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color, color, font-size, line-height, font-weight;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li {position:relative;}
 
 	/* 드롭다운1 */
-	[data-menu-type='3'] div[data-menu-depth='2'] {position:relative; top:auto; left:auto; width:auto; transform-origin:center center; transform:scaleY(1); transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-position, background-color, color, font-size, line-height, font-weight;}
+	[data-menu-type='3'] div[data-menu-depth='2'] {position:relative; top:auto; left:auto; width:auto; transform-origin:center center; transform:scaleY(1); transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color, color, font-size, line-height, font-weight;}
+
+	/* 위에서 아래로 슬라이드 효과 */
+	[data-menu-type][data-menu-effect='2'] {max-height:0; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
+
+	/* 왼쪽에서 오른쪽으로 슬라이드 효과 */
+	[data-menu-type][data-menu-effect='3'] {left:-100%; transition-property:visibility, left;}
+	[data-menu-type][data-menu-effect='3'] + div[data-menu-close] {left:-100%; transition-property:visibility, left;}
+
+	/* 오른쪽에서 왼쪽으로 슬라이드 효과 */
+	[data-menu-type][data-menu-effect='4'] {right:-100%; transition-property:visibility, right;}
+	[data-menu-type][data-menu-effect='4'] + div[data-menu-close] {right:-100%; transition-property:visibility, right;}
 }

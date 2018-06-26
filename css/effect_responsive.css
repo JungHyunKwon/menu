@@ -2,18 +2,12 @@
 
 @media screen and (max-width:1000px) {
 	/* 위에서 아래로 슬라이드 효과 */
-	[data-menu-type][data-menu-effect='2'] {max-height:0; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
 	.menu_open [data-menu-type][data-menu-effect='2'] {max-height:100%;}
 
 	/* 왼쪽에서 오른쪽으로 슬라이드 효과 */
-	[data-menu-type][data-menu-effect='3'] {left:-100%; transition-property:visibility, left;}
-	.menu_open [data-menu-type][data-menu-effect='3'] {left:0;}
-	[data-menu-type][data-menu-effect='3'] + div[data-menu-close] {left:-100%; transition-property:visibility, left;}
-	.menu_open [data-menu-type][data-menu-effect='3'] + div[data-menu-close] {left:0;}
+	.menu_open [data-menu-type][data-menu-effect='3'], .menu_open [data-menu-type][data-menu-effect='3'] + div[data-menu-close] {left:0;}
 
 	/* 오른쪽에서 왼쪽으로 슬라이드 효과 */
-	[data-menu-type][data-menu-effect='4'] {right:-100%; left:auto; transition-property:visibility, right;}
-	.menu_open [data-menu-type][data-menu-effect='4'] {right:0;}
-	[data-menu-type][data-menu-effect='4'] + div[data-menu-close] {right:-100%; left:auto; transition-property:visibility, right;}
-	.menu_open [data-menu-type][data-menu-effect='4'] + div[data-menu-close] {right:0;}
+	[data-menu-type][data-menu-effect='4'], [data-menu-type][data-menu-effect='4'] + div[data-menu-close] {left:auto;}
+	.menu_open [data-menu-type][data-menu-effect='4'], .menu_open [data-menu-type][data-menu-effect='4'] + div[data-menu-close] {right:0;}
 }
