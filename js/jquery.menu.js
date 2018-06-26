@@ -181,7 +181,7 @@ try {
 			 * @name 문자열 공백 제거
 			 * @since 2017-12-06
 			 * @param {string} value
-			 * @return {string}
+			 * @return {*}
 			 */
 			function _removeBlank(value) {
 				return (typeof value === 'string') ? value.replace(/\s/g, '') : value;
@@ -216,8 +216,7 @@ try {
 				 */
 				function _removePrefixClass(element, startName) {
 					var $element = $(element),
-						startNameLength = (typeof startName === 'string') ? startName.length : 0, //문자열이 아닐때 0대체
-						result = [];
+						startNameLength = (typeof startName === 'string') ? startName.length : 0; //문자열이 아닐때 0대체
 					
 					for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
 						var $elementI = $element.eq(i),
@@ -234,24 +233,10 @@ try {
 								if(classNameJ.substring(0, startNameLength) === startName) {
 									//클래스 제거
 									$elementI.removeClass(classNameJ);
-
-									//결과 기입
-									result.push(classNameJ);
 								}
 							}
 						}
 					}
-
-					//결과가 1개일때
-					if(result.length === 1) {
-						result = result[0];
-					
-					//결과가 없을때
-					}else if(!result.length) {
-						result = $element;
-					}
-
-					return result;
 				}
 				
 
@@ -396,7 +381,7 @@ try {
 						
 						//이벤트가 mouse가 아니면서 click이 아닐때
 						if(option.event !== 'mouse' && option.event !== 'click') {
-							option.event = 'click';
+							option.event = 'mouse';
 						}
 
 						//열기버튼
@@ -663,7 +648,7 @@ try {
 									var $parentsDepthPrevItem = option.filterDepthCutItem($parentsDepthItem.prev('li').get(), 'prev'),
 										$parentsDepthNextItem = option.filterDepthCutItem($parentsDepthItem.next('li').get(), 'next');
 									
-									element =  $parentsDepthItem.last().find('[data-menu-text="1"]').filter('a, button')[0];
+									element = $parentsDepthItem.last().find('[data-menu-text="1"]').filter('a, button')[0];
 
 									//활성화의 이전 클래스 제거
 									$parentsDepthPrevItem.removeClass(_className.activePrev);
