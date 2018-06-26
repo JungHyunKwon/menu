@@ -26,7 +26,7 @@
 	[data-menu-type='2'] div[data-menu-depth='1'].clearfix ul[data-menu-list='2'], [data-menu-type='2'] div[data-menu-title='2'] + ul[data-menu-list='2'] {padding-left:0;}
 	
 	/* 활성화 제거 */
-	.menu_active [data-menu-type='2'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:hidden; opacity:1; z-index:auto;}
+	.menu_active [data-menu-type='2'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:hidden; z-index:auto;}
 
 	/* 활성화 */
 	.menu_open {overflow-x:hidden; overflow-y:hidden;}
