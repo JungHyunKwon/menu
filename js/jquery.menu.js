@@ -351,6 +351,9 @@ try {
 						}
 					//적용
 					}else if(_isElement(thisFirst)) {
+						var interval = 250,
+							thisFirstData = $thisFirst.data();
+
 						//기존 이벤트 제거
 						if(register) {
 							$thisFirst.menu('destroy');
@@ -390,9 +393,6 @@ try {
 						//닫기버튼
 						option.$closeElement = $('div[data-menu-close="' + option.namespace + '"] [data-menu-button]');
 
-						//타이머 간격
-						option.interval = 250;
-
 						//클래스이름 합성
 						option.className = {
 							globalActive : option.namespace + _separator + _className.active,
@@ -403,7 +403,6 @@ try {
 						option.type = parseInt($thisFirst.attr('data-menu-type'), 10) || 1;
 							
 						//요소 정의
-						option.thisFirstData = $thisFirst.data();
 						option.$depth = $thisFirst.find('div[data-menu-depth]');
 						option.$depth1 = option.$depth.filter('div[data-menu-depth="1"]');
 						option.$depth1Text = option.$depth1.find('a[data-menu-text="1"], button[data-menu-text="1"]');
@@ -420,7 +419,7 @@ try {
 
 						//높이 캐싱
 						thisFirstStyle.transitionProperty = 'none';
-						option.thisFirstData.menuHeight = thisFirst.clientHeight;
+						thisFirstData.menuHeight = thisFirst.clientHeight;
 						thisFirstStyle.transitionProperty = '';
 
 						//actived클래스 추가
@@ -438,7 +437,11 @@ try {
 							i = parseInt(i, 10);
 
 							if(_getTypeof(i) === 'number' && _getTypeof(cutI) === 'number' && cutI > 1) {
-								$thisFirst.find('div[data-menu-depth="' + i + '"]:first-of-type ul[data-menu-list]:first > li:nth-child(' + cutI + 'n)').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
+								var $depthList = $thisFirst.find('ul[data-menu-list="' + i + '"]');
+								
+								for(var j = 0, depthListLength = $depthList.length; j < depthListLength; j++) {
+									$depthList.children('li:nth-child(' + cutI + 'n)').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
+								}
 							}
 						}
 						
@@ -594,7 +597,7 @@ try {
 
 									//결과가 있을때
 									if(result) {
-										result += (option.thisFirstData.menuHeight || 0);
+										result += (thisFirstData.menuHeight || 0);
 									}
 
 									thisFirstStyle.height = result + 'px';
@@ -803,7 +806,7 @@ try {
 							//0.25초마다 타이머 실행
 							option.keydownTimer = setTimeout(function() {
 								option.isPressTabKey = false;
-							}, option.interval);
+							}, interval);
 						});
 
 						//요소 등록
