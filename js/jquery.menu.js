@@ -609,8 +609,8 @@ try {
 								//다음뎁스가 있을때
 								if($nextDepth.length) {
 									$nextDepth.one('transitionend.' + option.namespace, function(event) {
-										//style속성에 height값이 있을때 && 선택한 요소의 li가 활성화 클래스를 가지고 있을때
-										if(thisFirstStyle.height && $(this).closest('li').hasClass(_className.active)) {
+										//메뉴가 열려있을때
+										if(_$body.hasClass(option.className.globalActive)) {
 											setDepth2Height();
 										}
 									});
