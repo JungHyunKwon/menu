@@ -440,7 +440,7 @@ try {
 								var $depthList = $thisFirst.find('ul[data-menu-list="' + i + '"]');
 								
 								for(var j = 0, depthListLength = $depthList.length; j < depthListLength; j++) {
-									$depthList.children('li:nth-child(' + cutI + 'n)').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
+									$depthList.eq(j).children('li:nth-child(' + cutI + 'n)').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
 								}
 							}
 						}
