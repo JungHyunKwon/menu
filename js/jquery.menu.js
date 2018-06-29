@@ -609,8 +609,8 @@ try {
 								//다음뎁스가 있을때
 								if($nextDepth.length) {
 									$nextDepth.one('transitionend.' + option.namespace, function(event) {
-										//메뉴가 열려있을때
-										if(_$body.hasClass(option.className.globalActive)) {
+										//활성화가 되어있을때
+										if($parentDepthItem.hasClass(_className.active)) {
 											setDepth2Height();
 										}
 									});
