@@ -211,12 +211,12 @@ try {
 				 * @name 별칭으로 시작하는 클래스 지우기
 				 * @since 2017-12-06
 				 * @param {element || jQueryElement} element
-				 * @param {string} startName
+				 * @param {string} value
 				 * @return {array || string || jQueryElement || jQueryObject}
 				 */
-				function _removePrefixClass(element, startName) {
+				function _removePrefixClass(element, value) {
 					var $element = $(element),
-						startNameLength = (typeof startName === 'string') ? startName.length : 0; //문자열이 아닐때 0대체
+						valueLength = (typeof value === 'string') ? value.length : 0; //문자열이 아닐때 0대체
 					
 					for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
 						var $elementI = $element.eq(i),
@@ -229,8 +229,8 @@ try {
 							for(var j = 0, classNameLength = className.length; j < classNameLength; j++) {
 								var classNameJ = className[j];
 
-								//클래스이름이 startName값으로 시작할때
-								if(classNameJ.substring(0, startNameLength) === startName) {
+								//클래스이름이 value값으로 시작할때
+								if(classNameJ.substring(0, valueLength) === value) {
 									//클래스 제거
 									$elementI.removeClass(classNameJ);
 								}
@@ -238,7 +238,6 @@ try {
 						}
 					}
 				}
-				
 
 				/**
 				 * @name 등록된 요소 인덱스 구하기
