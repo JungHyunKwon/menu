@@ -177,16 +177,6 @@ try {
 				}
 			}
 
-			/**
-			 * @name 문자열 공백 제거
-			 * @since 2017-12-06
-			 * @param {string} value
-			 * @return {*}
-			 */
-			function _removeBlank(value) {
-				return (typeof value === 'string') ? value.replace(/\s/g, '') : value;
-			}
-
 			$(function() {
 				var _$body = $('body');
 
@@ -363,11 +353,8 @@ try {
 							option = {};
 						}
 
-						//네임스페이스 공백제거
-						option.namespace = _removeBlank(option.namespace);
-
-						//네임스페이스가 문자열이 아니거나 공백일때
-						if(typeof option.namespace !== 'string' || option.namespace === '') {
+						//네임스페이스가 없거나 문자열이 아닐때
+						if(!option.namespace || typeof option.namespace !== 'string') {
 							option.namespace = $thisFirst.attr('id') || thisFirst.tagName.toLowercase() + (_register.length + 1);
 						}
 
