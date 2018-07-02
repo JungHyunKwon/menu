@@ -277,7 +277,7 @@ try {
 				 */
 				$.fn.menu = function(option) {
 					var $thisFirst = this.first(),
-						thisFirst = $thisFirst[0],
+						thisFirst = $thisFirst[0] || {},
 						thisFirstStyle = thisFirst.style,
 						optionType = _getTypeof(option),
 						registIndex = _getRegistIndex(thisFirst),

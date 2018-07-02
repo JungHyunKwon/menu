@@ -76,7 +76,7 @@ button | | 여는버튼 또는 닫는버튼을 지정할때 사용하며 부모�
 ### 속성선택자 변경방법
 변경전 | 변경후
 | :--- | :--- |
-[data-menu-type='#'] | .#
+[data-menu-type='#'] | .nav
 [data-menu-depth='#'] | .depth#
 [data-menu-list='#'] | .depth#_list
 [data-menu-list='#'] > li | .depth#_item
