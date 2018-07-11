@@ -5,7 +5,7 @@
 ````javascript
 $(selector).menu({
     event : string,
-    cut : object[number \|\| string[number-number] : number],
+    cut : object[number || string[number-number] : number],
     namespace : string
 });
 ````
