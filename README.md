@@ -5,7 +5,7 @@
 ````javascript
 $(selector).menu({
     event : string,
-    cut : object(number : number),
+    cut : object[number \|\| string[number-number] : number],
     namespace : string
 });
 ````
@@ -14,8 +14,8 @@ $(selector).menu({
 
 이름 | 기본값 | 값 | 설명
 | :-- | :--- | :- | :-- |
-event | click | string(mouse, click) | 사용할 이벤트를 지정합니다.
-cut | | object(number : number) | 지정한 메뉴깊이에 지정한 숫자의 배수마다 cut요소를 생성합니다.
+event | click | string[mouse, click] | 사용할 이벤트를 지정합니다.
+cut | | object[number \|\| string[number-number] : number] | 지정한 메뉴깊이에 지정한 숫자의 배수마다 cut요소를 생성합니다.
 namespace | <ol><li>id</li><li>태그이름 + 메뉴순번</li></ol> | string | 메뉴의 명칭을 지정합니다.
 
 ### data-menu-*
@@ -23,8 +23,8 @@ namespace | <ol><li>id</li><li>태그이름 + 메뉴순번</li></ol> | string | 
 #### selector
 이름 | 기본값 | 값 | 설명
 | :-- | :--- | :- | :-- |
-top-background | wrap | string(full, wrap) | 상단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다. 
-bottom-background | wrap | string(full, wrap) | 하단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다.
+top-background | wrap | string[full, wrap] | 상단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다. 
+bottom-background | wrap | string[full, wrap] | 하단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다.
 type | 1 | number | 메뉴유형을 지정합니다.<ol><li>풀다운</li><li>풀다운2</li><li>드롭다운</li><li>드롭다운2</li></ol>
 effect | 1 | number | openElement에 지정한 요소를 눌렀을때의 효과를 지정합니다. <ol><li>토글</li><li>위에서 아래로 슬라이드</li><li>왼쪽에서 오른쪽으로 슬라이드</li><li>오른쪽에서 왼쪽으로 슬라이드</li></ol>
 

@@ -272,7 +272,7 @@ try {
 				/**
 				 * @name menu
 				 * @since 2018-02-23
-				 * @param {object} option({event : string, cut : object(number : number), namespace : string})
+				  * @param {object} option {event : string, cut : object[number || string[number-number] : number], namespace : string}
 				 * @return {jQueryElement || jQueryObject}
 				 */
 				$.fn.menu = function(option) {
@@ -416,22 +416,57 @@ try {
 						//초기화 클래스 추가
 						$thisFirst.addClass(_className.initialized);
 
+						/**
+						 * @name 컷요소 생성
+						 * @since 2017-12-06
+						 * @param {element || jQueryElement} element
+						 * @param {number} cutNumber
+						 */
+						option.createCutItem = function(element, cutNumber) {
+							var $element = $(element);
+							
+							//숫자가 아닐때
+							if(_getTypeof(cutNumber) !== 'number') {
+								cutNumber = parseInt(cutNumber, 10);
+							}
+							
+							//1초과일때
+							if(cutNumber > 1) {
+								for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
+									$element.eq(i).children('li:nth-child(' + cutNumber + 'n)').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
+								}
+							}
+						};
+
 						//자르기
 						for(var i in option.cut) {
-							var cutI = option.cut[i];
-
-							i = parseInt(i, 10);
-
-							if(_getTypeof(i) === 'number' && _getTypeof(cutI) === 'number' && cutI > 1) {
-								var $depthList = $thisFirst.find('ul[data-menu-list="' + i + '"]');
+							var information = i.split('-').slice(0, 2),
+								depth = parseInt(information[0], 10),
+								assignationNumber = parseInt(information[1], 10),
+								cutNumber = option.cut[i],
+								type;
+							
+							//깊이가 숫자이면서 자르는 지점이 숫자이면서 1초과일때
+							if(_getTypeof(depth) === 'number') {
+								type = 'depth';
 								
-								for(var j = 0, depthListLength = $depthList.length; j < depthListLength; j++) {
-									$depthList.eq(j).children('li:nth-child(' + cutI + 'n)').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
+								//지정번호가 숫자일때
+								if(_getTypeof(assignationNumber) === 'number') {
+									type += 'Assignation';
 								}
+
+								var $depthList = $thisFirst.find('div[data-menu-depth="' + depth + '"]:first-of-type ul[data-menu-list="' + depth + '"]:first-of-type');
+							}
+
+							//유형이 depth일때
+							if(type === 'depth') {
+								option.createCutItem($depthList, cutNumber);
+							}else if(type === 'depthAssignation') {
+								option.createCutItem($depthList.eq(assignationNumber - 1), cutNumber);
 							}
 						}
 						
-						//요소 정의
+						//컷요소 정의
 						option.$depthCutItem = option.$depthList.children('li.' + _className.cut);
 
 						//has, solo클래스 추가
