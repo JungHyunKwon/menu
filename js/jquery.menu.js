@@ -422,7 +422,7 @@ try {
 						 * @param {element || jQueryElement} element
 						 * @param {number} cutNumber
 						 */
-						option.createCutItem = function(element, cutNumber) {
+						option.addCutItem = function(element, cutNumber) {
 							var $element = $(element);
 							
 							//숫자가 아닐때
@@ -460,9 +460,9 @@ try {
 
 							//유형이 depth일때
 							if(type === 'depth') {
-								option.createCutItem($depthList, cutNumber);
+								option.addCutItem($depthList, cutNumber);
 							}else if(type === 'depthAssignation') {
-								option.createCutItem($depthList.eq(assignationNumber - 1), cutNumber);
+								option.addCutItem($depthList.eq(assignationNumber - 1), cutNumber);
 							}
 						}
 						
