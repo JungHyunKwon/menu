@@ -420,39 +420,44 @@ try {
 						 * @name 컷요소 생성
 						 * @since 2017-12-06
 						 * @param {element || jQueryElement} element
-						 * @param {number} cutNumber
+						 * @param {number} cut
 						 */
-						option.addCutItem = function(element, cutNumber) {
+						option.addCutItem = function(element, cut) {
 							var $element = $(element);
 							
 							//숫자가 아닐때
-							if(_getTypeof(cutNumber) !== 'number') {
-								cutNumber = parseInt(cutNumber, 10);
+							if(_getTypeof(cut) !== 'number') {
+								cut = parseInt(cut, 10);
 							}
 							
 							//1초과일때
-							if(cutNumber > 1) {
+							if(cut > 1) {
 								for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
-									$element.eq(i).children('li:nth-child(' + cutNumber + 'n)').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
+									$element.eq(i).children('li:nth-child(' + cut + 'n)').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
 								}
 							}
 						};
 
 						//자르기
 						for(var i in option.cut) {
-							var information = i.split('-').slice(0, 2),
-								depth = parseInt(information[0], 10),
-								assignationNumber = parseInt(information[1], 10),
-								cutNumber = option.cut[i],
+							var number = i.split('-').slice(0, 2),
+								depth = parseInt(number[0], 10),
+								assignation = parseInt(number[1], 10),
+								cut = option.cut[i],
 								type;
 							
 							//깊이가 숫자이면서 자르는 지점이 숫자이면서 1초과일때
 							if(_getTypeof(depth) === 'number') {
 								type = 'depth';
 								
-								//지정번호가 숫자일때
-								if(_getTypeof(assignationNumber) === 'number') {
-									type += 'Assignation';
+								//지정번호가 있을때
+								if(number[1]) {
+									//지정번호가 숫자일때
+									if(_getTypeof(assignation) === 'number') {
+										type += 'Assignation';
+									}else{
+										type = '';
+									}
 								}
 
 								var $depthList = $thisFirst.find('div[data-menu-depth="' + depth + '"]:first-of-type ul[data-menu-list="' + depth + '"]:first-of-type');
@@ -460,9 +465,9 @@ try {
 
 							//유형이 depth일때
 							if(type === 'depth') {
-								option.addCutItem($depthList, cutNumber);
+								option.addCutItem($depthList, cut);
 							}else if(type === 'depthAssignation') {
-								option.addCutItem($depthList.eq(assignationNumber - 1), cutNumber);
+								option.addCutItem($depthList.eq(assignation - 1), cut);
 							}
 						}
 						
