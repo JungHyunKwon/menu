@@ -374,10 +374,10 @@ try {
 						}
 
 						//열기버튼
-						option.$openElement = $('div[data-menu-open="' + option.namespace + '"] [data-menu-button]');
+						option.$openElement = $('div[data-menu-open="' + option.namespace + '"] button[data-menu-button]');
 
 						//닫기버튼
-						option.$closeElement = $('div[data-menu-close="' + option.namespace + '"] [data-menu-button]');
+						option.$closeElement = $('div[data-menu-close="' + option.namespace + '"] button[data-menu-button]');
 
 						//클래스이름 합성
 						option.className = {
