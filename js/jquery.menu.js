@@ -416,58 +416,46 @@ try {
 						//초기화 클래스 추가
 						$thisFirst.addClass(_className.initialized);
 
-						/**
-						 * @name 컷요소 생성
-						 * @since 2017-12-06
-						 * @param {element || jQueryElement} element
-						 * @param {number} cut
-						 */
-						option.addCutItem = function(element, cut) {
-							var $element = $(element);
-							
-							//숫자가 아닐때
-							if(_getTypeof(cut) !== 'number') {
-								cut = parseInt(cut, 10);
-							}
-							
-							//1초과일때
-							if(cut > 1) {
-								for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
-									$element.eq(i).children('li:nth-child(' + cut + 'n)').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
-								}
-							}
-						};
-
 						//자르기
 						for(var i in option.cut) {
-							var number = i.split('-').slice(0, 2),
+							var number = i.split('-'),
+								numberLength = number.length,
 								depth = parseInt(number[0], 10),
-								assignation = parseInt(number[1], 10),
-								cut = option.cut[i],
-								type;
+								cut = parseInt(option.cut[i], 10),
+								$depthList = $thisFirst;
 							
-							//깊이가 숫자이면서 자르는 지점이 숫자이면서 1초과일때
-							if(_getTypeof(depth) === 'number') {
-								type = 'depth';
-								
-								//지정번호가 있을때
-								if(number[1]) {
-									//지정번호가 숫자일때
-									if(_getTypeof(assignation) === 'number') {
-										type += 'Assignation';
+							//1초과일때
+							if(numberLength > 1) {
+								for(var j = 0; j < numberLength; j++) {
+									var numberJ = parseInt(number[j], 10);
+									
+									//0초과일때
+									if(numberJ > 0) {
+										var count = j + 1,
+											query = 'div[data-menu-depth="' + count + '"]:first-of-type ul[data-menu-list="' + count + '"]:first-of-type';
+										
+										//마지막이 아닐때
+										if(count !== numberLength) {
+											query += ' > li:nth-child(' + numberJ + ')';
+										}
+
+										$depthList = $depthList.find(query);
 									}else{
-										type = '';
+										$depthList.length = 0;
+										break;
 									}
 								}
-
-								var $depthList = $thisFirst.find('div[data-menu-depth="' + depth + '"]:first-of-type ul[data-menu-list="' + depth + '"]:first-of-type');
+							
+							//1개이면서 1초과일때
+							}else if(numberLength === 1 && depth > 1) {
+								$depthList = $depthList.find('div[data-menu-depth="' + depth + '"]:first-of-type ul[data-menu-list="' + depth + '"]:first-of-type');
 							}
 
-							//유형이 depth일때
-							if(type === 'depth') {
-								option.addCutItem($depthList, cut);
-							}else if(type === 'depthAssignation') {
-								option.addCutItem($depthList.eq(assignation - 1), cut);
+							//초기화값과 같지 않으면서 자를순번이 1초과일때
+							if(!$depthList.is($thisFirst) && cut > 1) {
+								for(var j = 0, depthListLength = $depthList.length; j < depthListLength; j++) {
+									$depthList.eq(j).children('li:nth-child(' + cut + 'n)').next('li').prev('li').after('<li class="' + _className.cut + '">&nbsp;</li>');
+								}
 							}
 						}
 						
