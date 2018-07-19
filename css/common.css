@@ -27,7 +27,7 @@ div[data-menu-open], div[data-menu-open]:before, div[data-menu-open]:after, div[
 
 /* 버튼 */
 div[data-menu-open], div[data-menu-close] {visibility:hidden; position:absolute;}
-div[data-menu-open] button[data-menu-button], div[data-menu-close] button[data-menu-button] {position:relative; width:100%; height:100%;}
+div[data-menu-open] button[data-menu-button], div[data-menu-close] button[data-menu-button] {display:inline-block; position:relative; width:100%; height:100%;}
 div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:before, div[data-menu-close]:after, div[data-menu-open] button[data-menu-button], div[data-menu-open] button[data-menu-button]:before, div[data-menu-open] button[data-menu-button]:after, div[data-menu-close] button[data-menu-button], div[data-menu-close] button[data-menu-button]:before, div[data-menu-close] button[data-menu-button]:after {background-repeat:no-repeat; background-position:center center; font-size:0; vertical-align:middle;}
 
 /* 풀다운1 */
