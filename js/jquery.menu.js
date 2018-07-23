@@ -405,7 +405,7 @@ try {
 
 						//높이 캐싱
 						thisFirstStyle.transitionProperty = 'none';
-						thisFirstData.menuHeight = thisFirst.clientHeight;
+						thisFirstData.menuHeight = $thisFirst.height();
 						thisFirstStyle.transitionProperty = '';
 
 						//actived클래스 추가
