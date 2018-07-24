@@ -33,7 +33,7 @@
 
 	/* 3차메뉴 */
 	[data-menu-type='2'] div[data-menu-depth='3'] {display:block; background-color:#24478b;}
-	[data-menu-type='2'] ul[data-menu-list='3'] {padding-right:20px; padding-left:20px; border-top-style:solid; border-top-color:#175898;}
+	[data-menu-type='2'] ul[data-menu-list='3'] {padding-right:20px; padding-left:20px; border-top:0 solid #175898;}
 	[data-menu-type='2'] [data-menu-text='3'] {color:#fff;}
 
 	/* 4차메뉴 */
