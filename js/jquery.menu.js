@@ -355,7 +355,7 @@ try {
 
 						//네임스페이스가 없거나 문자열이 아닐때
 						if(!option.namespace || typeof option.namespace !== 'string') {
-							option.namespace = $thisFirst.attr('id') || thisFirst.tagName.toLowercase() + (_register.length + 1);
+							option.namespace = $thisFirst.attr('id') || thisFirst.tagName.toLowerCase() + (_register.length + 1);
 						}
 
 						//컷팅이 객체가 아닐때
