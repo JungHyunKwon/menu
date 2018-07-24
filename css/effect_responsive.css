@@ -8,6 +8,5 @@
 	.menu_open [data-menu-type][data-menu-effect='3'], .menu_open [data-menu-type][data-menu-effect='3'] + div[data-menu-close] {left:0;}
 
 	/* 오른쪽에서 왼쪽으로 슬라이드 효과 */
-	[data-menu-type][data-menu-effect='4'], [data-menu-type][data-menu-effect='4'] + div[data-menu-close] {left:auto;}
 	.menu_open [data-menu-type][data-menu-effect='4'], .menu_open [data-menu-type][data-menu-effect='4'] + div[data-menu-close] {right:0;}
 }

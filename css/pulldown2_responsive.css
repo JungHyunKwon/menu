@@ -1,38 +1,53 @@
 @charset 'utf-8';
 
 @media screen and (max-width:1000px) {
-	[data-menu-type='2'] {top:0; left:0; width:100%; height:100%;}
-	[data-menu-type='2'] div[data-menu-title] p {color:transparent; font-size:0; line-height:0px; text-align:left;}
-	[data-menu-type='2'] div[data-menu-depth='1'] {padding-top:40px;}
-	[data-menu-type='2'] div[data-menu-depth='3'] {display:block;}
-	[data-menu-type='2'] div[data-menu-depth='4'] {display:none;}
-	[data-menu-type='2'] ul[data-menu-list='2'] {padding-top:0; padding-bottom:0;}
-	[data-menu-type='2'] ul[data-menu-list='2'] > li {margin-top:0;}
-	[data-menu-type='2'] ul[data-menu-list='3'] {padding-right:20px; padding-left:20px; border-top-style:solid;}
+	[data-menu-type='2'] {top:0; left:0; width:100%; height:100%; background-color:#3072c4;}
+	[data-menu-type='2'][data-menu-effect='4'], [data-menu-type='2'][data-menu-effect='4'] + div[data-menu-close] {left:auto;}
+	[data-menu-type='2'][data-menu-top-background]:before {background-color:transparent;}
+	[data-menu-type='2'][data-menu-bottom-background]:after {background-color:transparent;}
+	
+	/* 공통 */
 	[data-menu-type='2'] div[data-menu-depth='2'] [data-menu-text] {font-size:0; line-height:0px;}
+	[data-menu-type='2'] ul[data-menu-list] > li.has > [data-menu-text]:before {width:12px; height:0; margin-right:10px; background-image:url('../images/has_depth_ico_off.png');}
+	[data-menu-type='2'] a[data-menu-text][target='_blank']:after {height:0; background-image:url('../images/depth_text_blank_white_ico.png');}
+
+	/* 제목상자 */
+	[data-menu-type='2'] div[data-menu-title] {width:auto;}
+	[data-menu-type='2'] div[data-menu-title='2'] {background-color:transparent;}
+	[data-menu-type='2'] div[data-menu-title] p {color:transparent; font-size:0; line-height:0px; text-align:left;}
+
+	/* 1차메뉴 */
+	[data-menu-type='2'] div[data-menu-depth='1'] {padding-top:40px;}
+	[data-menu-type='2'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {width:auto;}
+	[data-menu-type='2'] ul[data-menu-list='1'] > li {width:auto;}
 	[data-menu-type='2'] [data-menu-text='1'] {text-align:left;}
-	[data-menu-type='2'] [data-menu-text='2'] {color:#fff; text-align:left;}
-	[data-menu-type='2'] [data-menu-text='3'] {color:#fff;}
-	[data-menu-type='2'] ul[data-menu-list] > li.has > [data-menu-text]:before {width:12px; height:0; margin-right:10px;}
-	[data-menu-type='2'] ul[data-menu-list='1'] > li.has > [data-menu-text]:before {height:8px;}
-	[data-menu-type='2'] a[data-menu-text][target='_blank']:after {height:0;}
+	[data-menu-type='2'] ul[data-menu-list='1'] > li.has > [data-menu-text='1']:before {height:8px;}
 	[data-menu-type='2'] a[data-menu-text='1'][target='_blank']:after {height:12px;}
 
-	/* 1차메뉴 넓이 */
-	[data-menu-type='2'] ul[data-menu-list='1'] > li {width:auto;}
-
-	/* 좌측 제목상자 넓이 */
-	[data-menu-type='2'] div[data-menu-title], [data-menu-type='2'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {width:auto;}
+	/* 2차메뉴 */
+	[data-menu-type='2'] div[data-menu-depth='2'] {background-color:#175898;}
+	[data-menu-type='2'] ul[data-menu-list='2'] {padding-top:0; padding-bottom:0;}
 	[data-menu-type='2'] div[data-menu-depth='1'].clearfix ul[data-menu-list='2'], [data-menu-type='2'] div[data-menu-title='2'] + ul[data-menu-list='2'] {padding-left:0;}
-	
-	/* 활성화 제거 */
+	[data-menu-type='2'] ul[data-menu-list='2'] > li {margin-top:0;}
+	[data-menu-type='2'] [data-menu-text='2'] {color:#fff; text-align:left;}
+
+	/* 3차메뉴 */
+	[data-menu-type='2'] div[data-menu-depth='3'] {display:block; background-color:#24478b;}
+	[data-menu-type='2'] ul[data-menu-list='3'] {padding-right:20px; padding-left:20px; border-top-style:solid; border-top-color:#175898;}
+	[data-menu-type='2'] [data-menu-text='3'] {color:#fff;}
+
+	/* 4차메뉴 */
+	[data-menu-type='2'] div[data-menu-depth='4'] {display:none;}
+
+	/* 이전메뉴 활성화 제거 */
 	.menu_active [data-menu-type='2'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:hidden; z-index:auto;}
 
 	/* 활성화 */
 	.menu_open {overflow-x:hidden; overflow-y:hidden;}
 	.menu_open [data-menu-type='2'] {visibility:visible;}
 	.menu_open [data-menu-type='2'] div[data-menu-depth='1'] {visibility:visible;}
-	
+	.menu_open [data-menu-type='2'] ul[data-menu-list] > li.has.active > [data-menu-text]:before {background-image:url('../images/has_depth_ico_on.png');}
+
 	/* 2차메뉴 활성화 */
 	.menu_open.menu_active [data-menu-type='2'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:visible;}
 	.menu_open.menu_active [data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] {padding-top:15px; padding-bottom:15px;}
@@ -50,18 +65,6 @@
 	.menu_open.menu_active [data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active [data-menu-text='3'] {font-size:16px; line-height:18px;}
 	.menu_open.menu_active [data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active ul[data-menu-list='3'] > li.has > [data-menu-text='3']:before {height:8px;}
 	.menu_open.menu_active [data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active a[data-menu-text='3'][target='_blank']:after {height:12px;}
-
-	/* 배경 */
-	[data-menu-type='2'] {background-color:#3072c4;}
-	[data-menu-type='2'][data-menu-top-background]:before {background-color:transparent;}
-	[data-menu-type='2'][data-menu-bottom-background]:after {background-color:transparent;}
-	[data-menu-type='2'] div[data-menu-title='2'] {background-color:transparent;}
-	[data-menu-type='2'] div[data-menu-depth='2'] {background-color:#175898;}
-	[data-menu-type='2'] div[data-menu-depth='3'] {background-color:#24478b;}
-	[data-menu-type='2'] ul[data-menu-list='3'] {border-top-color:#175898;}
-	[data-menu-type='2'] ul[data-menu-list] > li.has > [data-menu-text]:before {background-image:url('../images/has_depth_ico_off.png');}
-	[data-menu-type='2'] ul[data-menu-list] > li.has.active > [data-menu-text]:before {background-image:url('../images/has_depth_ico_on.png');}
-	[data-menu-type='2'] a[data-menu-text][target='_blank']:after {background-image:url('../images/depth_text_blank_white_ico.png');}
 
 	/* 높이 */
 	[data-menu-type='2'][data-menu-top-background]:before {height:auto;}

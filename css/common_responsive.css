@@ -1,12 +1,10 @@
 @charset 'utf-8';
 
 @media screen and (max-width:1000px) {
-	/* 버튼 */
+	/* 풀다운1 */
 	div[data-menu-open], div[data-menu-close] {transition-property:visibility;}
 	div[data-menu-open] {visibility:visible;}
 	[data-menu-type] + div[data-menu-close] {position:fixed;}
-
-	/* 풀다운1 */
 	[data-menu-type] {visibility:hidden; overflow-x:hidden; overflow-y:auto; position:fixed; transition-property:visibility;}
 	[data-menu-type][data-menu-top-background]:before, [data-menu-type][data-menu-bottom-background]:after {display:none; position:static; right:auto; left:auto; margin-right:0; margin-left:0;}
 	[data-menu-type][data-menu-top-background]:before {top:auto; z-index:auto;}

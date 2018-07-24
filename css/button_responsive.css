@@ -1,13 +1,9 @@
 @charset 'utf-8';
 
 @media screen and (max-width:1000px) {
-	/* 버튼 */
-	div[data-menu-close] {width:100%; height:40px; text-align:right;}
+	div[data-menu-close] {width:100%; height:40px; background-color:#2b52a7; text-align:right;}
 	div[data-menu-close]:after {display:inline-block; width:10px; height:100%;}
 
-	/* 활성화 */
+	/* 메뉴를 열었을때 */
 	.menu_open div[data-menu-close] {visibility:visible;}
-
-	/* 배경 */
-	div[data-menu-close] {background-color:#2b52a7;}
 }

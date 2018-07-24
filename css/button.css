@@ -1,6 +1,5 @@
 @charset 'utf-8';
 
-/* 버튼 */
 div[data-menu-open], div[data-menu-close] {top:0; left:0;}
 div[data-menu-open] button[data-menu-button] {width:28px; height:28px; background-image:url('../images/open_btn_ico.png');}
 div[data-menu-close] button[data-menu-button] {width:22px; height:23px; background-image:url('../images/close_btn_ico.png');}
