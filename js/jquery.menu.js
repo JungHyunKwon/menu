@@ -611,7 +611,8 @@ try {
 
 									//결과가 있을때
 									if(result) {
-										result += (menuHeight + 'px');
+										result += menuHeight;
+										result += 'px';
 									}
 
 									thisFirstStyle.height = result;
