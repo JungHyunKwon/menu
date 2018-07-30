@@ -341,7 +341,7 @@ try {
 					//적용
 					}else if(_isElement(thisFirst)) {
 						var interval = 250,
-							thisFirstData = $thisFirst.data();
+							menuHeight = '';
 
 						//기존 이벤트 제거
 						if(register) {
@@ -405,7 +405,7 @@ try {
 
 						//높이 캐싱
 						thisFirstStyle.transitionProperty = 'none';
-						thisFirstData.menuHeight = thisFirst.clientHeight;
+						menuHeight = thisFirst.clientHeight;
 						thisFirstStyle.transitionProperty = '';
 
 						//actived클래스 추가
@@ -611,10 +611,10 @@ try {
 
 									//결과가 있을때
 									if(result) {
-										result += (thisFirstData.menuHeight || 0);
+										result += (menuHeight + 'px');
 									}
 
-									thisFirstStyle.height = result + 'px';
+									thisFirstStyle.height = result;
 								}
 								
 								//최초실행
