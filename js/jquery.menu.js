@@ -805,7 +805,7 @@ try {
 							//지정요소 나가면 추적
 							option.$depth1.on('mouseover.' + option.namespace, function(event) {
 								//메뉴가 활성화되어 있을때 && 풀다운1이면서 뎁스1일때 || 풀다운2이면서 타이틀1의 모든요소에 포함되지 않을때
-								if(_$body.hasClass(option.className.globalActive) && ((option.type === 1 && $(this).is(this)) || (option.type === 2 && !option.$depthTitle1.add(option.$depthTitle1.find('*')).is(this)))) {
+								if(_$body.hasClass(option.className.globalActive) && ((option.type === 1 && $(this).is(event.target)) || (option.type === 2 && !option.$depthTitle1.add(option.$depthTitle1.find('*')).is(this)))) {
 									setSpy(this);
 								}
 							}).on('mouseleave.' + option.namespace, function(event) {
