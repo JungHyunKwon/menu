@@ -456,8 +456,8 @@ try {
 						 * @return {jQueryElement}
 						 */
 						function setSpy(element) {
-							//스파이 요소가 있으면서 스파이 요소가 아닐때
-							if(option.$activedDepthText.length && !$(element).closest('li').hasClass(_className.actived)) {
+							//스파이 요소가 있을때
+							if(option.$activedDepthText.length) {
 								$thisFirst.menu('spy');
 							}else{
 								option.closeMenu.call(element, event);
