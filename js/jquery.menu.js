@@ -102,16 +102,6 @@ try {
 			}
 
 			/**
-			 * @name 객체 복사
-			 * @since 2017-12-06
-			 * @param {object} value
-			 * @return {*}
-			 */
-			function _copyObject(value) {
-				return (value instanceof Object) ? $.extend(true, {}, value) : value;
-			}
-
-			/**
 			 * @name 엘리먼트인지 구하기
 			 * @since 2017-12-06
 			 * @param {window || document || element || jQueryElement} element
@@ -387,6 +377,7 @@ try {
 						option.type = parseInt($thisFirst.attr('data-menu-type'), 10) || 1;
 							
 						//요소 정의
+						option.$wildCard = $thisFirst.add($thisFirst.find('*'));
 						option.$depth = $thisFirst.find('div[data-menu-depth]');
 						option.$depth1 = option.$depth.filter('div[data-menu-depth="1"]');
 						option.$depth1Text = option.$depth1.find('a[data-menu-text="1"], button[data-menu-text="1"]');
@@ -402,9 +393,9 @@ try {
 						option.$activedDepthItem = option.$activedDepthText.parents('li');
 
 						//높이 캐싱
-						thisFirstStyle.transitionProperty = 'none';
+						option.$wildCard.css('transition-property', 'none');
 						menuHeight = thisFirst.clientHeight;
-						thisFirstStyle.transitionProperty = '';
+						option.$wildCard.css('transition-property', '');
 
 						//actived클래스 추가
 						option.$activedDepthItem.prev('li').addClass(_className.activedPrev);
@@ -465,8 +456,8 @@ try {
 						 * @return {jQueryElement}
 						 */
 						function setSpy(element) {
-							//spy요소가 있을때
-							if(option.$activedDepthText.length) {
+							//스파이 요소가 있으면서 스파이 요소가 아닐때
+							if(option.$activedDepthText.length && !$(element).closest('li').hasClass(_className.actived)) {
 								$thisFirst.menu('spy');
 							}else{
 								option.closeMenu.call(element, event);
@@ -510,7 +501,7 @@ try {
 								numberLength = number.length,
 								depth = parseInt(number[0], 10),
 								cut = parseInt(option.cut[i], 10),
-								$depthList = _copyObject($thisFirst);
+								$depthList = $thisFirst;
 							
 							//1초과일때
 							if(numberLength > 1) {
