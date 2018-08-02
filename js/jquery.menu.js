@@ -161,6 +161,8 @@ try {
 						//제이쿼리 엘리먼트일때
 						if(resultLength && elementLength === resultLength) {
 							result = true;
+						}else{
+							result = false;
 						}
 					}
 
