@@ -43,7 +43,7 @@
 	.menu_active [data-menu-type='2'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:hidden; z-index:auto;}
 
 	/* 메뉴를 열었을때 */
-	.menu_open {overflow-x:hidden; overflow-y:hidden;}
+	.menu_open {overflow:hidden;}
 	.menu_open [data-menu-type='2'] {visibility:visible;}
 	.menu_open [data-menu-type='2'] div[data-menu-depth='1'] {visibility:visible;}
 	.menu_open [data-menu-type='2'] ul[data-menu-list] > li.has.active > [data-menu-text]:before {background-image:url('../images/has_depth_ico_on.png');}

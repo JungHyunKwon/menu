@@ -5,7 +5,7 @@
 	[data-menu-type='4'][data-menu-effect='4'], [data-menu-type='4'][data-menu-effect='4'] + div[data-menu-close] {left:auto;}
 
 	/* 메뉴를 열었을때 */
-	.menu_open {overflow-x:hidden; overflow-y:hidden;}
+	.menu_open {overflow:hidden;}
 	.menu_open [data-menu-type='4'] {visibility:visible;}
 	.menu_open [data-menu-type='4'] div[data-menu-depth='1'] {visibility:visible;}
 	.menu_open [data-menu-type='4'] ul[data-menu-list] > li.has.active > [data-menu-text]:before {background-image:url('../images/has_depth_ico_on.png');}

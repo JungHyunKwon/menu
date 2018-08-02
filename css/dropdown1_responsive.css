@@ -32,7 +32,7 @@
 	[data-menu-type='3'] div[data-menu-depth='4'] {display:none;}
 
 	/* 메뉴를 열었을때 */
-	.menu_open {overflow-x:hidden; overflow-y:hidden;}
+	.menu_open {overflow:hidden;}
 	.menu_open [data-menu-type='3'] {visibility:visible;}
 	.menu_open [data-menu-type='3'] div[data-menu-depth='1'] {visibility:visible;}
 	.menu_open [data-menu-type='3'] ul[data-menu-list] > li.has.active > [data-menu-text]:before {background-image:url('../images/has_depth_ico_on.png');}
