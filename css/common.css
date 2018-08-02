@@ -7,7 +7,7 @@ html, body, div,  p, h1, h2, h3, h4, h5, h6, dl, dt, dd, ol, ul, li, blockquote,
 table, caption, tbody, tfoot, thead, tr, th, td, iframe, article, aside, canvas, details, embed,
 figure, figcaption, header, footer, menu, nav, section, summary, audio, video {margin:0; padding:0; border:0 none transparent; font-size:inherit; font-family:inherit;}
 button {background-color:transparent; cursor:pointer;}
-ul, li {list-style-type:none;}
+ul, ul li {list-style-type:none;}
 a:link {color:#636363; text-decoration:none;}
 a:visited {color:#636363; text-decoration:none;}
 a:hover {color:#0030ae; text-decoration:underline;}
