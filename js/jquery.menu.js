@@ -271,8 +271,8 @@ try {
 					var $thisFirst = this.first(),
 						thisFirst = $thisFirst[0] || {},
 						thisFirstStyle = thisFirst.style,
-						registIndex = _getRegistIndex(thisFirst),
-						register = _register[registIndex],
+						index = _getRegistIndex(thisFirst),
+						register = _register[index],
 						event = $.Event('menu');
 
 					//문자열일때
@@ -310,7 +310,7 @@ try {
 								registerOption.$depthTitle2.off('mouseout.' + registerNamespace);
 
 								//배열에서 제거
-								_register.splice(registIndex, 1);
+								_register.splice(index, 1);
 							
 							//추적
 							}else if(option === 'spy') {
