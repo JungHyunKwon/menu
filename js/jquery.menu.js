@@ -456,8 +456,8 @@ try {
 						 * @return {jQueryElement}
 						 */
 						function setSpy(element) {
-							//스파이 요소가 있을때
-							if(option.$activedDepthText.length) {
+							//스파이 요소가 있고 선택된 요소의 가장 가까운 부모인 li가 actived클래스를 가지고 있지 않을때
+							if(option.$activedDepthText.length && !$(element).closest('li').hasClass(_className.actived)) {
 								$thisFirst.menu('spy');
 							}else{
 								option.closeMenu.call(element, event);
