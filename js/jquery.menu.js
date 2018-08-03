@@ -264,7 +264,7 @@ try {
 				/**
 				 * @name menu
 				 * @since 2018-02-23
-				  * @param {object} option {event : string, cut : object[number || string[number-number] : number], namespace : string}
+				 * @param {object} option {event : string, cut : object[number || string[number-number] : number], namespace : string}
 				 * @return {jQueryElement || jQueryObject}
 				 */
 				$.fn.menu = function(option) {
@@ -318,7 +318,7 @@ try {
 
 								//요소가 아닐때
 								if(!_isElement(element)) {
-									element = registerOption.$activedDepthText[0];
+									element = registerOption.$activedDepthLastText[0];
 								}
 								
 								element = $(element).first()[0];
@@ -391,8 +391,8 @@ try {
 						option.$depthText = option.$depth1.find('a[data-menu-text], button[data-menu-text]');
 						option.$depthLastText = option.$depthText.last();
 						option.$depthAndText = option.$depth.not('div[data-menu-depth="1"]').add(option.$depthText);
-						option.$activedDepthText = option.$depth1.find('a[data-menu-text][data-menu-actived], button[data-menu-text][data-menu-actived]').last();
-						option.$activedDepthItem = option.$activedDepthText.parents('li');
+						option.$activedDepthLastText = option.$depth1.find('a[data-menu-text][data-menu-actived], button[data-menu-text][data-menu-actived]').last();
+						option.$activedDepthItem = option.$activedDepthLastText.parents('li');
 
 						//높이 캐싱
 						option.$wildCard.css('transition-property', 'none');
@@ -458,8 +458,8 @@ try {
 						 * @return {jQueryElement}
 						 */
 						function setSpy(element) {
-							//스파이 요소가 있고 선택된 요소의 가장 가까운 부모인 li가 actived클래스를 가지고 있지 않을때
-							if(option.$activedDepthText.length && !$(element).closest('li').hasClass(_className.actived)) {
+							//스파이 요소가 있고 1차메뉴 요소이거나 메뉴요소이면서 선택된 요소의 가장 가까운 부모인 li가 actived클래스를 가지고 있지 않을때
+							if(option.$activedDepthLastText.length && (option.$depth1Text.is(element) || $thisFirst.is(element)) && !$(element).closest('li').hasClass(_className.actived)) {
 								$thisFirst.menu('spy');
 							}else{
 								option.closeMenu.call(element, event);
@@ -845,7 +845,7 @@ try {
 						});
 
 						//추적시작
-						setSpy();
+						setSpy(thisFirst);
 					}
 					
 					//요소반환
