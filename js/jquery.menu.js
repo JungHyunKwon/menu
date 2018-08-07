@@ -145,7 +145,7 @@ try {
 					var result = false;
 
 					//제이쿼리 객체일때
-					if(typeof window.jQuery === 'function' && element instanceof window.jQuery) {
+					if(element instanceof $) {
 						var elementLength = element.length;
 						
 						result = [];
