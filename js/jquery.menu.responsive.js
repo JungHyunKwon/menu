@@ -13,7 +13,7 @@ $(function() {
 			namespace : 'menu'
 		};
 
-	$(window).on('responsive', function(event) {
+	$(window).on('responsive.nav', function(event) {
 		//wide, web, tablet, phone분기에 걸렸을때
 		if($.inArray(event.state, event.setting.rangeProperty) > -1) {
 			var menuEvent = 'click',

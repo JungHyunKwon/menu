@@ -43,7 +43,9 @@ try {
 			 * @description 콘솔객체가 없을경우 에뮬레이션이 아닌 실제 인터넷 익스플로러9이하에서 콘솔로그 버그를 막을 수 있습니다. 막지 않고 콘솔을 쓸경우 모든 스크립팅은 중단 됩니다. 대체콘솔은 console.comment에 담겨있습니다.
 			 * @since 2017-10-11
 			 */
-			if(!(window.console instanceof Object)) {
+			
+			//객체일때
+			if(!(window.console instanceof Object && window.console.constructor === Object)) {
 				window.console = {
 					method : [
 						'assert',
@@ -125,7 +127,7 @@ try {
 						//console.error(error);
 					}
 
-					//window 또는 document 또는 element일때
+					//window 또는 document일때
 					if(element === window || element === document) {
 						result = true;						
 					}
@@ -237,7 +239,7 @@ try {
 						var registerJ = _register[j];
 
 						//객체일때 && 들어온 엘리먼트와 등록된 엘리먼트가 같을때
-						if(registerJ instanceof Object && $elementI.is(registerJ.element)) {
+						if(registerJ instanceof Object && registerJ.constructor === Object && $elementI.is(registerJ.element)) {
 							result.push(j);
 							isBreak = true;
 							break;
@@ -339,7 +341,7 @@ try {
 						}
 
 						//옵션이 객체가 아닐때
-						if(!(option instanceof Object)) {
+						if(!(option instanceof Object && option.constructor === Object)) {
 							option = {};
 						}
 
@@ -349,7 +351,7 @@ try {
 						}
 
 						//컷팅이 객체가 아닐때
-						if(!(option.cut instanceof Object)) {
+						if(!(option.cut instanceof Object === option.cut.constructor === Object)) {
 							option.cut = {};
 						}
 
