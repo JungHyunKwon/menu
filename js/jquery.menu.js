@@ -104,7 +104,7 @@ try {
 			}
 
 			/**
-			 * @name 엘리먼트인지 구하기
+			 * @name 요소 또는 제이쿼리 요소 확인
 			 * @since 2017-12-06
 			 * @param {window || document || element || jQueryElement} element
 			 * @return {boolean}
@@ -113,7 +113,7 @@ try {
 				var result = false;
 
 				/**
-				 * @name 엘리먼트인지 구하기
+				 * @name 요소확인
 				 * @since 2017-12-06
 				 * @param {window || document || element} element
 				 * @return {boolean}
@@ -136,7 +136,7 @@ try {
 				}
 
 				/**
-				 * @name 제이쿼리 엘리먼트인지 구하기
+				 * @name 제이쿼리 요소확인
 				 * @since 2017-12-06
 				 * @param {jQueryElement || jQueryObject} element
 				 * @return {boolean}
@@ -171,7 +171,7 @@ try {
 					return result;
 				}
 				
-				//window 또는 document 또는 element 또는 jQueryElement일때
+				//window 또는 document 또는 요소 또는 제이쿼리 요소일때
 				if(isElement(element) || isJQueryElement(element)) {
 					result = true;
 				}
