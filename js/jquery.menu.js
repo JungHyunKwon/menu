@@ -5,7 +5,7 @@
 try {
 	'use strict';
 
-	//제이쿼리가 있는지 확인
+	//제이쿼리가 함수일때
 	if(typeof window.jQuery === 'function') {
 		//$ 중첩 방지
 		(function($) {
