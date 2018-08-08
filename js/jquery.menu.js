@@ -438,19 +438,24 @@ try {
 						 * @return {jQueryElement}
 						 */
 						function setSpy(element) {
+							var isSpy = false;
+
 							//스파이 요소가 있을때
 							if(option.$activedDepthLastText.length) {
 								//클릭 이벤트일때
 								if(option.event === 'click') {
 									//1차메뉴 요소이면서 선택된 요소의 가장 가까운 부모인 li가 actived클래스를 가지고 있지 않을때 또는 메뉴요소일때
 									if((option.$depth1Text.is(element) && !$(element).closest('li').hasClass(_className.actived)) || $thisFirst.is(element)) {
-										$thisFirst.menu('spy');
-									}else{
-										option.closeMenu.call(element, event);
+										isSpy = true;
 									}
 								}else{
-									$thisFirst.menu('spy');
+									isSpy = true;
 								}
+							}
+							
+							//스파이 조건에 맞을때
+							if(isSpy) {
+								$thisFirst.menu('spy');
 							}else{
 								option.closeMenu.call(element, event);
 							}
