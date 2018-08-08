@@ -329,7 +329,7 @@ try {
 						}
 
 						//컷팅이 객체가 아닐때
-						if(!(option.cut instanceof Object === option.cut.constructor === Object)) {
+						if(!(option.cut instanceof Object && option.cut.constructor === Object)) {
 							option.cut = {};
 						}
 
