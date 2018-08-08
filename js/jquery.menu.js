@@ -438,9 +438,6 @@ try {
 						 * @return {jQueryElement}
 						 */
 						function setSpy(element) {
-
-							//&& (option.$depth1Text.is(element) || $thisFirst.is(element)) || !$(element).closest('li').hasClass(_className.actived)
-
 							//스파이 요소가 있을때
 							if(option.$activedDepthLastText.length) {
 								//클릭 이벤트일때
