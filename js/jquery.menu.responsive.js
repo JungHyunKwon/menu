@@ -12,6 +12,7 @@ try {
 		(function($) {
 			$(function() {
 				var $nav = $('[data-menu-type]'),
+					$navActivedText = $nav.find('[data-menu-actived]'),
 					navMenuType = parseInt($nav.attr('data-menu-type'), 10) || 1,
 					navOption = {
 						cut : {},
@@ -28,6 +29,9 @@ try {
 						if(event.state === 'wide' || event.state === 'web') {
 							menuEvent = 'mouse';
 							menuType = navMenuType;
+							$navActivedText.removeAttr('data-menu-actived');
+						}else{
+							$navActivedText.attr('data-menu-actived', '');
 						}
 						
 						//현재 메뉴 이벤트와 분기에 따른 메뉴 이벤트가 다를때
