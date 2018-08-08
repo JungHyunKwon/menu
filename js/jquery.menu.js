@@ -5,9 +5,9 @@
 try {
 	'use strict';
 
-	//제이쿼리가 함수일때
-	if(typeof window.jQuery === 'function') {
-		(function($) {
+	(function($) {
+		//제이쿼리가 함수일때
+		if(typeof $ === 'function') {
 			var _register = [], //등록된 요소
 				_separator = '_', //구분자
 				_className = { //클래스 이름
@@ -832,10 +832,10 @@ try {
 					return $thisFirst;
 				};
 			});
-		})(jQuery);
-	}else{
-		throw '제이쿼리가 없습니다.';
-	}
+		}else{
+			throw '제이쿼리가 없습니다.';
+		}
+	})(window.jQuery);
 }catch(error) {
 	console.error(error);
 }

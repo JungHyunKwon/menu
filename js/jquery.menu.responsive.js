@@ -6,10 +6,9 @@
 try {
 	'use strict';
 
-	//제이쿼리가 함수일때
-	if(typeof window.jQuery === 'function') {
-		//$ 중첩 방지
-		(function($) {
+	(function($) {
+		//제이쿼리가 함수일때
+		if(typeof $ === 'function') {
 			$(function() {
 				var $nav = $('[data-menu-type]'),
 					$navActivedText = $nav.find('[data-menu-actived]'),
@@ -49,45 +48,45 @@ try {
 						}
 					}
 				});
-				
-				$(document).on('ready', function(event) {
-					$.responsive({
-						range : {
-							wide : {
-								horizontal : {
-									from : 9999,
-									to : 1201
-								}
-							},
-							web : {
-								horizontal : {
-									from : 1200,
-									to : 1001
-								}
-							},
-							tablet : {
-								horizontal : {
-									from : 1000,
-									to : 641
-								}
-							},
-							phone : {
-								horizontal : {
-									from : 640,
-									to : 0
-								}
+			});
+
+			$(document).on('ready', function(event) {
+				$.responsive({
+					range : {
+						wide : {
+							horizontal : {
+								from : 9999,
+								to : 1201
 							}
 						},
-						lowIE : {
-							property : 'web'
+						web : {
+							horizontal : {
+								from : 1200,
+								to : 1001
+							}
+						},
+						tablet : {
+							horizontal : {
+								from : 1000,
+								to : 641
+							}
+						},
+						phone : {
+							horizontal : {
+								from : 640,
+								to : 0
+							}
 						}
-					});
+					},
+					lowIE : {
+						property : 'web'
+					}
 				});
 			});
-		})(jQuery);
-	}else{
-		throw '제이쿼리가 없습니다.';
-	}
+		}else{
+			throw '제이쿼리가 없습니다.';
+		}
+	})(window.jQuery);
 }catch(error) {
 	console.error(error);
 }
