@@ -371,7 +371,7 @@ try {
 						option.$depthText = option.$depth1.find('a[data-menu-text], button[data-menu-text]');
 						option.$depthLastText = option.$depthText.last();
 						option.$depthAndText = option.$depth.not('div[data-menu-depth="1"]').add(option.$depthText);
-						option.$activedDepthLastText = option.$depth1.find('a[data-menu-text][data-menu-actived], button[data-menu-text][data-menu-actived]').last();
+						option.$activedDepthLastText = option.$depth1.find('[data-menu-text][data-menu-actived]').filter('a, button').last();
 						option.$activedDepthItem = option.$activedDepthLastText.parents('li');
 
 						//높이 캐싱
@@ -438,8 +438,8 @@ try {
 						 * @return {jQueryElement}
 						 */
 						function setSpy(element) {
-							//스파이 요소가 있고 1차메뉴 요소이거나 메뉴요소이면서 선택된 요소의 가장 가까운 부모인 li가 actived클래스를 가지고 있지 않을때
-							if(option.$activedDepthLastText.length && (option.$depth1Text.is(element) || $thisFirst.is(element)) && !$(element).closest('li').hasClass(_className.actived)) {
+							//스파이 요소가 있고 1차메뉴 요소이거나 메뉴요소이거나 선택된 요소의 가장 가까운 부모인 li가 actived클래스를 가지고 있지 않을때
+							if(option.$activedDepthLastText.length && (option.$depth1Text.is(element) || $thisFirst.is(element)) || !$(element).closest('li').hasClass(_className.actived)) {
 								$thisFirst.menu('spy');
 							}else{
 								option.closeMenu.call(element, event);
