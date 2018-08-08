@@ -438,9 +438,22 @@ try {
 						 * @return {jQueryElement}
 						 */
 						function setSpy(element) {
-							//스파이 요소가 있고 1차메뉴 요소이거나 메뉴요소이거나 선택된 요소의 가장 가까운 부모인 li가 actived클래스를 가지고 있지 않을때
-							if(option.$activedDepthLastText.length && (option.$depth1Text.is(element) || $thisFirst.is(element)) || !$(element).closest('li').hasClass(_className.actived)) {
-								$thisFirst.menu('spy');
+
+							//&& (option.$depth1Text.is(element) || $thisFirst.is(element)) || !$(element).closest('li').hasClass(_className.actived)
+
+							//스파이 요소가 있을때
+							if(option.$activedDepthLastText.length) {
+								//클릭 이벤트일때
+								if(option.event === 'click') {
+									//1차메뉴 요소이면서 선택된 요소의 가장 가까운 부모인 li가 actived클래스를 가지고 있지 않을때 또는 메뉴요소일때
+									if((option.$depth1Text.is(element) && !$(element).closest('li').hasClass(_className.actived)) || $thisFirst.is(element)) {
+										$thisFirst.menu('spy');
+									}else{
+										option.closeMenu.call(element, event);
+									}
+								}else{
+									$thisFirst.menu('spy');
+								}
 							}else{
 								option.closeMenu.call(element, event);
 							}
@@ -555,7 +568,7 @@ try {
 								option.closeMenu.call(this, event);
 
 							//클릭이벤트로 들어왔을때
-							}else if(option.event === 'click') {
+							}else{
 								var $siblingsParentDepthItem = $parentsDepthItem.find('[data-menu-text]:first').filter('a, button').closest('li');
 
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
@@ -663,7 +676,7 @@ try {
 								option.$depthItem.removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
 							
 							//클릭이벤트로 들어왔을때
-							}else if(option.event === 'click') {
+							}else{
 								var element = this,
 									$parentsDepthItem = $this.parents('li');
 
@@ -770,7 +783,7 @@ try {
 							event.stopPropagation();
 						};
 
-						//mouse이벤트일때
+						//마우스 이벤트일때
 						if(option.event === 'mouse') {
 							//depthText와 depth에 마우스가 접근했을때						
 							option.$depthAndText.on('mouseover.' + option.namespace, option.openMenu);
@@ -802,7 +815,9 @@ try {
 									option.toggleMenu.call(this, event);
 								}
 							});
-						}else if(option.event === 'click') {
+						
+						//클릭 이벤트일때
+						}else{
 							option.$depthText.on('click.' + option.namespace, option.toggleMenu);
 						}
 
