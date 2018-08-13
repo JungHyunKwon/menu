@@ -11,7 +11,7 @@ try {
 		if(typeof $ === 'function') {
 			$(function() {
 				var $nav = $('[data-menu-type]'),
-					$navActivedText = $nav.find('[data-menu-actived]'),
+					$navActivedText = $nav.find('[data-menu-actived]').last(),
 					navMenuType = parseInt($nav.attr('data-menu-type'), 10) || 1,
 					navOption = {
 						cut : {},
