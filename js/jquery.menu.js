@@ -272,7 +272,7 @@ try {
 								registerOption.$depthCutItem.remove();
 								
 								//클래스 제거
-								$thisFirst.removeClass(_className.initialized);
+								$thisFirst.removeClass(_className.initialized + ' ' + (registerOption.className.title1 || '') + ' ' + (registerOption.className.title2 || ''));
 								_$body.removeClass(registerOption.className.globalActive + ' ' + registerOption.className.globalOpen);
 								_removePrefixClass($thisFirst, _className.state);
 								registerOption.$depthItem.removeClass(_className.has + ' ' + _className.solo + ' ' + _className.activePrev + ' ' + _className.active + ' ' + _className.activeNext + ' ' + _className.activedPrev + ' ' + _className.actived + ' ' + _className.activedNext);
@@ -311,7 +311,8 @@ try {
 						}
 					//적용
 					}else if(_isElement(thisFirst)) {
-						var menuHeight = '';
+						var menuHeight = '',
+							type = parseInt($thisFirst.attr('data-menu-type'), 10);
 
 						//기존 이벤트 제거
 						if(register) {
@@ -321,6 +322,14 @@ try {
 						//옵션이 객체가 아닐때
 						if(!(option instanceof Object && option.constructor === Object)) {
 							option = {};
+						}
+
+						//유형 정의
+						option.type = type || 1;
+						
+						//유형이 없을때
+						if(!type) {
+							$thisFirst.attr('data-menu-type', 1);
 						}
 
 						//네임스페이스가 없거나 문자열이 아닐때
@@ -349,15 +358,13 @@ try {
 						//닫기버튼
 						option.$closeElement = $('div[data-menu-close="' + option.namespace + '"] button[data-menu-button]');
 
+
 						//클래스이름 합성
 						option.className = {
 							globalActive : option.namespace + _separator + _className.active,
 							globalOpen : option.namespace + _separator + _className.open
 						};
 
-						//유형 정의
-						option.type = parseInt($thisFirst.attr('data-menu-type'), 10) || 1;
-							
 						//요소 정의
 						option.$wildCard = $thisFirst.add($thisFirst.find('*'));
 						option.$depth = $thisFirst.find('div[data-menu-depth]');
@@ -373,6 +380,18 @@ try {
 						option.$depthAndText = option.$depth.not('div[data-menu-depth="1"]').add(option.$depthText);
 						option.$activedDepthLastText = option.$depth1.find('[data-menu-text][data-menu-actived]').filter('a, button').last();
 						option.$activedDepthItem = option.$activedDepthLastText.parents('li');
+						
+						//첫번째 제목요소가 있을때
+						if(option.$depthTitle1.length) {
+							option.className.title1 = 'title1';
+							$thisFirst.addClass(option.className.title1);
+						}
+
+						//두번째 제목요소가 있을때
+						if(option.$depthTitle2.length) {
+							option.className.title2 = 'title2';
+							$thisFirst.addClass(option.className.title2);
+						}
 
 						//높이 캐싱
 						option.$wildCard.css('transition-property', 'none');
