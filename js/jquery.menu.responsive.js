@@ -18,7 +18,7 @@ try {
 						namespace : 'menu'
 					};
 
-				$(window).on('responsive.nav', function(event) {
+				$(window).on('responsive.menu', function(event) {
 					//wide, web, tablet, phone분기에 걸렸을때
 					if($.inArray(event.state, event.setting.rangeProperty) > -1) {
 						var menuEvent = 'click',
@@ -35,11 +35,6 @@ try {
 						
 						//현재 메뉴 이벤트와 분기에 따른 메뉴 이벤트가 다를때
 						if(navOption.event !== menuEvent) {
-							//메뉴가 셋팅되어 있을때 파괴
-							if($nav.hasClass('menu_initialized')) {
-								$nav.menu('destroy');
-							}
-							
 							//메뉴 이벤트 변경
 							navOption.event = menuEvent;
 
