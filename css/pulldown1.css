@@ -29,7 +29,7 @@
 /* 활성화 */
 .menu_active [data-menu-type='1'] div[data-menu-depth='2'] {visibility:visible;}
 .menu_active [data-menu-type='1'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {background-color:#eee;}
-.menu_active [data-menu-type='1'] ul[data-menu-list='1'] > li.active div[data-menu-title='2'] {visibility:visible; opacity:1;}
+.menu_active [data-menu-type='1'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] > li.active div[data-menu-title='2'] {visibility:visible; opacity:1;}
 
 /* 높이 */
 [data-menu-type='1'], [data-menu-type='1'][data-menu-top-background]:before {height:40px;}

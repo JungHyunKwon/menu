@@ -272,7 +272,7 @@ try {
 								registerOption.$depthCutItem.remove();
 								
 								//클래스 제거
-								$thisFirst.removeClass(_className.initialized + ' ' + (registerOption.className.title1 || '') + ' ' + (registerOption.className.title2 || ''));
+								$thisFirst.removeClass(_className.initialized);
 								_$body.removeClass(registerOption.className.globalActive + ' ' + registerOption.className.globalOpen);
 								_removePrefixClass($thisFirst, _className.state);
 								registerOption.$depthItem.removeClass(_className.has + ' ' + _className.solo + ' ' + _className.activePrev + ' ' + _className.active + ' ' + _className.activeNext + ' ' + _className.activedPrev + ' ' + _className.actived + ' ' + _className.activedNext);
@@ -287,6 +287,7 @@ try {
 								registerOption.$depthText.off('click.' + registerNamespace);
 								registerOption.$depthAndText.off('mouseover.' + registerNamespace);
 								registerOption.$depthText.off('keydown.' + registerNamespace);
+								registerOption.$depthTitle1.off('focusin.' + registerNamespace + ' focusout.' + registerNamespace);
 								registerOption.$depthTitle2.off('mouseout.' + registerNamespace);
 
 								//배열에서 제거
@@ -370,8 +371,9 @@ try {
 						option.$depth = $thisFirst.find('div[data-menu-depth]');
 						option.$depth1 = option.$depth.filter('div[data-menu-depth="1"]');
 						option.$depth1Text = option.$depth1.find('a[data-menu-text="1"], button[data-menu-text="1"]');
-						option.$depthTitle1 = option.$depth1.find('div[data-menu-title="1"]');
-						option.$depthTitle2 = option.$depth1.find('div[data-menu-title="2"]');
+						option.$depthTitle = option.$depth1.find('div[data-menu-title]');
+						option.$depthTitle1 = option.$depthTitle.filter('[data-menu-title="1"]');
+						option.$depthTitle2 = option.$depthTitle.filter('[data-menu-title="2"]');
 						option.$depth2 = option.$depth.filter('[data-menu-depth="2"]');
 						option.$depthList = option.$depth.find('ul[data-menu-list]');
 						option.$depthItem = option.$depthList.children('li');
@@ -380,18 +382,6 @@ try {
 						option.$depthAndText = option.$depth.not('div[data-menu-depth="1"]').add(option.$depthText);
 						option.$activedDepthLastText = option.$depth1.find('[data-menu-text][data-menu-actived]').filter('a, button').last();
 						option.$activedDepthItem = option.$activedDepthLastText.parents('li');
-						
-						//첫번째 제목요소가 있을때
-						if(option.$depthTitle1.length) {
-							option.className.title1 = 'title1';
-							$thisFirst.addClass(option.className.title1);
-						}
-
-						//두번째 제목요소가 있을때
-						if(option.$depthTitle2.length) {
-							option.className.title2 = 'title2';
-							$thisFirst.addClass(option.className.title2);
-						}
 
 						//높이 캐싱
 						option.$wildCard.css('transition-property', 'none');
@@ -812,13 +802,26 @@ try {
 							//지정요소 나가면 추적
 							option.$depth1.on('mouseover.' + option.namespace, function(event) {
 								//메뉴가 활성화되어 있을때 && 풀다운1이면서 뎁스1일때 || 풀다운2이면서 타이틀1의 모든요소에 포함되지 않을때
-								if(_$body.hasClass(option.className.globalActive) && ((option.type === 1 && $(this).is(event.target)) || (option.type === 2 && !option.$depthTitle1.add(option.$depthTitle1.find('*')).is(this)))) {
+								if(_$body.hasClass(option.className.globalActive) && ((option.type === 1 && $(this).is(event.target)) || (option.type === 2 && !option.$depthTitle1.add(option.$depthTitle1.find('*')).is(event.target)))) {
 									setSpy(this);
 								}
 							}).on('mouseleave.' + option.namespace, function(event) {
 								setSpy(this);
 							});
 							
+							//타이틀1을 접근했을때, 빠져나갔을때
+							option.$depthTitle1.on('focusin.' + option.namespace, function(event) {
+								//풀다운1일때
+								if(option.type === 1) {
+									option.openMenu.call(this, event);
+								}
+							}).on('focusout.' + option.namespace, function(event) {
+								//풀다운1일때
+								if(option.type === 1) {
+									setSpy(this);
+								}
+							});
+
 							//타이틀2를 나갔을때
 							option.$depthTitle2.on('mouseout.' + option.namespace, function(event) {
 								//풀다운1일때

@@ -5,5 +5,5 @@
 	div[data-menu-close]:after {display:inline-block; width:10px; height:100%;}
 
 	/* 메뉴를 열었을때 */
-	.menu_open div[data-menu-close] {visibility:visible;}
+	.menu_open [data-menu-type] + div[data-menu-close] {visibility:visible;}
 }

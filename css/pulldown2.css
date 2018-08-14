@@ -3,13 +3,14 @@
 [data-menu-type='2'][data-menu-top-background]:before {background-color:#2b52a7;}
 [data-menu-type='2'][data-menu-bottom-background]:after {background-color:#fff;}
 
-/* 제목상자 */
-[data-menu-type='2'] div[data-menu-title] {width:300px; background-color:#005caa;}
-[data-menu-type='2'] div[data-menu-title] p {color:#fff; font-size:15px; line-height:17px; text-align:center;}
-
 /* 공통 */
 [data-menu-type='2'] [data-menu-text] {font-size:16px; line-height:18px;}
 [data-menu-type='2'] a[data-menu-text][target='_blank']:after {width:12px; height:12px; margin-left:5px; background-image:url('../images/depth_text_blank_black_ico.png');}
+
+/* 제목상자 */
+[data-menu-type='2'] div[data-menu-title] {width:300px; background-color:#005caa;}
+[data-menu-type='2'] div[data-menu-title] p {color:#fff; font-size:15px; line-height:17px; text-align:center;}
+[data-menu-type='2'] div[data-menu-title='1'] + ul[data-menu-list='1'] div[data-menu-depth='2'], [data-menu-type='2'] div[data-menu-title='2'] + ul[data-menu-list='2'] {padding-left:300px;}
 
 /* 1차메뉴 */
 [data-menu-type='2'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {width:900px;}
@@ -19,7 +20,6 @@
 
 /* 2차메뉴 */
 [data-menu-type='2'] ul[data-menu-list='2'] {padding-top:15px; padding-right:5px; padding-bottom:15px; padding-left:5px;}
-[data-menu-type='2'] div[data-menu-depth='1'].clearfix ul[data-menu-list='2'], [data-menu-type='2'] div[data-menu-title='2'] + ul[data-menu-list='2'], [data-menu-type='2'].title1 ul[data-menu-list='2'] {padding-left:300px;}
 [data-menu-type='2'] ul[data-menu-list='2'] > li {margin-top:10px;}
 [data-menu-type='2'] ul[data-menu-list='2'] > li:first-child {margin-top:0;}
 [data-menu-type='2'] [data-menu-text='2'] {color:#222;}
@@ -32,7 +32,7 @@
 
 /* 높이 */
 [data-menu-type='2'], [data-menu-type='2'][data-menu-top-background]:before {height:40px;}
-[data-menu-type='2'][data-menu-bottom-background]:after, [data-menu-type='2'].title1 div[data-menu-title='1'], [data-menu-type='2'] div[data-menu-depth='2'] {top:40px; height:calc(100% - 40px);}
+[data-menu-type='2'][data-menu-bottom-background]:after, [data-menu-type='2'] div[data-menu-depth='1'] div[data-menu-title='1'], [data-menu-type='2'] div[data-menu-depth='2'] {top:40px; height:calc(100% - 40px);}
 
 /* 중앙정렬 넓이 */
 [data-menu-type='2'] div[data-menu-depth='1'], [data-menu-type='2'][data-menu-top-background]:before, [data-menu-type='2'][data-menu-bottom-background]:after {width:1200px;}

@@ -22,7 +22,7 @@ body {background-color:#000; font-family:'Malgun Gothic', '맑은 고딕', 'Dotu
 .clearfix {display:block;}
 .skip {display:block; overflow:hidden; position:absolute; top:0; left:0; z-index:90; width:1px; height:1px; background-color:transparent; font-size:0;}
 
-/* 풀다운1 */
+/* 공통 */
 div[data-menu-open], div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-open] button[data-menu-button], div[data-menu-open] button[data-menu-button]:before, div[data-menu-open] button[data-menu-button]:after, div[data-menu-close], div[data-menu-close]:before, div[data-menu-close]:after, div[data-menu-close] button[data-menu-button], div[data-menu-close] button[data-menu-button]:before, div[data-menu-close] button[data-menu-button]:after, [data-menu-type], [data-menu-type]:before, [data-menu-type]:after, [data-menu-type] div[data-menu-depth], [data-menu-type] div[data-menu-depth]:before, [data-menu-type] div[data-menu-depth]:after, [data-menu-type] div[data-menu-title], [data-menu-type] div[data-menu-title]:before, [data-menu-type] div[data-menu-title]:after, [data-menu-type] ul[data-menu-list], [data-menu-type] ul[data-menu-list]:before, [data-menu-type] ul[data-menu-list]:after, [data-menu-type] ul[data-menu-list] > li, [data-menu-type] ul[data-menu-list] > li:before, [data-menu-type] ul[data-menu-list] > li:after, [data-menu-type] [data-menu-text], [data-menu-type] [data-menu-text]:before, [data-menu-type] [data-menu-text]:after {font-size:0; line-height:0px; transition-property:none; transition-duration:0.25s; transition-timing-function:linear;}
 div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-open] button[data-menu-button], div[data-menu-open] button[data-menu-button]:before, div[data-menu-open] button[data-menu-button]:after, div[data-menu-close]:before, div[data-menu-close]:after, div[data-menu-close] button[data-menu-button], div[data-menu-close] button[data-menu-button]:before, div[data-menu-close] button[data-menu-button]:after, [data-menu-type]:before, [data-menu-type]:after, [data-menu-type] div[data-menu-depth]:before, [data-menu-type] div[data-menu-depth]:after, [data-menu-type] div[data-menu-title]:before, [data-menu-type] div[data-menu-title]:after, [data-menu-type] ul[data-menu-list]:before, [data-menu-type] ul[data-menu-list]:after, [data-menu-type] ul[data-menu-list] > li:before, [data-menu-type] ul[data-menu-list] > li:after, [data-menu-type] [data-menu-text]:before, [data-menu-type] [data-menu-text]:after {background-repeat:no-repeat; background-position:center center; vertical-align:middle; transition-property:height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color, color, font-size, line-height, font-weight;}
 div[data-menu-open], div[data-menu-close] {visibility:hidden; position:absolute;}
@@ -32,21 +32,22 @@ div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:befo
 [data-menu-type][data-menu-top-background]:before, [data-menu-type][data-menu-bottom-background]:after {display:block; position:absolute; right:0; left:0; margin-right:auto; margin-left:auto;}
 [data-menu-type][data-menu-top-background]:before {top:0; z-index:10;}
 [data-menu-type][data-menu-top-background]:after {z-index:20;}
-[data-menu-type] div[data-menu-title] {position:absolute; left:0; z-index:20;}
-[data-menu-type] div[data-menu-title='1'] {overflow:hidden;}
-[data-menu-type] div[data-menu-title='2'] {top:0; height:100%;}
-[data-menu-type='1'].title2 div[data-menu-title='2'] {visibility:hidden; overflow:hidden; opacity:0; transition-property:visibility, opacity;}
+[data-menu-type] div[data-menu-title] {position:relative; z-index:20;}
+[data-menu-type] div[data-menu-title='1'], [data-menu-type] div[data-menu-title='2'] {overflow:hidden; position:absolute; left:0;}
+[data-menu-type] div[data-menu-title='2'] {visibility:hidden; opacity:0; top:0; height:100%; transition-property:visibility, opacity;}
 [data-menu-type] div[data-menu-depth] {visibility:hidden; position:relative; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color;}
-[data-menu-type] div[data-menu-depth='1'] {visibility:visible; z-index:30; height:100%; margin-right:auto; margin-left:auto; transition-property:none;}
+[data-menu-type] div[data-menu-depth='1'] {visibility:inherit; z-index:30; height:100%; margin-right:auto; margin-left:auto; transition-property:none;}
 [data-menu-type] div[data-menu-depth='2'] {overflow:hidden; transition-property:visibility, background-color, color;}
-[data-menu-type='1'].title2 div[data-menu-depth='2'] {position:static;}
-[data-menu-type] ul[data-menu-list] {transition-property:margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color;}
+[data-menu-type] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:static;}
+[data-menu-type] ul[data-menu-list] {position:relative; transition-property:margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color;}
+[data-menu-type] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {position:static;}
+[data-menu-type] div[data-menu-title] + ul[data-menu-list] {z-index:10;}
 [data-menu-type] ul[data-menu-list='1'] {height:100%;}
 [data-menu-type] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {float:right;}
 [data-menu-type] ul[data-menu-list] > li {position:relative; transition-property:z-index, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color;}
 [data-menu-type] ul[data-menu-list].clearfix > li {float:left;}
 [data-menu-type] ul[data-menu-list='1'] > li {height:100%;}
-[data-menu-type='1'].title2 ul[data-menu-list='1'] > li {position:static;}
+[data-menu-type] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] > li {position:static;}
 [data-menu-type] ul[data-menu-list] > li.has > [data-menu-text]:before, [data-menu-type] a[data-menu-text][target='_blank']:after {display:inline-block; width:1px; height:1px;}
 [data-menu-type] ul[data-menu-list] > li.has > [data-menu-text]:before {content:'하위메뉴가 존재하는';}
 [data-menu-type] ul[data-menu-list] > li.cut {overflow:hidden; width:100%; height:0;}
@@ -54,11 +55,15 @@ div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:befo
 [data-menu-type] a[data-menu-text][target='_blank']:after {content:'새창';}
 
 /* 풀다운2 */
-[data-menu-type='2'] div[data-menu-depth='2'] {opacity:0; position:absolute; left:0; width:100%; transition-property:visibility, opacity, z-index, background-color;}
+[data-menu-type='2'] div[data-menu-title='2'] {visibility:inherit; opacity:1; transition-property:none;}
+[data-menu-type='2'] div[data-menu-depth='2'], [data-menu-type='2'] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:absolute;}
+[data-menu-type='2'] div[data-menu-depth='2'] {opacity:0; left:0; width:100%; transition-property:visibility, opacity, z-index, background-color;}
 [data-menu-type='2'] ul[data-menu-list='1'] > li {position:static;}
 
 /* 드롭다운1 */
 [data-menu-type='3'] {transition-property:visibility;}
+[data-menu-type='3'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {position:relative;}
+[data-menu-type='3'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] > li {position:relative;}
 [data-menu-type='3'] div[data-menu-depth='2'] {overflow:visible; position:absolute; top:100%; left:0; width:100%; transform-origin:center top; transform:scaleY(0); transition-property:visibility, background-color, transform;}
 
 /* 드롭다운2 */
@@ -66,4 +71,6 @@ div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:befo
 [data-menu-type='4'] div[data-menu-depth='1'] {z-index:auto; height:auto; margin-right:0; margin-left:0;}
 [data-menu-type='4'] div[data-menu-depth='2'] {overflow:visible; position:relative; left:auto; width:auto;}
 [data-menu-type='4'] ul[data-menu-list='1'] {height:auto;}
+[data-menu-type='4'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {position:relative;}
 [data-menu-type='4'] ul[data-menu-list='1'] > li {height:auto;}
+[data-menu-type='4'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] > li {position:relative;}
