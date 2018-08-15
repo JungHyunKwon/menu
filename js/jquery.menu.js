@@ -38,50 +38,6 @@ try {
 			_className.activedNext = _className.actived + _separator + _className.next;
 
 			/**
-			 * @name 콘솔오류방지
-			 * @description 콘솔객체가 없을경우 에뮬레이션이 아닌 실제 인터넷 익스플로러9이하에서 콘솔로그 버그를 막을 수 있습니다. 막지 않고 콘솔을 쓸 경우 모든 스크립팅은 중단 됩니다. 대체콘솔은 console.comment에 담겨있습니다.
-			 * @since 2017-10-11
-			 */
-			
-			//객체일때
-			if(!(window.console instanceof Object && window.console.constructor === Object)) {
-				window.console = {
-					method : ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
-					comment : []
-				};
-
-				for(var i = 0, consoleMethodLength = window.console.method.length; i < consoleMethodLength; i++) {
-					var methodI = window.console.method[i];
-
-					//함수가아닐때
-					if(typeof window.console[methodI] !== 'function') {
-						window.console[methodI] = function() {
-							var result = [],
-								argumentsLength = arguments.length;
-						
-							//매개변수가 2개이상일때
-							if(argumentsLength > 1) {
-								for(var i = 0; i < argumentsLength; i++) {
-									result.push(arguments[i]);
-								}
-							
-							//매개변수가 한개일때
-							}else if(argumentsLength === 1) {
-								result = arguments[0];
-							}
-						   
-							//console.comment에 기입
-							if(argumentsLength) {
-								this.comment.push(result);
-							}
-
-							return result;
-						};
-					}
-				}
-			}
-
-			/**
 			 * @name 요소 또는 제이쿼리 요소 확인
 			 * @since 2017-12-06
 			 * @param {window || document || element || jQueryElement} element
