@@ -406,7 +406,8 @@ try {
 							var result = '';
 
 							if(value > 0) {
-								result = 'div[data-menu-depth="' + value + '"]:first-of-type ul[data-menu-list="' + value + '"]:first-of-type';
+								result = 'ul[data-menu-list="' + value + '"]';
+								console.log(result);
 							}
 
 							return result;
@@ -599,7 +600,7 @@ try {
 							$parentsDepthNextItem.addClass(_className.activeNext);
 
 							//상태 클래스 추가
-							addStateClass($parentsDepthLastItem.add($parentsDepthLastItem.find('div[data-menu-depth]:first-of-type ul[data-menu-list]:first > li')).filter('.' + _className.active).last().find('[data-menu-text]:first').filter('a, button')[0]);
+							addStateClass($parentsDepthLastItem.add($parentsDepthLastItem.find('ul[data-menu-list]:first > li')).filter('.' + _className.active).last().find('[data-menu-text]:first').filter('a, button')[0]);
 
 							//풀다운1 || 풀다운2
 							if(option.type === 1 || option.type === 2) {
