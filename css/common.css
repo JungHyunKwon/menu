@@ -66,7 +66,7 @@ div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:befo
 /* 드롭다운2 */
 [data-menu-type='4'] {transition-property:visibility;}
 [data-menu-type='4'] div[data-menu-depth='1'] {z-index:auto; height:auto; margin-right:0; margin-left:0;}
-[data-menu-type='4'] div[data-menu-depth='2'] {overflow:visible; position:relative; left:auto; width:auto;}
+[data-menu-type='4'] div[data-menu-depth='2'] {overflow:visible; position:relative; left:auto; width:auto; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color;}
 [data-menu-type='4'] ul[data-menu-list='1'] {height:auto;}
 [data-menu-type='4'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {position:relative;}
 [data-menu-type='4'] ul[data-menu-list='1'] > li {height:auto;}
