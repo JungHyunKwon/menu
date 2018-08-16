@@ -363,7 +363,6 @@ try {
 
 							if(value > 0) {
 								result = 'ul[data-menu-list="' + value + '"]';
-								console.log(result);
 							}
 
 							return result;
