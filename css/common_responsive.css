@@ -11,7 +11,7 @@
 	[data-menu-type][data-menu-top-background]:before {top:auto; z-index:auto;}
 	[data-menu-type][data-menu-top-background]:after {z-index:auto;}
 	[data-menu-type] div[data-menu-title] {display:none; position:static; z-index:auto;}
-	[data-menu-type] div[data-menu-title='1'], [data-menu-type] div[data-menu-title='2'] {overflow:visible; position:static; left:auto;}
+	[data-menu-type] div[data-menu-title='1'], [data-menu-type] div[data-menu-title='2'] {overflow:visible; left:auto;}
 	[data-menu-type] div[data-menu-title='2'] {visibility:inherit; opacity:1; top:auto; height:auto; transition-property:none;}
 	[data-menu-type] div[data-menu-depth='1'] {z-index:auto; height:auto; margin-right:0; margin-left:0; transition-property:visibility;}
 	[data-menu-type] div[data-menu-depth='2'] {overflow:visible; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, border-color, background-color, color, font-size, line-height, font-weight;}
