@@ -14,7 +14,7 @@
 	[data-menu-type] div[data-menu-title='1'], [data-menu-type] div[data-menu-title='2'] {overflow:visible; position:static; left:auto;}
 	[data-menu-type] div[data-menu-title='2'] {visibility:inherit; opacity:1; top:auto; height:auto; transition-property:none;}
 	[data-menu-type] div[data-menu-depth='1'] {z-index:auto; height:auto; margin-right:0; margin-left:0; transition-property:visibility;}
-	[data-menu-type] div[data-menu-depth='2'] {overflow:visible; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color, color, font-size, line-height, font-weight;}
+	[data-menu-type] div[data-menu-depth='2'] {overflow:visible; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, border-color, background-color, color, font-size, line-height, font-weight;}
 	[data-menu-type] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:relative;}
 	[data-menu-type] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {position:relative;}
 	[data-menu-type] div[data-menu-title] + ul[data-menu-list] {z-index:auto;}
@@ -27,11 +27,11 @@
 
 	/* 풀다운2 */
 	[data-menu-type='2'] div[data-menu-depth='2'], [data-menu-type='2'] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:relative;}
-	[data-menu-type='2'] div[data-menu-depth='2'] {opacity:1; left:auto; width:auto; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color, color, font-size, line-height, font-weight;}
+	[data-menu-type='2'] div[data-menu-depth='2'] {opacity:1; left:auto; width:auto; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, border-color, background-color, color, font-size, line-height, font-weight;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li {position:relative;}
 
 	/* 드롭다운1 */
-	[data-menu-type='3'] div[data-menu-depth='2'] {position:relative; top:auto; left:auto; width:auto; transform-origin:center center; transform:scaleY(1); transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, background-color, color, font-size, line-height, font-weight;}
+	[data-menu-type='3'] div[data-menu-depth='2'] {position:relative; top:auto; left:auto; width:auto; transform-origin:center center; transform:scaleY(1); transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, border-color, background-color, color, font-size, line-height, font-weight;}
 
 	/* 위에서 아래로 슬라이드 효과 */
 	[data-menu-type][data-menu-effect='2'] {max-height:0; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
