@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
 	<title>menu</title>
-	<link href="https://rawgit.com/JungHyunKwon/responsive/master/css/responsive.css" type="text/css" rel="stylesheet" />
+	<link href="https://cdn.rawgit.com/JungHyunKwon/responsive/0d9f07f2/css/responsive.css" type="text/css" rel="stylesheet" />
 	<link href="css/common.css" type="text/css" rel="stylesheet" />
 	<link href="css/common_responsive.css" type="text/css" rel="stylesheet" />
 	<link href="css/pulldown1.css" type="text/css" rel="stylesheet" />
@@ -13,19 +13,47 @@
 	<link href="css/button.css" type="text/css" rel="stylesheet" />
 	<link href="css/button_responsive.css" type="text/css" rel="stylesheet" />
 	<link href="css/effect_responsive.css" type="text/css" rel="stylesheet" />
-	<link href="css/template.css" type="text/css" rel="stylesheet" />
+	<style>
+		.effect button {display:none; width:100%; margin-top:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; padding-left:5px; border-top-left-radius:5px; border-top-right-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; background-color:#fff;}
+		.effect button:first-child {margin-top:0;}
+		.effect p {padding-bottom:10px; color:#fff; font-size:15px; line-height:17px;}
+		@media screen and (max-width:1000px) {
+			.effect {padding-top:40px;}
+			.effect button {display:block;}
+			.effect p {display:none;}
+		}
+	</style>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script src="https://rawgit.com/JungHyunKwon/responsive/master/js/jquery.responsive.min.js"></script>
+	<script src="https://cdn.rawgit.com/JungHyunKwon/responsive/097c1d56/js/jquery.responsive.min.js"></script>
 	<script src="js/jquery.menu.min.js"></script>
 	<script src="js/jquery.menu.responsive.js"></script>
+	<script>
+		'use strict';
+
+		$(function() {
+			var $nav = $('[data-menu-type]'),
+				$effectButton = $('.effect button');
+
+			$effectButton.on('click', function(event) {
+				$nav.attr('data-menu-effect', $effectButton.index(this) + 1);
+			});
+		});
+	</script>
 </head>
 <body>
 <h1 class="skip">menu</h1>
+<div class="effect">
+	<button type="button">토글</button>
+	<button type="button">위에서 아래로 슬라이드</button>
+	<button type="button">왼쪽에서 오른쪽으로 슬라이드</button>
+	<button type="button">오른쪽에서 왼쪽으로 슬라이드</button>
+	<p>화면을 1000이하로 맞춰보세요.</p>
+</div>
 <div>
 	<div data-menu-open="menu">
 		<button type="button" data-menu-button>메뉴 열기</button>
 	</div>
-	<nav data-menu-type="1" data-menu-top-background="full" data-menu-bottom-background="full">
+	<nav data-menu-type="1" data-menu-effect="1" data-menu-top-background="full" data-menu-bottom-background="full">
 		<h2 class="skip">메뉴</h2>
 		<div data-menu-depth="1">
 			<ul class="clearfix" data-menu-list="1">
