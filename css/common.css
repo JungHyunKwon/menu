@@ -28,7 +28,7 @@ div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:befo
 [data-menu-type] {position:relative; transition-property:visibility, height;}
 [data-menu-type][data-menu-top-background]:before, [data-menu-type][data-menu-bottom-background]:after {display:block; position:absolute; right:0; left:0; margin-right:auto; margin-left:auto;}
 [data-menu-type][data-menu-top-background]:before {top:0; z-index:10;}
-[data-menu-type][data-menu-top-background]:after {z-index:20;}
+[data-menu-type][data-menu-bottom-background]:after {z-index:20;}
 [data-menu-type] div[data-menu-title] {position:relative; z-index:20;}
 [data-menu-type] div[data-menu-title='1'], [data-menu-type] div[data-menu-title='2'] {overflow:hidden; position:absolute; left:0;}
 [data-menu-type] div[data-menu-title='2'] {visibility:hidden; opacity:0; top:0; height:100%; transition-property:visibility, opacity;}

@@ -9,7 +9,7 @@
 	[data-menu-type] {visibility:hidden; overflow-x:hidden; overflow-y:auto; position:fixed; transition-property:visibility;}
 	[data-menu-type][data-menu-top-background]:before, [data-menu-type][data-menu-bottom-background]:after {display:none; position:static; right:auto; left:auto; margin-right:0; margin-left:0;}
 	[data-menu-type][data-menu-top-background]:before {top:auto; z-index:auto;}
-	[data-menu-type][data-menu-top-background]:after {z-index:auto;}
+	[data-menu-type][data-menu-bottom-background]:after {z-index:auto;}
 	[data-menu-type] div[data-menu-title] {display:none; position:static; z-index:auto;}
 	[data-menu-type] div[data-menu-title='1'], [data-menu-type] div[data-menu-title='2'] {overflow:visible; left:auto;}
 	[data-menu-type] div[data-menu-title='2'] {visibility:inherit; opacity:1; top:auto; height:auto; transition-property:none;}
