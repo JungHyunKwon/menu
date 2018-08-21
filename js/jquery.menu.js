@@ -10,7 +10,8 @@ try {
 		if(typeof $ === 'function') {
 			var _register = [], //등록된 요소
 				_separator = '_', //구분자
-				_language = $('html').attr('lang'),
+				_language = $('html').attr('lang') || 'en',
+				_confirmMessage = 'Move to contents?',
 				_className = { //클래스 이름
 					active : 'active', //활성화
 					state : 'state', //상태
@@ -23,11 +24,9 @@ try {
 					initialized : 'menu' + _separator + 'initialized' //초기화된
 				};
 			
-			//언어 설정이 되어있을때
-			if(_language) {
-				_language = _language.toLowerCase();
-			}else{
-				_language = 'en';
+			//한국어일때
+			if(_confirmMessage === 'ko') {
+				_confirmMessage = '콘텐츠로 이동하시겠습니까?';
 			}
 
 			//활성화의 이전
@@ -782,7 +781,7 @@ try {
 								//활성화되어 있을때
 								if(isActive) {
 									//버튼요소이거나 다음 뎁스에 선택한 메뉴와 같은 콘텐츠가 있거나 콘텐츠로 이동하지 않았을때
-									if(tagName === 'button' || hasText || !window.confirm((_language === 'ko') ? '콘텐츠로 이동하시겠습니까?' : 'Move to contents?')) {
+									if(tagName === 'button' || hasText || !window.confirm(_confirmMessage)) {
 										//닫기 또는 추적
 										setSpy(this);
 
