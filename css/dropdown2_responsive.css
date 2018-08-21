@@ -4,19 +4,21 @@
 	[data-menu-type='4'] {top:0; left:0; width:100%; height:100%;}
 	[data-menu-type='4'][data-menu-effect='4'], [data-menu-type='4'][data-menu-effect='4'] + div[data-menu-close] {left:auto;}
 
-	/* 1차메뉴 */
-	[data-menu-type='4'] div[data-menu-depth='1'] {padding-top:40px;}
-
 	/* 메뉴를 열었을때 */
 	.menu_open {overflow:hidden;}
 	.menu_open [data-menu-type='4'] {visibility:visible;}
+
+	/* 1차메뉴 */
+	[data-menu-type='4'] div[data-menu-depth='1'] {padding-top:40px;}
 	
-	/* 이전메뉴 활성화 제거 */
-	.menu_active [data-menu-type='4'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:hidden;}
-	.menu_active [data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active div[data-menu-depth='3'] {visibility:hidden;}
+	/* 2차메뉴 활성화 제거 */
+	[data-menu-type='4'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:hidden;}
 
 	/* 2차메뉴 활성화 */
 	.menu_open.menu_active [data-menu-type='4'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:visible;}
+
+	/* 3차메뉴 활성화 제거 */
+	[data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active div[data-menu-depth='3'] {visibility:hidden;}
 
 	/* 3차메뉴 활성화 */
 	.menu_open.menu_active [data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active div[data-menu-depth='3'] {visibility:visible;}
