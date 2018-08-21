@@ -10,7 +10,7 @@ try {
 		if(typeof $ === 'function') {
 			var _register = [], //등록된 요소
 				_separator = '_', //구분자
-				_language = $('html').attr('lang') || 'en',
+				_language = $('html').attr('lang'),
 				_confirmMessage = 'Move to contents?',
 				_className = { //클래스 이름
 					active : 'active', //활성화
@@ -24,6 +24,13 @@ try {
 					initialized : 'menu' + _separator + 'initialized' //초기화된
 				};
 			
+			//언어설정이 되어있을때
+			if(_language) {
+				_language = _language.toLowerCase();
+			}else{
+				_language = 'en';
+			}
+
 			//한국어일때
 			if(_confirmMessage === 'ko') {
 				_confirmMessage = '콘텐츠로 이동하시겠습니까?';
