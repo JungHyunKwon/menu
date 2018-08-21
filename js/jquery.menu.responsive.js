@@ -45,7 +45,7 @@ try {
 				});
 			});
 
-			$(document).on('ready', function(event) {
+			$(document).on('ready.menu', function(event) {
 				$.responsive({
 					range : {
 						wide : {
