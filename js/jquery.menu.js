@@ -3,9 +3,9 @@
  * @version 1.0.0
  */
 try {
-	(function($) {
-		'use strict';
+	'use strict';
 
+	(function($) {
 		//제이쿼리가 함수일때
 		if(typeof $ === 'function') {
 			var _register = [], //등록된 요소
