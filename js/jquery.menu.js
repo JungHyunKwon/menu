@@ -3,13 +3,14 @@
  * @version 1.0.0
  */
 try {
-	'use strict';
-
 	(function($) {
+		'use strict';
+
 		//제이쿼리가 함수일때
 		if(typeof $ === 'function') {
 			var _register = [], //등록된 요소
 				_separator = '_', //구분자
+				_language = $('html').attr('lang'),
 				_className = { //클래스 이름
 					active : 'active', //활성화
 					state : 'state', //상태
@@ -21,6 +22,13 @@ try {
 					cut : 'cut', //자르기
 					initialized : 'menu' + _separator + 'initialized' //초기화된
 				};
+			
+			//언어 설정이 되어있을때
+			if(_language) {
+				_language = _language.toLowerCase();
+			}else{
+				_language = 'en';
+			}
 
 			//활성화의 이전
 			_className.activePrev = _className.active + _separator + _className.prev;
@@ -36,6 +44,50 @@ try {
 
 			//활성화된의 다음
 			_className.activedNext = _className.actived + _separator + _className.next;
+
+			/**
+			 * @name 형태얻기
+			 * @since 2017-12-06
+			 * @param {*} value
+			 * @return {string || undefined}
+			 */
+			function _getType(value) {
+				var result;
+				
+				//매개변수가 있을때
+				if(arguments.length) {
+					//null일때
+					if(value === null) {
+						result = 'null';
+					
+					//undefined일때
+					}else if(value === undefined) {
+						result = 'undefined';
+					}else{
+						result = Object.prototype.toString.call(value).toLowerCase().replace('[object ', '').replace(']', '');
+						
+						//Invalid Date일때
+						if(result === 'date' && isNaN(new Date(value))) {
+							result = 'Invalid Date';
+						
+						//숫자일때
+						}else if(result === 'number') {
+							//NaN일때
+							if(isNaN(value)) {
+								result = 'NaN';
+							
+							//Infinity일때
+							}else if(!isFinite(value)) {
+								result = value.toString();
+							}
+						}else if(result === 'console') {
+							result = 'object';
+						}
+					}
+				}
+
+				return result;
+			}
 
 			/**
 			 * @name 요소 또는 제이쿼리 요소 확인
@@ -173,7 +225,7 @@ try {
 						var registerJ = _register[j];
 
 						//객체일때 && 들어온 엘리먼트와 등록된 엘리먼트가 같을때
-						if(registerJ instanceof Object && registerJ.constructor === Object && $elementI.is(registerJ.element)) {
+						if(_getType(registerJ) === 'object' && $elementI.is(registerJ.element)) {
 							result.push(j);
 							isBreak = true;
 							break;
@@ -277,7 +329,7 @@ try {
 						}
 
 						//옵션이 객체가 아닐때
-						if(!(option instanceof Object && option.constructor === Object)) {
+						if(_getType(option) !== 'object') {
 							option = {};
 						}
 
@@ -295,7 +347,7 @@ try {
 						}
 
 						//컷팅이 객체가 아닐때
-						if(!(option.cut instanceof Object && option.cut.constructor === Object)) {
+						if(_getType(option.cut) !== 'object') {
 							option.cut = {};
 						}
 
@@ -730,7 +782,7 @@ try {
 								//활성화되어 있을때
 								if(isActive) {
 									//버튼요소이거나 다음 뎁스에 선택한 메뉴와 같은 콘텐츠가 있거나 콘텐츠로 이동하지 않았을때
-									if(tagName === 'button' || hasText || !window.confirm('콘텐츠로 이동하시겠습니까?')) {
+									if(tagName === 'button' || hasText || !window.confirm((_language === 'ko') ? '콘텐츠로 이동하시겠습니까?' : 'Move to contents?')) {
 										//닫기 또는 추적
 										setSpy(this);
 

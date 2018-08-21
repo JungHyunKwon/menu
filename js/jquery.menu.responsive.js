@@ -4,9 +4,9 @@
  * @version 1.0.0
  */
 try {
-	'use strict';
-
 	(function($) {
+		'use strict';
+
 		//제이쿼리가 함수일때
 		if(typeof $ === 'function') {
 			$(function() {
