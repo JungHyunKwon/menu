@@ -15,7 +15,8 @@ try {
 					navMenuType = parseInt($nav.attr('data-menu-type'), 10) || 1,
 					navOption = {
 						cut : {},
-						namespace : 'menu'
+						namespace : 'menu',
+						confirm : '콘텐츠로 이동하시겠습니까?'
 					};
 
 				$(window).on('responsive.menu', function(event) {

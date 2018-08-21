@@ -17,6 +17,7 @@ $(selector).menu({
 event | click | string[mouse, click] | 사용할 이벤트를 지정합니다.
 cut | | object[number \|\| string[number-number] : number] | 지정한 메뉴깊이에 지정한 숫자의 배수마다 cut요소를 생성합니다.
 namespace | <ol><li>id</li><li>태그이름 + 메뉴순번</li></ol> | string | 메뉴의 명칭을 지정합니다.
+confirm | 콘텐츠로 이동하시겠습니까? | string | 닫으려는 메뉴가 콘텐츠가 있을경우 발생됩니다.
 
 ### data-menu-*
 
