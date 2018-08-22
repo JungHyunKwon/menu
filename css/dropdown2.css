@@ -10,9 +10,9 @@
 [data-menu-type='4'] ul[data-menu-list] > li.has.active > [data-menu-text]:before {background-image:url('../images/has_depth_ico_on.png');}
 
 /* 1차메뉴 */
-[data-menu-type='4'] [data-menu-text='1'] {padding-top:11px; padding-right:5px; padding-bottom:11px; padding-left:5px; color:#fff; font-size:16px; line-height:18px;}
+[data-menu-type='4'] [data-menu-text='1'] {padding:11px 5px; color:#fff; font-size:16px; line-height:18px;}
 [data-menu-type='4'] ul[data-menu-list='1'] > li.has > [data-menu-text='1']:before {width:12px; height:8px; margin-right:10px;}
-[data-menu-type='4'] a[data-menu-text='1'][target='_blank']:after {height:12px;}
+[data-menu-type='4'] a[data-menu-text='1'][target='_blank']:after {width:12px; height:12px; margin-left:5px;}
 
 /* 1차메뉴 활성화 */
 [data-menu-type='4'] ul[data-menu-list='1'] > li.active [data-menu-text='1']:hover {text-decoration:none;}
@@ -30,7 +30,7 @@
 [data-menu-type='4'] ul[data-menu-list='1'] > li.active [data-menu-text='2'] {font-size:16px; line-height:18px;}
 [data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active [data-menu-text='2']:hover {text-decoration:none;}
 [data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.has > [data-menu-text='2']:before {width:12px; height:8px; margin-left:10px;}
-[data-menu-type='4'] ul[data-menu-list='1'] > li.active a[data-menu-text='2'][target='_blank']:after {height:12px;}
+[data-menu-type='4'] ul[data-menu-list='1'] > li.active a[data-menu-text='2'][target='_blank']:after {width:12px; height:12px; margin-left:5px;}
 
 /* 3차메뉴 */
 [data-menu-type='4'] div[data-menu-depth='3'] {background-color:#24478b;}
@@ -45,7 +45,7 @@
 [data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active [data-menu-text='3'] {font-size:16px; line-height:18px;}
 [data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active ul[data-menu-list='3'] > li.active [data-menu-text='3']:hover {text-decoration:none;}
 [data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active ul[data-menu-list='3'] > li.has > [data-menu-text='3']:before {width:12px; height:8px; margin-left:10px;}
-[data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active a[data-menu-text='3'][target='_blank']:after {height:12px;}
+[data-menu-type='4'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active a[data-menu-text='3'][target='_blank']:after {width:12px; height:12px; margin-left:5px;}
 
 /* 4차메뉴 */
 [data-menu-type='4'] div[data-menu-depth='4'] {display:none;}
