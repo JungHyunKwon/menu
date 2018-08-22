@@ -11,7 +11,7 @@
 
 	/* 공통 */
 	[data-menu-type='1'] div[data-menu-depth='2'] [data-menu-text] {font-size:0; line-height:0px;}
-	[data-menu-type='1'] ul[data-menu-list] > li.has > [data-menu-text]:before {width:0; height:0; background-image:url('../images/has_depth_ico_off.png'); }
+	[data-menu-type='1'] ul[data-menu-list] > li.has > [data-menu-text]:before {width:0; height:0; background-image:url('../images/has_depth_ico_off.png');}
 	[data-menu-type='1'] a[data-menu-text][target='_blank']:after {width:0; height:0; margin-left:0; background-image:url('../images/depth_text_blank_white_ico.png');}
 
 	/* 공통 활성화 */
