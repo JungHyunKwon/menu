@@ -52,6 +52,7 @@ div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:befo
 [data-menu-type] ul[data-menu-list] > li.cut {overflow:hidden; width:100%; height:0;}
 [data-menu-type] [data-menu-text] {display:block; position:relative; vertical-align:middle;}
 [data-menu-type] a[data-menu-text][target='_blank']:after {content:'새창';}
+
 /* 풀다운2 */
 [data-menu-type='2'] div[data-menu-title='2'] {visibility:inherit; opacity:1;}
 [data-menu-type='2'] div[data-menu-depth='2'], [data-menu-type='2'] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:absolute;}
