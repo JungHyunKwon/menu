@@ -13,6 +13,7 @@
 
 /* 1차메뉴 활성화 */
 [data-menu-type='3'] ul[data-menu-list='1'] > li.active {z-index:10;}
+[data-menu-type='3'] ul[data-menu-list='1'] > li.active [data-menu-text='1']:hover {text-decoration:none;}
 
 /* 2차메뉴 */
 [data-menu-type='3'] div[data-menu-depth='2'] {background-color:#fff;}

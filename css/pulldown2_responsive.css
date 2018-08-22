@@ -33,6 +33,9 @@
 
 	/* 1차메뉴 활성화 제거 */
 	[data-menu-type='2'] ul[data-menu-list='1'] > li.active {z-index:auto;}
+	
+	/* 1차메뉴 활성화 */
+	[data-menu-type='2'] ul[data-menu-list='1'] > li.active [data-menu-text='1']:hover {text-decoration:none;}
 
 	/* 2차메뉴 */
 	[data-menu-type='2'] div[data-menu-depth='2'] {background-color:#175898;}
@@ -49,6 +52,7 @@
 	[data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li {margin-top:10px;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li:first-child {margin-top:0;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li.active [data-menu-text='2'] {font-size:16px; line-height:18px;}
+	[data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active [data-menu-text='2']:hover {text-decoration:none;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.has > [data-menu-text='2']:before {width:12px; height:8px; margin-right:10px;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li.active a[data-menu-text='2'][target='_blank']:after {height:12px;}
 
@@ -63,6 +67,7 @@
 	[data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active ul[data-menu-list='3'] > li {margin-top:10px;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active ul[data-menu-list='3'] > li:first-child {margin-top:0;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active [data-menu-text='3'] {font-size:16px; line-height:18px;}
+	[data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active ul[data-menu-list='3'] > li.active [data-menu-text='3']:hover {text-decoration:none;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active ul[data-menu-list='3'] > li.has > [data-menu-text='3']:before {width:12px; height:8px; margin-right:10px;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active a[data-menu-text='3'][target='_blank']:after {height:12px;}
 
