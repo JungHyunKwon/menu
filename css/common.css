@@ -34,9 +34,8 @@ div[data-menu-open] button[data-menu-button], div[data-menu-close] button[data-m
 [data-menu-type] div[data-menu-title='2'] {visibility:hidden; opacity:0; top:0; height:100%;}
 [data-menu-type] div[data-menu-depth='1'], [data-menu-type][data-menu-top-background]:before, [data-menu-type][data-menu-bottom-background]:after {width:1200px;}
 [data-menu-type][data-menu-top-background='full']:before, [data-menu-type][data-menu-bottom-background='full']:after {width:100%;}
-[data-menu-type] div[data-menu-depth] {visibility:hidden; position:relative;}
+[data-menu-type] div[data-menu-depth] {visibility:hidden; overflow:hidden; position:relative;}
 [data-menu-type] div[data-menu-depth='1'] {visibility:inherit; z-index:30; height:100%; margin-right:auto; margin-left:auto;}
-[data-menu-type] div[data-menu-depth='2'] {overflow:hidden;}
 [data-menu-type] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:static;}
 [data-menu-type] ul[data-menu-list] {position:relative;}
 [data-menu-type] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {position:static;}
@@ -62,11 +61,11 @@ div[data-menu-open] button[data-menu-button], div[data-menu-close] button[data-m
 /* 드롭다운1 */
 [data-menu-type='3'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {position:relative;}
 [data-menu-type='3'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] > li {position:relative;}
-[data-menu-type='3'] div[data-menu-depth='2'] {overflow:visible; position:absolute; top:100%; left:0; width:100%; transform-origin:center top; transform:scaleY(0);}
+[data-menu-type='3'] div[data-menu-depth='2'] {position:absolute; top:100%; left:0; width:100%; transform-origin:center top; transform:scaleY(0);}
 
 /* 드롭다운2 */
 [data-menu-type='4'] div[data-menu-depth='1'] {z-index:auto; height:auto; margin-right:0; margin-left:0;}
-[data-menu-type='4'] div[data-menu-depth='2'] {overflow:visible; position:relative; left:auto; width:auto;}
+[data-menu-type='4'] div[data-menu-depth='2'] {position:relative; left:auto; width:auto;}
 [data-menu-type='4'] ul[data-menu-list='1'] {height:auto;}
 [data-menu-type='4'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {position:relative;}
 [data-menu-type='4'] ul[data-menu-list='1'] > li {height:auto;}
