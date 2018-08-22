@@ -2,19 +2,18 @@
 
 @media screen and (max-width:1000px) {
 	/* 풀다운1 */
-	div[data-menu-open], div[data-menu-close] {transition-property:visibility;}
 	div[data-menu-open] {visibility:visible;}
 	[data-menu-type] div[data-menu-close] {visibility:inherit;}
 	[data-menu-type] + div[data-menu-close] {position:fixed;}
-	[data-menu-type] {visibility:hidden; overflow-x:hidden; overflow-y:auto; position:fixed; transition-property:visibility;}
+	[data-menu-type] {visibility:hidden; overflow-x:hidden; overflow-y:auto; position:fixed;}
 	[data-menu-type][data-menu-top-background]:before, [data-menu-type][data-menu-bottom-background]:after {display:none; position:static; right:auto; left:auto; margin-right:0; margin-left:0;}
 	[data-menu-type][data-menu-top-background]:before {top:auto; z-index:auto;}
 	[data-menu-type][data-menu-bottom-background]:after {z-index:auto;}
 	[data-menu-type] div[data-menu-title] {display:none; position:static; z-index:auto;}
 	[data-menu-type] div[data-menu-title='1'], [data-menu-type] div[data-menu-title='2'] {overflow:visible; left:auto;}
-	[data-menu-type] div[data-menu-title='2'] {visibility:inherit; opacity:1; top:auto; height:auto; transition-property:none;}
+	[data-menu-type] div[data-menu-title='2'] {visibility:inherit; opacity:1; top:auto; height:auto;}
 	[data-menu-type] div[data-menu-depth='1'] {z-index:auto; height:auto; margin-right:0; margin-left:0;}
-	[data-menu-type] div[data-menu-depth='2'] {overflow:visible; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, border-color, background-color, color, font-size, line-height, font-weight;}
+	[data-menu-type] div[data-menu-depth='2'] {overflow:visible;}
 	[data-menu-type] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'], [data-menu-type] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {position:relative;}
 	[data-menu-type] div[data-menu-title] + ul[data-menu-list] {z-index:auto;}
 	[data-menu-type] ul[data-menu-list='1'], data-menu-type] ul[data-menu-list='1'] > li {height:auto;}
@@ -24,20 +23,20 @@
 
 	/* 풀다운2 */
 	[data-menu-type='2'] div[data-menu-depth='2'], [data-menu-type='2'] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:relative;}
-	[data-menu-type='2'] div[data-menu-depth='2'] {opacity:1; left:auto; width:auto; transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, border-color, background-color, color, font-size, line-height, font-weight;}
+	[data-menu-type='2'] div[data-menu-depth='2'] {opacity:1; left:auto; width:auto;}
 	[data-menu-type='2'] ul[data-menu-list='1'] > li {position:relative;}
 
 	/* 드롭다운1 */
-	[data-menu-type='3'] div[data-menu-depth='2'] {position:relative; top:auto; left:auto; width:auto; transform-origin:center center; transform:scaleY(1); transition-property:visibility, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width, border-color, background-color, color, font-size, line-height, font-weight;}
+	[data-menu-type='3'] div[data-menu-depth='2'] {position:relative; top:auto; left:auto; width:auto; transform-origin:center center; transform:scaleY(1);}
 
 	/* 위에서 아래로 슬라이드 효과 */
-	[data-menu-type][data-menu-effect='2'] {max-height:0; transition-property:visibility, max-height, margin-top, margin-bottom, padding-top, padding-bottom, border-top-width, border-bottom-width;}
+	[data-menu-type][data-menu-effect='2'] {max-height:0;}
 
 	/* 왼쪽에서 오른쪽으로 슬라이드 효과 */
-	[data-menu-type][data-menu-effect='3'] {left:-100%; transition-property:visibility, left;}
-	[data-menu-type][data-menu-effect='3'] + div[data-menu-close] {left:-100%; transition-property:visibility, left;}
+	[data-menu-type][data-menu-effect='3'] {left:-100%;}
+	[data-menu-type][data-menu-effect='3'] + div[data-menu-close] {left:-100%;}
 
 	/* 오른쪽에서 왼쪽으로 슬라이드 효과 */
-	[data-menu-type][data-menu-effect='4'] {right:-100%; transition-property:visibility, right;}
-	[data-menu-type][data-menu-effect='4'] + div[data-menu-close] {right:-100%; transition-property:visibility, right;}
+	[data-menu-type][data-menu-effect='4'] {right:-100%;}
+	[data-menu-type][data-menu-effect='4'] + div[data-menu-close] {right:-100%;}
 }
