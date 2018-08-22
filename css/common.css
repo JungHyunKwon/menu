@@ -32,6 +32,8 @@ div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:befo
 [data-menu-type] div[data-menu-title] {position:relative; z-index:20;}
 [data-menu-type] div[data-menu-title='1'], [data-menu-type] div[data-menu-title='2'] {overflow:hidden; position:absolute; left:0;}
 [data-menu-type] div[data-menu-title='2'] {visibility:hidden; opacity:0; top:0; height:100%;}
+[data-menu-type] div[data-menu-depth='1'], [data-menu-type][data-menu-top-background]:before, [data-menu-type][data-menu-bottom-background]:after {width:1200px;}
+[data-menu-type][data-menu-top-background='full']:before, [data-menu-type][data-menu-bottom-background='full']:after {width:100%;}
 [data-menu-type] div[data-menu-depth] {visibility:hidden; position:relative;}
 [data-menu-type] div[data-menu-depth='1'] {visibility:inherit; z-index:30; height:100%; margin-right:auto; margin-left:auto;}
 [data-menu-type] div[data-menu-depth='2'] {overflow:hidden;}
@@ -50,7 +52,6 @@ div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-close]:befo
 [data-menu-type] ul[data-menu-list] > li.cut {overflow:hidden; width:100%; height:0;}
 [data-menu-type] [data-menu-text] {display:block; position:relative; vertical-align:middle;}
 [data-menu-type] a[data-menu-text][target='_blank']:after {content:'새창';}
-
 /* 풀다운2 */
 [data-menu-type='2'] div[data-menu-title='2'] {visibility:inherit; opacity:1;}
 [data-menu-type='2'] div[data-menu-depth='2'], [data-menu-type='2'] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:absolute;}
