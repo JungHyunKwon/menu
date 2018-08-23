@@ -14,7 +14,7 @@
 
 /* 1차메뉴 */
 [data-menu-type='2'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {width:900px;}
-[data-menu-type='2'] ul[data-menu-list='1'] > li {width:20%;}
+[data-menu-type='2'] ul[data-menu-list='1'] > li {width:20%; transition-property:z-index;}
 [data-menu-type='2'] [data-menu-text='1'] {padding:11px 5px; color:#fff; text-align:center;}
 [data-menu-type='2'] a[data-menu-text='1'][target='_blank']:after {background-image:url('../images/depth_text_blank_white_ico.png');}
 
@@ -22,7 +22,7 @@
 [data-menu-type='2'] ul[data-menu-list='1'] > li.active {z-index:10;}
 
 /* 2차메뉴 */
-[data-menu-type='2'] ul[data-menu-list='2'] {padding:15px 5px;}
+[data-menu-type='2'] ul[data-menu-list='2'] {padding:15px 5px; transition-property:visibility, opacity;}
 [data-menu-type='2'] ul[data-menu-list='2'] > li {margin-top:10px;}
 [data-menu-type='2'] ul[data-menu-list='2'] > li:first-child {margin-top:0;}
 [data-menu-type='2'] [data-menu-text='2'] {color:#222;}

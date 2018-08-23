@@ -7,7 +7,7 @@
 [data-menu-type='3'] a[data-menu-text][target='_blank']:after {width:12px; height:12px; margin-left:5px; background-image:url('../images/depth_text_blank_black_ico.png');}
 
 /* 1차메뉴 */
-[data-menu-type='3'] ul[data-menu-list='1'] > li {width:20%;}
+[data-menu-type='3'] ul[data-menu-list='1'] > li {width:20%; transition-property:z-index;}
 [data-menu-type='3'] [data-menu-text='1'] {padding:11px 5px; color:#fff; text-align:center;}
 [data-menu-type='3'] a[data-menu-text='1'][target='_blank']:after {background-image:url('../images/depth_text_blank_white_ico.png');}
 
@@ -16,7 +16,7 @@
 [data-menu-type='3'] ul[data-menu-list='1'] > li.active [data-menu-text='1']:hover {text-decoration:none;}
 
 /* 2차메뉴 */
-[data-menu-type='3'] div[data-menu-depth='2'] {background-color:#fff;}
+[data-menu-type='3'] div[data-menu-depth='2'] {background-color:#fff; transition-property:visibility, transform;}
 [data-menu-type='3'] ul[data-menu-list='2'] {padding:15px 5px;}
 [data-menu-type='3'] ul[data-menu-list='2'] > li {margin-top:10px;}
 [data-menu-type='3'] ul[data-menu-list='2'] > li:first-child {margin-top:0;}

@@ -9,6 +9,7 @@
 
 /* 제목상자 */
 [data-menu-type='1'] div[data-menu-title] {width:300px; background-color:#005caa;}
+[data-menu-type='1'] div[data-menu-title='2'] {transition-property:visibility, opacity;}
 [data-menu-type='1'] div[data-menu-title] p {color:#fff; font-size:15px; line-height:17px; text-align:center;}
 
 /* 제목상자 활성화 */
@@ -21,6 +22,7 @@
 [data-menu-type='1'] a[data-menu-text='1'][target='_blank']:after {background-image:url('../images/depth_text_blank_white_ico.png');}
 
 /* 2차메뉴 */
+[data-menu-type='1'] div[data-menu-depth='2'] {transition-property:visibility, background-color;}
 [data-menu-type='1'] ul[data-menu-list='2'] {padding:15px 5px;}
 [data-menu-type='1'] ul[data-menu-list='2'] > li {margin-top:10px;}
 [data-menu-type='1'] ul[data-menu-list='2'] > li:first-child {margin-top:0;}
