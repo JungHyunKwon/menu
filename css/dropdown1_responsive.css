@@ -6,7 +6,7 @@
 	[data-menu-type='3'][data-menu-top-background]:before {background-color:transparent;}
 	
 	/* 메뉴를 열었을때 */
-	.menu_open {overflow:hidden;}
+	.menu_open, .menu_open body {overflow:hidden;}
 	.menu_open [data-menu-type='3'] {visibility:visible;}
 
 	/* 공통 */

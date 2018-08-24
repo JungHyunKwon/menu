@@ -5,7 +5,7 @@
 	[data-menu-type='4'][data-menu-effect='4'], [data-menu-type='4'][data-menu-effect='4'] + div[data-menu-close] {left:auto;}
 
 	/* 메뉴를 열었을때 */
-	.menu_open {overflow:hidden;}
+	.menu_open, .menu_open body {overflow:hidden;}
 	.menu_open [data-menu-type='4'] {visibility:visible;}
 
 	/* 1차메뉴 */

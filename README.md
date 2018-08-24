@@ -56,7 +56,7 @@ button | | 여는버튼 또는 닫는버튼을 지정할때 사용하며 부모�
 
 ### 클래스
 
-#### body
+#### html
 * active : namespace에 지정한 값에 _active를 더하여 메뉴에 접근했을때 부여됩니다.
 * open : namespace에 지정한 값에 _open을 더하여 메뉴를 열었을때 부여됩니다.
 

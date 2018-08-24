@@ -8,7 +8,8 @@ try {
 	(function($) {
 		//제이쿼리가 함수일때
 		if(typeof $ === 'function') {
-			var _register = [], //등록된 요소
+			var _$html = $('html'),
+				_register = [], //등록된 요소
 				_separator = '_', //구분자
 				_className = { //클래스 이름
 					active : 'active', //활성화
@@ -239,8 +240,6 @@ try {
 			}
 
 			$(function() {
-				var _$body = $('body');
-
 				/**
 				 * @name menu
 				 * @since 2018-02-23
@@ -273,7 +272,7 @@ try {
 								
 								//클래스 제거
 								$thisFirst.removeClass(_className.initialized);
-								_$body.removeClass(registerOption.className.globalActive + ' ' + registerOption.className.globalOpen);
+								_$html.removeClass(registerOption.className.globalActive + ' ' + registerOption.className.globalOpen);
 								_removePrefixClass($thisFirst, _className.state);
 								registerOption.$depthItem.removeClass(_className.has + ' ' + _className.solo + ' ' + _className.activePrev + ' ' + _className.active + ' ' + _className.activeNext + ' ' + _className.activedPrev + ' ' + _className.actived + ' ' + _className.activedNext);
 
@@ -591,7 +590,7 @@ try {
 							}
 
 							//전역 활성화 클래스 추가
-							_$body.addClass(option.className.globalActive);
+							_$html.addClass(option.className.globalActive);
 
 							//활성화의 이전 클래스 추가
 							$parentsDepthPrevItem.addClass(_className.activePrev);
@@ -679,7 +678,7 @@ try {
 							//마우스이벤트로 들어왔을때
 							if(option.event === 'mouse') {
 								//전역 클래스 제거
-								_$body.removeClass(option.className.globalActive);
+								_$html.removeClass(option.className.globalActive);
 
 								//상태 클래스 제거
 								_removePrefixClass($thisFirst, _className.state);
@@ -736,7 +735,7 @@ try {
 								//1차 메뉴를 닫을때
 								if(option.$depth1Text.is(element)) {
 									//전역 활성화 클래스 제거
-									_$body.removeClass(option.className.globalActive);
+									_$html.removeClass(option.className.globalActive);
 									
 									//메뉴타입이 1, 2일때
 									if(option.type === 1 || option.type === 2) {
@@ -806,7 +805,7 @@ try {
 							//지정요소 나가면 추적
 							option.$depth1.on('mouseover.' + option.namespace, function(event) {
 								//메뉴가 활성화되어 있을때 && 풀다운1이면서 뎁스1일때 || 풀다운2이면서 타이틀1의 모든요소에 포함되지 않을때
-								if(_$body.hasClass(option.className.globalActive) && ((option.type === 1 && $(this).is(event.target)) || (option.type === 2 && !option.$depthTitle1.add(option.$depthTitle1.find('*')).is(event.target)))) {
+								if(_$html.hasClass(option.className.globalActive) && ((option.type === 1 && $(this).is(event.target)) || (option.type === 2 && !option.$depthTitle1.add(option.$depthTitle1.find('*')).is(event.target)))) {
 									setSpy(this);
 								}
 							}).on('mouseleave.' + option.namespace, function(event) {
@@ -852,13 +851,13 @@ try {
 						//메뉴 보이기
 						option.$openElement.on('click.' + option.namespace, function(event) {
 							//메뉴출력 클래스 토글
-							_$body.toggleClass(option.className.globalOpen);
+							_$html.toggleClass(option.className.globalOpen);
 						});
 
 						//메뉴 숨기기
 						option.$closeElement.on('click.' + option.namespace, function(event) {						
 							//메뉴 숨기기
-							_$body.removeClass(option.className.globalOpen);
+							_$html.removeClass(option.className.globalOpen);
 						});
 
 						//요소 등록
