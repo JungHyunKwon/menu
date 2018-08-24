@@ -22,7 +22,8 @@
 [data-menu-type='2'] ul[data-menu-list='1'] > li.active {z-index:10;}
 
 /* 2차메뉴 */
-[data-menu-type='2'] ul[data-menu-list='2'] {padding:15px 5px; transition-property:visibility, opacity;}
+[data-menu-type='2'] div[data-menu-depth='2'] {transition-property:visibility, opacity;}
+[data-menu-type='2'] ul[data-menu-list='2'] {padding:15px 5px;}
 [data-menu-type='2'] ul[data-menu-list='2'] > li {margin-top:10px;}
 [data-menu-type='2'] ul[data-menu-list='2'] > li:first-child {margin-top:0;}
 [data-menu-type='2'] [data-menu-text='2'] {color:#222;}
