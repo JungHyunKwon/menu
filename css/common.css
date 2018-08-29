@@ -32,8 +32,6 @@ div[data-menu-open] button[data-menu-button], div[data-menu-close] button[data-m
 [data-menu-type] div[data-menu-title] {position:relative; z-index:20;}
 [data-menu-type] div[data-menu-title='1'], [data-menu-type] div[data-menu-title='2'] {overflow:hidden; position:absolute; left:0;}
 [data-menu-type] div[data-menu-title='2'] {visibility:hidden; opacity:0; top:0; height:100%;}
-[data-menu-type] div[data-menu-depth='1'], [data-menu-type][data-menu-top-background]:before, [data-menu-type][data-menu-bottom-background]:after {width:1200px;}
-[data-menu-type][data-menu-top-background='full']:before, [data-menu-type][data-menu-bottom-background='full']:after {width:100%;}
 [data-menu-type] div[data-menu-depth] {visibility:hidden; overflow:hidden; position:relative;}
 [data-menu-type] div[data-menu-depth='1'] {visibility:inherit; overflow:visible; z-index:30; height:100%; margin-right:auto; margin-left:auto;}
 [data-menu-type] div[data-menu-depth='1'].clearfix div[data-menu-depth='2'] {position:static;}

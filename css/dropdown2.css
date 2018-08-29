@@ -51,6 +51,3 @@
 
 /* 4차메뉴 */
 [data-menu-type='4'] div[data-menu-depth='4'] {display:none;}
-
-/* 중앙정렬 넓이 */
-[data-menu-type='4'] div[data-menu-depth='1'] {width:auto;}

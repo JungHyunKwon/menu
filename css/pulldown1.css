@@ -39,3 +39,7 @@
 [data-menu-type='1'], [data-menu-type='1'][data-menu-top-background]:before {height:40px;}
 [data-menu-type='1'][data-menu-bottom-background]:after, [data-menu-type='1'] div[data-menu-title] {top:40px;}
 [data-menu-type='1'][data-menu-bottom-background]:after, [data-menu-type='1'] div[data-menu-title], [data-menu-type='1'] div[data-menu-depth='2'] {height:calc(100% - 40px);}
+
+/* 중앙정렬 넓이 */
+[data-menu-type='1'] div[data-menu-depth='1'], [data-menu-type='1'][data-menu-top-background]:before, [data-menu-type='1'][data-menu-bottom-background]:after {width:1200px;}
+[data-menu-type='1'][data-menu-top-background='full']:before, [data-menu-type='1'][data-menu-bottom-background='full']:after {width:100%;}
