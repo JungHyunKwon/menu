@@ -772,8 +772,8 @@ try {
 								}
 							}
 							
-							//다음 뎁스가 있을때
-							if($nextDepth.length) {
+							//다음 뎁스가 있으면서 display가 none일때
+							if($nextDepth.length && $nextDepth.css('display') !== 'none') {
 								//활성화되어 있을때
 								if(isActive) {
 									//버튼요소이거나 다음 뎁스에 선택한 메뉴와 같은 콘텐츠가 있거나 콘텐츠로 이동하지 않았을때
