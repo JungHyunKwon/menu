@@ -49,12 +49,10 @@
 /* 4차메뉴 */
 [data-menu-type='5'] div[data-menu-depth='4'] {display:none;}
 
+/* 메뉴넓이 */
+.menu_active [data-menu-type='5'] {width:500px;}
+
 /* 1차메뉴 넓이 */
 [data-menu-type='5'], [data-menu-type='5'][data-menu-top-background]:before, [data-menu-type='5'] div[data-menu-depth='1'] {width:200px;}
 [data-menu-type='5'] div[data-menu-depth='2'], [data-menu-type='5'][data-menu-bottom-background]:after {left:200px;}
-
-/* 2차메뉴 넓이 */
-.menu_active [data-menu-type='5'][data-menu-bottom-background]:after, [data-menu-type='5'] div[data-menu-depth='2'] {width:300px;}
-
-/* 1차메뉴 넓이 + 2차메뉴 넓이 */
-.menu_active [data-menu-type='5'] {width:500px;}
+.menu_active [data-menu-type='5'][data-menu-bottom-background]:after, [data-menu-type='5'] div[data-menu-depth='2'] {width:calc(100% - 200px);}
