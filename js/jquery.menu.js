@@ -311,7 +311,10 @@ try {
 						}
 					//적용
 					}else if(_isElement(thisFirst)) {
-						var menuHeight = '',
+						var size = {
+								width : '',
+								height : ''
+							},
 							type = parseInt($thisFirst.attr('data-menu-type'), 10);
 
 						//기존 이벤트 제거
@@ -386,9 +389,10 @@ try {
 						option.$activedDepthLastText = option.$depth1.find('[data-menu-text][data-menu-actived]').filter('a, button').last();
 						option.$activedDepthItem = option.$activedDepthLastText.parents('li');
 
-						//높이 캐싱
+						//크기 캐싱
 						option.$wildCard.css('transition-property', 'none');
-						menuHeight = thisFirst.clientHeight;
+						size.width = $thisFirst.outerWidth() || '';
+						size.height = $thisFirst.outerHeight() || '';
 						option.$wildCard.css('transition-property', '');
 
 						//actived클래스 추가
@@ -604,15 +608,15 @@ try {
 							//상태 클래스 추가
 							addStateClass($parentsDepthLastItem.add($parentsDepthLastItem.find('ul[data-menu-list] > li')).filter('.' + _className.active).last().find('[data-menu-text]:first').filter('a, button')[0]);
 
-							//풀다운1 || 풀다운2
+							//풀다운1 또는 풀다운2 또는 왼쪽메뉴일때
 							if(option.type === 1 || option.type === 2) {
 								var $nextDepth = $parentDepthItem.find('div[data-menu-depth]:first');
 								
 								/**
-								 * @name 2차메뉴 높이부여
+								 * @name 2차메뉴 크기부여
 								 * @since 2017-12-06
 								 */ 
-								function setDepth2Height() {
+								function setDepth2Size() {
 									var result = '';
 
 									//풀다운1
@@ -642,7 +646,7 @@ try {
 
 									//결과가 있을때
 									if(result) {
-										result += menuHeight;
+										result += size.height;
 										result += 'px';
 									}
 
@@ -650,14 +654,14 @@ try {
 								}
 								
 								//최초실행
-								setDepth2Height();
+								setDepth2Size();
 								
 								//다음뎁스가 있을때
 								if($nextDepth.length) {
 									$nextDepth.one('transitionend.' + option.namespace, function(event) {
 										//활성화가 되어있을때
 										if($parentDepthItem.hasClass(_className.active)) {
-											setDepth2Height();
+											setDepth2Size();
 										}
 									});
 								}
@@ -683,8 +687,11 @@ try {
 								//상태 클래스 제거
 								_removePrefixClass($thisFirst, _className.state);
 
-								//height초기화
-								thisFirstStyle.height = '';
+								//풀다운1 또는 풀다운2일때
+								if(option.type === 1 || option.type === 2) {
+									//높이 초기화
+									thisFirstStyle.height = '';
+								}
 
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
 								option.$depthItem.removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
@@ -737,7 +744,7 @@ try {
 									//전역 활성화 클래스 제거
 									_$html.removeClass(option.className.globalActive);
 									
-									//메뉴타입이 1, 2일때
+									//풀다운1 또는 풀다운2일때
 									if(option.type === 1 || option.type === 2) {
 										//height 초기화
 										thisFirstStyle.height = '';
@@ -842,7 +849,6 @@ try {
 									option.toggleMenu.call(this, event);
 								}
 							});
-						
 						//클릭 이벤트일때
 						}else{
 							option.$depthText.on('click.' + option.namespace, option.toggleMenu);

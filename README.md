@@ -27,7 +27,7 @@ confirm | 콘텐츠로 이동하시겠습니까? | string | 닫으려는 메뉴�
 | :-- | :--- | :- | :-- |
 top-background | wrap | string[full, wrap] | 상단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다. 
 bottom-background | wrap | string[full, wrap] | 하단배경을 꽉차게 지정할 수 있고 중앙정렬 넓이만큼 지정할 수 있습니다.
-type | 1 | number | 메뉴유형을 지정합니다.<ol><li>풀다운</li><li>풀다운2</li><li>드롭다운</li><li>드롭다운2</li></ol>
+type | 1 | number | 메뉴유형을 지정합니다.<ol><li>풀다운</li><li>풀다운2</li><li>드롭다운</li><li>드롭다운2</li><li>드롭다운3</li></ol>
 effect | 1 | number | openElement에 지정한 요소를 눌렀을때의 효과를 지정합니다. <ol><li>토글</li><li>위에서 아래로 슬라이드</li><li>왼쪽에서 오른쪽으로 슬라이드</li><li>오른쪽에서 왼쪽으로 슬라이드</li></ol>
 
 #### div
@@ -78,6 +78,7 @@ button | | 여는버튼 또는 닫는버튼을 지정할때 사용하며 부모�
 ### 속성선택자 변경방법
 변경전 | 변경후
 | :--- | :--- |
+.menu | .#
 [data-menu-type] | .nav
 [data-menu-depth='#'] | .depth#
 [data-menu-list='#'] | .depth#_list

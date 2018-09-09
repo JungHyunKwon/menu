@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
 	<title>menu</title>
 	<link href="css/common.css" type="text/css" rel="stylesheet" />
-	<link href="css/pulldown1.css" type="text/css" rel="stylesheet" />
+	<link href="css/dropdown3.css" type="text/css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script src="js/jquery.menu.min.js"></script>
+	<script src="js/jquery.menu.js"></script>
 	<script>
 		$(function() {
 			$('[data-menu-type]').menu({
@@ -26,16 +26,26 @@
 	<div data-menu-open="menu">
 		<button type="button" data-menu-button>메뉴 열기</button>
 	</div>
-	<nav data-menu-type="1" data-menu-top-background="full" data-menu-bottom-background="full">
+	<nav data-menu-type="5" data-menu-top-background="full" data-menu-bottom-background="full">
 		<h2 class="skip">메뉴</h2>
 		<div data-menu-depth="1">
-			<ul class="clearfix" data-menu-list="1">
+			<ul data-menu-list="1">
 				<li>
 					<a href="#n" title="새창" target="_blank" data-menu-text="1">1차 메뉴(1)</a>
 					<div data-menu-depth="2">
 						<ul data-menu-list="2">
 							<li>
 								<a href="#n" title="새창" target="_blank" data-menu-text="2">2차 메뉴(1)</a>
+								<div data-menu-depth="3">
+									<ul data-menu-list="3">
+										<li>
+											<a href="#n" title="새창" target="_blank" data-menu-text="3">3차 메뉴(1)</a>
+										</li>
+										<li>
+											<a href="#n" data-menu-text="3">3차 메뉴(1)</a>
+										</li>
+									</ul>
+								</div>
 							</li>
 							<li>
 								<a href="#n" data-menu-text="2">2차 메뉴(1)</a>
@@ -48,7 +58,7 @@
 					<div data-menu-depth="2">
 						<ul data-menu-list="2">
 							<li>
-								<a href="#n" data-menu-text="2" data-menu-actived>2차 메뉴(2)</a>
+								<a href="#n" data-menu-text="2">2차 메뉴(2)</a>
 							</li>
 						</ul>
 					</div>
