@@ -72,7 +72,7 @@ div[data-menu-open] button[data-menu-button], div[data-menu-close] button[data-m
 [data-menu-type='5'] {height:100%;}
 [data-menu-type='5'][data-menu-top-background]:before, [data-menu-type='5'][data-menu-bottom-background]:after {right:auto; height:100%; z-index:-1; margin-right:0; margin-left:0;}
 [data-menu-type='5'][data-menu-bottom-background]:after {top:0;}
-[data-menu-type='5'] div[data-menu-depth='1'] {position:static; height:auto; margin-right:0; margin-left:0;}
+[data-menu-type='5'] div[data-menu-depth='1'] {position:static; height:auto; z-index:auto; margin-right:0; margin-left:0;}
 [data-menu-type='5'] ul[data-menu-list='1'] {position:static; height:auto;}
 [data-menu-type='5'] ul[data-menu-list='1'] > li {position:static; height:auto;}
 [data-menu-type='5'] div[data-menu-depth='2'] {opacity:0; position:absolute; top:0; height:100%; transform-origin:left top; transform:scaleX(0);}
