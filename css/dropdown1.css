@@ -21,7 +21,7 @@
 [data-menu-type='3'] ul[data-menu-list='2'] > li {margin-top:10px;}
 [data-menu-type='3'] ul[data-menu-list='2'] > li:first-child {margin-top:0;}
 [data-menu-type='3'] [data-menu-text='2'] {color:#222; text-align:center;}
-[data-menu-type='3'] a[data-menu-text='1'][target='_blank']:after {background-image:url('../images/depth_text_black_blank.png');}
+[data-menu-type='3'] a[data-menu-text='2'][target='_blank']:after {background-image:url('../images/depth_text_black_blank.png');}
 
 /* 2차메뉴 활성화 */
 [data-menu-type='3'] ul[data-menu-list='1'] > li.active div[data-menu-depth='2'] {visibility:visible; opacity:1; transform:scaleY(1);}
