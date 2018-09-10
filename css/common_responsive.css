@@ -26,7 +26,7 @@
 	[data-menu-type='2'] ul[data-menu-list='1'] > li {position:relative;}
 
 	/* 드롭다운1 */
-	[data-menu-type='3'] div[data-menu-depth='2'] {opacity:1; position:relative; top:auto; left:auto; width:auto; transform-origin:center center; transform:scaleY(1);}
+	[data-menu-type='3'] div[data-menu-depth='2'] {opacity:1; position:relative; top:auto; left:auto; width:auto; transform-origin:center; transform:scaleY(1);}
 
 	/* 드롭다운3 */
 	[data-menu-type='5'] {height:100%;}
@@ -35,7 +35,7 @@
 	[data-menu-type='5'] div[data-menu-depth='1'] {position:relative;}
 	[data-menu-type='5'] ul[data-menu-list='1'] {position:relative;}
 	[data-menu-type='5'] ul[data-menu-list='1'] > li {position:relative;}
-	[data-menu-type='5'] div[data-menu-depth='2'] {opacity:1; position:relative; top:auto; height:auto; transform-origin:center center; transform:scaleX(1);}
+	[data-menu-type='5'] div[data-menu-depth='2'] {opacity:1; position:relative; top:auto; height:auto; transform-origin:center; transform:scaleX(1);}
 
 	/* 위에서 아래로 슬라이드 효과 */
 	[data-menu-type][data-menu-effect='2'] {max-height:0;}

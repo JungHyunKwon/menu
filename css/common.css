@@ -20,7 +20,7 @@ body {overflow-x:auto; overflow-y:hidden; min-width:1200px; background-color:#00
 
 /* 공통 */
 div[data-menu-open], div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-open] *, div[data-menu-open] :before, div[data-menu-open] :after, [data-menu-type], [data-menu-type]:before, [data-menu-type]:after, [data-menu-type] *, [data-menu-type] :before, [data-menu-type] :after, div[data-menu-close], div[data-menu-close]:before, div[data-menu-close]:after, div[data-menu-close] *, div[data-menu-close] :before, div[data-menu-close] :after {transition:all 0.25s linear;}
-div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-open] :before, div[data-menu-open] :after, [data-menu-type]:before, [data-menu-type]:after, [data-menu-type] :before, [data-menu-type] :after, div[data-menu-close]:before, div[data-menu-close]:after, div[data-menu-close] :before, div[data-menu-close] :after {background-repeat:no-repeat; background-position:center center; font-size:0; vertical-align:middle;}
+div[data-menu-open]:before, div[data-menu-open]:after, div[data-menu-open] :before, div[data-menu-open] :after, [data-menu-type]:before, [data-menu-type]:after, [data-menu-type] :before, [data-menu-type] :after, div[data-menu-close]:before, div[data-menu-close]:after, div[data-menu-close] :before, div[data-menu-close] :after {background-repeat:no-repeat; background-position:center; font-size:0; vertical-align:middle;}
 div[data-menu-open], div[data-menu-close] {visibility:hidden; position:absolute;}
 div[data-menu-open] button[data-menu-button], div[data-menu-close] button[data-menu-button] {display:inline-block; position:relative; font-size:0;}
 [data-menu-type], div[data-menu-open], div[data-menu-close] {line-height:0px; font-size:0;}
