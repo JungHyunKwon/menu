@@ -6,7 +6,7 @@
 
 /* 공통 */
 [data-menu-type='1'] [data-menu-text] {font-size:16px; line-height:18px;}
-[data-menu-type='1'] a[data-menu-text][target='_blank']:after {width:12px; height:12px; margin-left:5px;}
+[data-menu-type='1'] [data-menu-text][target='_blank']:after {width:12px; height:12px; margin-left:5px;}
 
 /* 제목상자 */
 [data-menu-type='1'] div[data-menu-title] {width:300px; background-color:#005caa;}
@@ -20,7 +20,7 @@
 [data-menu-type='1'] div[data-menu-depth='1'].clearfix ul[data-menu-list='1'] {width:900px;}
 [data-menu-type='1'] ul[data-menu-list='1'] > li {width:20%;}
 [data-menu-type='1'] [data-menu-text='1'] {padding:11px 5px; color:#fff; text-align:center;}
-[data-menu-type='1'] a[data-menu-text='1'][target='_blank']:after {background-image:url('../images/depth_text_white_blank.png');}
+[data-menu-type='1'] [data-menu-text='1'][target='_blank']:after {background-image:url('../images/depth_text_white_blank.png');}
 
 /* 2차메뉴 */
 [data-menu-type='1'] div[data-menu-depth='2'] {transition-property:visibility, background-color;}
@@ -28,7 +28,7 @@
 [data-menu-type='1'] ul[data-menu-list='2'] > li {margin-top:10px;}
 [data-menu-type='1'] ul[data-menu-list='2'] > li:first-child {margin-top:0;}
 [data-menu-type='1'] [data-menu-text='2'] {color:#222; text-align:center;}
-[data-menu-type='1'] a[data-menu-text='2'][target='_blank']:after {background-image:url('../images/depth_text_black_blank.png');}
+[data-menu-type='1'] [data-menu-text='2'][target='_blank']:after {background-image:url('../images/depth_text_black_blank.png');}
 
 /* 2차메뉴 활성화 */
 .menu_active [data-menu-type='1'] div[data-menu-depth='2'] {visibility:visible;}

@@ -12,7 +12,7 @@
 	/* 공통 */
 	[data-menu-type='1'] div[data-menu-depth='2'] [data-menu-text] {font-size:0; line-height:0px;}
 	[data-menu-type='1'] ul[data-menu-list] > li.has > [data-menu-text]:before {background-image:url('../images/has_depth_off.png'); transition-property:width, height, margin-right;}
-	[data-menu-type='1'] a[data-menu-text][target='_blank']:after {transition-property:width, height, margin-left;}
+	[data-menu-type='1'] [data-menu-text][target='_blank']:after {transition-property:width, height, margin-left;}
 
 	/* 공통 활성화 */
 	[data-menu-type='1'] ul[data-menu-list] > li.has.active > [data-menu-text]:before {background-image:url('../images/has_depth_on.png');}
@@ -32,7 +32,7 @@
 	[data-menu-type='1'] ul[data-menu-list='1'] > li {width:auto;}
 	[data-menu-type='1'] [data-menu-text='1'] {text-align:left;}
 	[data-menu-type='1'] ul[data-menu-list='1'] > li.has > [data-menu-text='1']:before {width:12px; height:8px; margin-right:10px;}
-	[data-menu-type='1'] a[data-menu-text='1'][target='_blank']:after {width:12px; height:12px; margin-left:5px;}
+	[data-menu-type='1'] [data-menu-text='1'][target='_blank']:after {width:12px; height:12px; margin-left:5px;}
 	
 	/* 1차메뉴 활성화 */
 	[data-menu-type='1'] ul[data-menu-list='1'] > li.active [data-menu-text='1']:hover {text-decoration:none;}
@@ -43,7 +43,7 @@
 	[data-menu-type='1'] ul[data-menu-list='2'] > li {margin-top:0; transition-property:margin-top;}
 	[data-menu-type='1'] [data-menu-text='2'] {color:#fff; text-align:left; transition-property:font-size, line-height;}
 	[data-menu-type='1'] ul[data-menu-list='2'] > li.has > [data-menu-text='2']:before {width:0; height:0;}
-	[data-menu-type='1'] a[data-menu-text='2'][target='_blank']:after {width:0; height:0; background-image:url('../images/depth_text_white_blank.png');}
+	[data-menu-type='1'] [data-menu-text='2'][target='_blank']:after {width:0; height:0; background-image:url('../images/depth_text_white_blank.png');}
 
 	/* 2차메뉴 활성화 제거 */
 	.menu_active [data-menu-type='1'] div[data-menu-depth='2'] {visibility:hidden;}
@@ -57,7 +57,7 @@
 	[data-menu-type='1'] ul[data-menu-list='1'] > li.active [data-menu-text='2'] {font-size:16px; line-height:18px;}
 	[data-menu-type='1'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active [data-menu-text='2']:hover {text-decoration:none;}
 	[data-menu-type='1'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.has > [data-menu-text='2']:before {width:12px; height:8px; margin-right:10px;}
-	[data-menu-type='1'] ul[data-menu-list='1'] > li.active a[data-menu-text='2'][target='_blank']:after {width:12px; height:12px; margin-left:5px;}
+	[data-menu-type='1'] ul[data-menu-list='1'] > li.active [data-menu-text='2'][target='_blank']:after {width:12px; height:12px; margin-left:5px;}
 
 	/* 3차메뉴 */
 	[data-menu-type='1'] div[data-menu-depth='3'] {display:block; background-color:#24478b; transition-property:visibility;}
@@ -65,7 +65,7 @@
 	[data-menu-type='1'] ul[data-menu-list='3'] > li {transition-property:margin-top;}
 	[data-menu-type='1'] [data-menu-text='3'] {color:#fff; transition-property:font-size, line-height;}
 	[data-menu-type='1'] ul[data-menu-list='3'] > li.has > [data-menu-text='3']:before {width:0; height:0;}
-	[data-menu-type='1'] a[data-menu-text='3'][target='_blank']:after {width:0; height:0; background-image:url('../images/depth_text_white_blank.png');}
+	[data-menu-type='1'] [data-menu-text='3'][target='_blank']:after {width:0; height:0; background-image:url('../images/depth_text_white_blank.png');}
 
 	/* 3차메뉴 활성화 */
 	.menu_open.menu_active [data-menu-type='1'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active div[data-menu-depth='3'] {visibility:visible;}
@@ -75,7 +75,7 @@
 	[data-menu-type='1'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active [data-menu-text='3'] {font-size:16px; line-height:18px;}
 	[data-menu-type='1'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active ul[data-menu-list='3'] > li.active [data-menu-text='3']:hover {text-decoration:none;}
 	[data-menu-type='1'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active ul[data-menu-list='3'] > li.has > [data-menu-text='3']:before {width:12px; height:8px; margin-right:10px;}
-	[data-menu-type='1'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active a[data-menu-text='3'][target='_blank']:after {width:12px; height:12px; margin-left:5px;}
+	[data-menu-type='1'] ul[data-menu-list='1'] > li.active ul[data-menu-list='2'] > li.active [data-menu-text='3'][target='_blank']:after {width:12px; height:12px; margin-left:5px;}
 
 	/* 4차메뉴 */
 	[data-menu-type='1'] div[data-menu-depth='4'] {display:none;}
