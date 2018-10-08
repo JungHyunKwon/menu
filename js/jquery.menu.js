@@ -39,7 +39,7 @@ try {
 			_className.activedNext = _className.actived + _separator + _className.next;
 
 			/**
-			 * @name 형태얻기
+			 * @name 형태 얻기
 			 * @since 2017-12-06
 			 * @param {*} value
 			 * @return {string || undefined}
@@ -95,7 +95,7 @@ try {
 			/**
 			 * @name 요소 확인
 			 * @since 2017-12-06
-			 * @param {object} options element || jQueryElement || {element : element || window || document || array || jQueryElement, isInPage : boolean, include : window || document || array, match : boolean}
+			 * @param {object} options element || jQueryElement || {element : element || window || document || jQueryElement || array, isInPage : boolean, isIncludeWindow : boolean, isIncludeDocument : boolean, isMatch : boolean}
 			 * @return {boolean}
 			 */
 			function _isElement(options) {
@@ -114,22 +114,12 @@ try {
 
 				//객체 또는 요소일때
 				if(optionsType === 'object') {
-					var element = options.element,
-						elementType = _getType(element),
-						include = options.include,
-						includeType = _getType(include),
-						isInPage = (options.isInPage === true) ? true : false;
+					var elementType = _getType(options.element);
 					
 					//window 또는 document 또는 요소일때
 					if(elementType === 'window' || elementType === 'document' || elementType === 'element') {
-						element = [element];
+						options.element = [options.element];
 						elementType = 'array';
-					}
-
-					//window 또는 document일때
-					if(include === 'window' || includeType === 'document') {
-						include = [include];
-						includeType = 'array';
 					}
 
 					/**
@@ -142,22 +132,10 @@ try {
 						var result = false,
 							elementType = _getType(element);
 
-						//배열일때
-						if(includeType === 'array') {
-							for(var i = 0, includeLength = include.length; i < includeLength; i++) {
-								var includeI = include[i];
-								
-								//window 또는 document 포함여부
-								if((includeI === window || includeI === document) && element === includeI) {
-									result = true;
-									break;
-								}
-							}
-						
-						//요소일때
-						}else if(elementType === 'element') {
-							//페이지안에 존재여부를 허용했을때
-							if(isInPage) {
+						//요소이거나 window이면서 window를 포함시키는 옵션을 허용했거나 document이면서 document를 포함시키는 옵션을 허용했을때
+						if(elementType === 'element' || elementType === 'window' && options.isIncludeWindow === true || elementType === 'document' && options.isIncludeDocument === true) {
+							//요소이면서 페이지안에 존재여부를 허용했을때
+							if(elementType === 'element' && options.isInPage === true) {
 								result = document.documentElement.contains(element);
 							}else{
 								result = true;
@@ -168,12 +146,12 @@ try {
 					}
 
 					//배열이거나 제이쿼리 요소일때
-					if(elementType === 'array' || (hasJQuery && element instanceof $)) {
+					if(elementType === 'array' || (hasJQuery && options.element instanceof $)) {
 						var checkedElement = [],
-							elementLength = element.length;
+							elementLength = options.element.length;
 
 						for(var i = 0; i < elementLength; i++) {
-							var elementI = element[i];
+							var elementI = options.element[i];
 
 							//요소일때
 							if(checkElement(elementI)) {
@@ -186,7 +164,7 @@ try {
 						//결과가 있을때
 						if(checkedElementLength) {
 							//일치를 허용했을때
-							if(options.match === true) {
+							if(options.isMatch === true) {
 								//요소갯수와 결과갯수가 같을때
 								if(elementLength === checkedElementLength) {
 									result = true;
