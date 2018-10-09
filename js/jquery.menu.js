@@ -133,7 +133,7 @@ try {
 							elementType = _getType(element);
 
 						//요소이거나 window이면서 window를 포함시키는 옵션을 허용했거나 document이면서 document를 포함시키는 옵션을 허용했을때
-						if(elementType === 'element' || elementType === 'window' && options.isIncludeWindow === true || elementType === 'document' && options.isIncludeDocument === true) {
+						if(elementType === 'element' || (elementType === 'window' && options.isIncludeWindow === true) || (elementType === 'document' && options.isIncludeDocument === true)) {
 							//요소이면서 페이지안에 존재여부를 허용했을때
 							if(elementType === 'element' && options.isInPage === true) {
 								result = document.documentElement.contains(element);
