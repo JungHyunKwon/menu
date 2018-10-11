@@ -95,30 +95,30 @@ try {
 			/**
 			 * @name 요소 확인
 			 * @since 2017-12-06
-			 * @param {object} options element || jQueryElement || {element : element || window || document || jQueryElement || array, isInPage : boolean, isIncludeWindow : boolean, isIncludeDocument : boolean, isMatch : boolean}
+			 * @param {object} settings element || jQueryElement || {element : element || window || document || jQueryElement || array, isInPage : boolean, isIncludeWindow : boolean, isIncludeDocument : boolean, isMatch : boolean}
 			 * @return {boolean}
 			 */
-			function _isElement(options) {
+			function _isElement(settings) {
 				var hasJQuery = (typeof $ === 'function') ? true : false,
-					optionsType = _getType(options),
+					settingsType = _getType(settings),
 					result = false;
 				
 				//요소이거나 제이쿼리 요소일때
-				if(optionsType === 'element' || (hasJQuery && options instanceof $)) {
-					options = {
-						element : options
+				if(settingsType === 'element' || (hasJQuery && settings instanceof $)) {
+					settings = {
+						element : settings
 					};
 
-					optionsType = 'object';
+					settingsType = 'object';
 				}
 
 				//객체 또는 요소일때
-				if(optionsType === 'object') {
-					var elementType = _getType(options.element);
+				if(settingsType === 'object') {
+					var elementType = _getType(settings.element);
 					
 					//window 또는 document 또는 요소일때
 					if(elementType === 'window' || elementType === 'document' || elementType === 'element') {
-						options.element = [options.element];
+						settings.element = [settings.element];
 						elementType = 'array';
 					}
 
@@ -133,9 +133,9 @@ try {
 							elementType = _getType(element);
 
 						//요소이거나 window이면서 window를 포함시키는 옵션을 허용했거나 document이면서 document를 포함시키는 옵션을 허용했을때
-						if(elementType === 'element' || (elementType === 'window' && options.isIncludeWindow === true) || (elementType === 'document' && options.isIncludeDocument === true)) {
+						if(elementType === 'element' || (elementType === 'window' && settings.isIncludeWindow === true) || (elementType === 'document' && settings.isIncludeDocument === true)) {
 							//요소이면서 페이지안에 존재여부를 허용했을때
-							if(elementType === 'element' && options.isInPage === true) {
+							if(elementType === 'element' && settings.isInPage === true) {
 								result = document.documentElement.contains(element);
 							}else{
 								result = true;
@@ -146,12 +146,12 @@ try {
 					}
 
 					//배열이거나 제이쿼리 요소일때
-					if(elementType === 'array' || (hasJQuery && options.element instanceof $)) {
+					if(elementType === 'array' || (hasJQuery && settings.element instanceof $)) {
 						var checkedElement = [],
-							elementLength = options.element.length;
+							elementLength = settings.element.length;
 
 						for(var i = 0; i < elementLength; i++) {
-							var elementI = options.element[i];
+							var elementI = settings.element[i];
 
 							//요소일때
 							if(checkElement(elementI)) {
@@ -164,7 +164,7 @@ try {
 						//결과가 있을때
 						if(checkedElementLength) {
 							//일치를 허용했을때
-							if(options.isMatch === true) {
+							if(settings.isMatch === true) {
 								//요소갯수와 결과갯수가 같을때
 								if(elementLength === checkedElementLength) {
 									result = true;
@@ -260,6 +260,28 @@ try {
 				return result;
 			}
 
+			/**
+			 * @name 자료형 복사
+			 * @since 2017-12-06
+			 * @param {*} value
+			 * @return {*}
+			 */
+			function _copyType(value) {
+				var valueType = _getType(value),
+					result = value;
+
+				//객체일때
+				if(valueType === 'object') {
+					result = $.extend(true, {}, value);
+				
+				//배열일때
+				}else if(valueType === 'array') {
+					result = value.slice();
+				}
+
+				return result;
+			}
+
 			$(function() {
 				/**
 				 * @name menu
@@ -273,19 +295,20 @@ try {
 						thisFirstStyle = thisFirst.style,
 						index = _getRegistIndex(thisFirst),
 						register = _register[index],
-						event = $.Event('menu');
+						event = $.Event('menu'),
+						settings = _copyType(options);
 
 					//문자열일때
-					if(typeof options === 'string') {
+					if(typeof settings === 'string') {
 						//소문자 치환
-						options = options.toLowerCase();
+						settings = settings.toLowerCase();
 
 						//등록되어있을때
 						if(register) {
-							var registerOption = register.options;
+							var registerOption = register.settings;
 
 							//파괴
-							if(options === 'destroy') {
+							if(settings === 'destroy') {
 								var registerNamespace = registerOption.namespace;
 
 								//cut 엘리먼트 삭제
@@ -314,7 +337,7 @@ try {
 								_register.splice(index, 1);
 							
 							//추적
-							}else if(options === 'spy') {
+							}else if(settings === 'spy') {
 								var element = arguments[1];
 
 								//요소가 아닐때
@@ -345,12 +368,12 @@ try {
 						}
 
 						//옵션이 객체가 아닐때
-						if(_getType(options) !== 'object') {
-							options = {};
+						if(_getType(settings) !== 'object') {
+							settings = {};
 						}
 
 						//유형 정의
-						options.type = type || 1;
+						settings.type = type || 1;
 						
 						//유형이 없을때
 						if(!type) {
@@ -358,69 +381,69 @@ try {
 						}
 
 						//네임스페이스가 없거나 문자열이 아닐때
-						if(!options.namespace || typeof options.namespace !== 'string') {
-							options.namespace = $thisFirst.attr('id') || thisFirst.tagName.toLowerCase() + (_register.length + 1);
+						if(!settings.namespace || typeof settings.namespace !== 'string') {
+							settings.namespace = $thisFirst.attr('id') || thisFirst.tagName.toLowerCase() + (_register.length + 1);
 						}
 
 						//컷팅이 객체가 아닐때
-						if(_getType(options.cut) !== 'object') {
-							options.cut = {};
+						if(_getType(settings.cut) !== 'object') {
+							settings.cut = {};
 						}
 
 						//이벤트가 문자열일때
-						if(typeof options.event === 'string') {
-							options.event = options.event.toLowerCase();
+						if(typeof settings.event === 'string') {
+							settings.event = settings.event.toLowerCase();
 						}
 						
 						//이벤트가 mouse가 아니면서 click이 아닐때
-						if(options.event !== 'mouse' && options.event !== 'click') {
-							options.event = 'mouse';
+						if(settings.event !== 'mouse' && settings.event !== 'click') {
+							settings.event = 'mouse';
 						}
 						
 						//컨펌이없거나 문자가 아닐때
-						if(!options.confirm || typeof options.confirm !== 'string') {
-							options.confirm = '콘텐츠로 이동하시겠습니까?';
+						if(!settings.confirm || typeof settings.confirm !== 'string') {
+							settings.confirm = '콘텐츠로 이동하시겠습니까?';
 						}
 
 						//열기버튼
-						options.$openElement = $('div[data-menu-open="' + options.namespace + '"] button[data-menu-button]');
+						settings.$openElement = $('div[data-menu-open="' + settings.namespace + '"] button[data-menu-button]');
 
 						//닫기버튼
-						options.$closeElement = $('div[data-menu-close="' + options.namespace + '"] button[data-menu-button]');
+						settings.$closeElement = $('div[data-menu-close="' + settings.namespace + '"] button[data-menu-button]');
 
 						//클래스이름 합성
-						options.className = {
-							globalActive : options.namespace + _separator + _className.active,
-							globalOpen : options.namespace + _separator + _className.open
+						settings.className = {
+							globalActive : settings.namespace + _separator + _className.active,
+							globalOpen : settings.namespace + _separator + _className.open
 						};
 
 						//요소 정의
-						options.$wildCard = $thisFirst.add($thisFirst.find('*'));
-						options.$depth = $thisFirst.find('div[data-menu-depth]');
-						options.$depth1 = options.$depth.filter('div[data-menu-depth="1"]');
-						options.$depth1Text = options.$depth1.find('a[data-menu-text="1"], button[data-menu-text="1"]');
-						options.$depthTitle = options.$depth1.find('div[data-menu-title]');
-						options.$depthTitle1 = options.$depthTitle.filter('[data-menu-title="1"]');
-						options.$depthTitle2 = options.$depthTitle.filter('[data-menu-title="2"]');
-						options.$depth2 = options.$depth.filter('[data-menu-depth="2"]');
-						options.$depthList = options.$depth.find('ul[data-menu-list]');
-						options.$depthItem = options.$depthList.children('li');
-						options.$depthText = options.$depth1.find('a[data-menu-text], button[data-menu-text]');
-						options.$depthLastText = options.$depthText.last();
-						options.$depthAndText = options.$depth.not('div[data-menu-depth="1"]').add(options.$depthText);
-						options.$activedDepthLastText = options.$depth1.find('[data-menu-text][data-menu-actived]').filter('a, button').last();
-						options.$activedDepthItem = options.$activedDepthLastText.parents('li');
+						settings.$wildCard = $thisFirst.add($thisFirst.find('*'));
+						settings.$depth = $thisFirst.find('div[data-menu-depth]');
+						settings.$depth1 = settings.$depth.filter('div[data-menu-depth="1"]');
+						settings.$depth1Text = settings.$depth1.find('a[data-menu-text="1"], button[data-menu-text="1"]');
+						settings.$depthTitle = settings.$depth1.find('div[data-menu-title]');
+						settings.$depthTitle1 = settings.$depthTitle.filter('[data-menu-title="1"]');
+						settings.$depthTitle2 = settings.$depthTitle.filter('[data-menu-title="2"]');
+						settings.$depth2 = settings.$depth.filter('[data-menu-depth="2"]');
+						settings.$depthList = settings.$depth.find('ul[data-menu-list]');
+						settings.$depthItem = settings.$depthList.children('li');
+						settings.$depthText = settings.$depth1.find('a[data-menu-text], button[data-menu-text]');
+						settings.$depthLastText = settings.$depthText.last();
+						settings.$depthAndText = settings.$depth.not('div[data-menu-depth="1"]').add(settings.$depthText);
+						settings.$activedDepthLastText = settings.$depth1.find('[data-menu-text][data-menu-actived]').filter('a, button').last();
+						settings.$activedDepthItem = settings.$activedDepthLastText.parents('li');
 
 						//크기 캐싱
-						options.$wildCard.css('transition-property', 'none');
+						settings.$wildCard.css('transition-property', 'none');
 						size.width = $thisFirst.outerWidth() || '';
 						size.height = $thisFirst.outerHeight() || '';
-						options.$wildCard.css('transition-property', '');
+						settings.$wildCard.css('transition-property', '');
 
 						//actived클래스 추가
-						options.$activedDepthItem.prev('li').addClass(_className.activedPrev);
-						options.$activedDepthItem.addClass(_className.actived);
-						options.$activedDepthItem.next('li').addClass(_className.activedNext);
+						settings.$activedDepthItem.prev('li').addClass(_className.activedPrev);
+						settings.$activedDepthItem.addClass(_className.actived);
+						settings.$activedDepthItem.next('li').addClass(_className.activedNext);
 
 						//초기화 클래스 추가
 						$thisFirst.addClass(_className.initialized);
@@ -455,7 +478,7 @@ try {
 							_removePrefixClass($thisFirst, _className.state);
 							
 							for(var i = 0, parentsDepthItemLength = $parentsDepthItem.length; i < parentsDepthItemLength; i++) {
-								var state = _className.state + (options.$depthItem.index($parentsDepthItem[i]) + 1);
+								var state = _className.state + (settings.$depthItem.index($parentsDepthItem[i]) + 1);
 
 								result.push(state);
 								$thisFirst.addClass(state);
@@ -479,11 +502,11 @@ try {
 							var isSpy = false;
 
 							//스파이 요소가 있을때
-							if(options.$activedDepthLastText.length) {
+							if(settings.$activedDepthLastText.length) {
 								//클릭 이벤트일때
-								if(options.event === 'click') {
+								if(settings.event === 'click') {
 									//1차메뉴 요소이면서 선택된 요소의 가장 가까운 부모인 li가 actived클래스를 가지고 있지 않을때 또는 메뉴요소일때
-									if((options.$depth1Text.is(element) && !$(element).closest('li').hasClass(_className.actived)) || $thisFirst.is(element)) {
+									if((settings.$depth1Text.is(element) && !$(element).closest('li').hasClass(_className.actived)) || $thisFirst.is(element)) {
 										isSpy = true;
 									}
 								}else{
@@ -495,7 +518,7 @@ try {
 							if(isSpy) {
 								$thisFirst.menu('spy');
 							}else{
-								options.closeMenu.call(element, event);
+								settings.closeMenu.call(element, event);
 							}
 
 							return element;
@@ -516,7 +539,7 @@ try {
 							}
 
 							for(var i = 0, elementLength = $element.length; i < elementLength; i++) {
-								if(options.$depthCutItem.is($element[i])) {
+								if(settings.$depthCutItem.is($element[i])) {
 									var $elementI = $element.eq(i);
 
 									if(direction === 'prev') {
@@ -531,11 +554,11 @@ try {
 						}
 
 						//자르기
-						for(var i in options.cut) {
+						for(var i in settings.cut) {
 							var number = i.split('-'),
 								numberLength = number.length,
 								depth = parseInt(number[0], 10),
-								cut = parseInt(options.cut[i], 10),
+								cut = parseInt(settings.cut[i], 10),
 								$depthList = $thisFirst;
 							
 							//1초과일때
@@ -574,11 +597,11 @@ try {
 						}
 						
 						//컷요소 정의
-						options.$depthCutItem = options.$depthList.children('li.' + _className.cut);
+						settings.$depthCutItem = settings.$depthList.children('li.' + _className.cut);
 
 						//has, solo클래스 추가
-						for(var i = 0, depthItemLength = options.$depthItem.length; i < depthItemLength; i++) {
-							var $depthItemI = options.$depthItem.eq(i);
+						for(var i = 0, depthItemLength = settings.$depthItem.length; i < depthItemLength; i++) {
+							var $depthItemI = settings.$depthItem.eq(i);
 
 							//다음 메뉴가 있을때
 							if($depthItemI.find('div[data-menu-depth]:first').length) {
@@ -593,7 +616,7 @@ try {
 						 * @since 2017-12-06
 						 * @param {object} event
 						 */ 
-						options.openMenu = function(event) {
+						settings.openMenu = function(event) {
 							var $this = $(this),
 								$parentsDepthItem = $this.parents('li'),
 								$parentDepthItem = $parentsDepthItem.first(),
@@ -603,9 +626,9 @@ try {
 								$parentsDepthNextItem = filterDepthCutItem($parentsDepthItem.next('li').get(), 'next');
 
 							//마우스이벤트로 들어왔을때
-							if(options.event === 'mouse') {
+							if(settings.event === 'mouse') {
 								//초기화
-								options.closeMenu.call(this, event);
+								settings.closeMenu.call(this, event);
 
 							//클릭이벤트로 들어왔을때
 							}else{
@@ -616,7 +639,7 @@ try {
 							}
 
 							//전역 활성화 클래스 추가
-							_$html.addClass(options.className.globalActive);
+							_$html.addClass(settings.className.globalActive);
 
 							//활성화의 이전 클래스 추가
 							$parentsDepthPrevItem.addClass(_className.activePrev);
@@ -631,7 +654,7 @@ try {
 							addStateClass($parentsDepthLastItem.add($parentsDepthLastItem.find('ul[data-menu-list] > li')).filter('.' + _className.active).last().find('[data-menu-text]:first').filter('a, button')[0]);
 
 							//풀다운1 또는 풀다운2 또는 왼쪽메뉴일때
-							if(options.type === 1 || options.type === 2) {
+							if(settings.type === 1 || settings.type === 2) {
 								var $nextDepth = $parentDepthItem.find('div[data-menu-depth]:first');
 								
 								/**
@@ -642,11 +665,11 @@ try {
 									var result = '';
 
 									//풀다운1
-									if(options.type === 1) {
+									if(settings.type === 1) {
 										result = [];
 
-										for(var i = 0, depth2Length = options.$depth2.length; i < depth2Length; i++) {
-											result[i] = options.$depth2.eq(i).children().filter(function(index, element) {
+										for(var i = 0, depth2Length = settings.$depth2.length; i < depth2Length; i++) {
+											result[i] = settings.$depth2.eq(i).children().filter(function(index, element) {
 												var position = $(element).css('position');
 
 												return (position === 'static' || position === 'relative') ? true : false;
@@ -657,7 +680,7 @@ try {
 										result = Math.max.apply(null, result) || '';
 
 									//풀다운2
-									}else if(options.type === 2) {
+									}else if(settings.type === 2) {
 										//선택된 depthText에 depth2 첫번째 자손에서 outerHeight(height, padding, border)를 구하기
 										result = $depth2.children().filter(function(index, element) {
 											var position = $(element).css('position');
@@ -680,7 +703,7 @@ try {
 								
 								//다음뎁스가 있을때
 								if($nextDepth.length) {
-									$nextDepth.one('transitionend.' + options.namespace, function(event) {
+									$nextDepth.one('transitionend.' + settings.namespace, function(event) {
 										//활성화가 되어있을때
 										if($parentDepthItem.hasClass(_className.active)) {
 											setDepth2Size();
@@ -698,25 +721,25 @@ try {
 						 * @since 2017-12-06
 						 * @param {object} event
 						 */
-						options.closeMenu = function(event) {
+						settings.closeMenu = function(event) {
 							var $this = $(this);
 
 							//마우스이벤트로 들어왔을때
-							if(options.event === 'mouse') {
+							if(settings.event === 'mouse') {
 								//전역 클래스 제거
-								_$html.removeClass(options.className.globalActive);
+								_$html.removeClass(settings.className.globalActive);
 
 								//상태 클래스 제거
 								_removePrefixClass($thisFirst, _className.state);
 
 								//풀다운1 또는 풀다운2일때
-								if(options.type === 1 || options.type === 2) {
+								if(settings.type === 1 || settings.type === 2) {
 									//높이 초기화
 									thisFirstStyle.height = '';
 								}
 
 								//활성화의 이전, 활성화, 활성화의 다음 클래스 제거
-								options.$depthItem.removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
+								settings.$depthItem.removeClass(_className.activePrev + ' ' + _className.active + ' ' + _className.activeNext);
 							
 							//클릭이벤트로 들어왔을때
 							}else{
@@ -724,7 +747,7 @@ try {
 									$parentsDepthItem = $this.parents('li');
 
 								//메뉴 닫기
-								if($this.is(options.$depthLastText)) {
+								if($this.is(settings.$depthLastText)) {
 									var $parentsDepthPrevItem = filterDepthCutItem($parentsDepthItem.prev('li').get(), 'prev'),
 										$parentsDepthNextItem = filterDepthCutItem($parentsDepthItem.next('li').get(), 'next');
 									
@@ -762,12 +785,12 @@ try {
 								}
 
 								//1차 메뉴를 닫을때
-								if(options.$depth1Text.is(element)) {
+								if(settings.$depth1Text.is(element)) {
 									//전역 활성화 클래스 제거
-									_$html.removeClass(options.className.globalActive);
+									_$html.removeClass(settings.className.globalActive);
 									
 									//풀다운1 또는 풀다운2일때
-									if(options.type === 1 || options.type === 2) {
+									if(settings.type === 1 || settings.type === 2) {
 										//height 초기화
 										thisFirstStyle.height = '';
 									}
@@ -783,7 +806,7 @@ try {
 						 * @since 2017-12-06
 						 * @param {object} event
 						 */
-						options.toggleMenu = function(event) {
+						settings.toggleMenu = function(event) {
 							var $this = $(this),
 								$parentDepthItem = $this.closest('li'),
 								$nextDepth = $parentDepthItem.find('div[data-menu-depth]:first'),
@@ -806,7 +829,7 @@ try {
 								//활성화되어 있을때
 								if(isActive) {
 									//버튼요소이거나 다음 뎁스에 선택한 메뉴와 같은 콘텐츠가 있거나 콘텐츠로 이동하지 않았을때
-									if(tagName === 'button' || hasText || !window.confirm(options.confirm)) {
+									if(tagName === 'button' || hasText || !window.confirm(settings.confirm)) {
 										//닫기 또는 추적
 										setSpy(this);
 
@@ -815,7 +838,7 @@ try {
 									}
 								}else{
 									//다음 메뉴 열기
-									options.openMenu.call(this, event);
+									settings.openMenu.call(this, event);
 
 									//이벤트 기능 정지
 									event.preventDefault();
@@ -827,71 +850,71 @@ try {
 						};
 
 						//마우스 이벤트일때
-						if(options.event === 'mouse') {
+						if(settings.event === 'mouse') {
 							//depthText와 depth에 마우스가 접근했을때						
-							options.$depthAndText.on('mouseover.' + options.namespace, options.openMenu);
+							settings.$depthAndText.on('mouseover.' + settings.namespace, settings.openMenu);
 							
 							//지정요소 나가면 추적
-							options.$depth1.on('mouseover.' + options.namespace, function(event) {
+							settings.$depth1.on('mouseover.' + settings.namespace, function(event) {
 								//메뉴가 활성화되어 있을때 && 풀다운1이면서 뎁스1일때 || 풀다운2이면서 타이틀1의 모든요소에 포함되지 않을때
-								if(_$html.hasClass(options.className.globalActive) && ((options.type === 1 && $(this).is(event.target)) || (options.type === 2 && !options.$depthTitle1.add(options.$depthTitle1.find('*')).is(event.target)))) {
+								if(_$html.hasClass(settings.className.globalActive) && ((settings.type === 1 && $(this).is(event.target)) || (settings.type === 2 && !settings.$depthTitle1.add(settings.$depthTitle1.find('*')).is(event.target)))) {
 									setSpy(this);
 								}
-							}).on('mouseleave.' + options.namespace, function(event) {
+							}).on('mouseleave.' + settings.namespace, function(event) {
 								setSpy(this);
 							});
 							
 							//타이틀1을 접근했을때, 빠져나갔을때
-							options.$depthTitle1.on('focusin.' + options.namespace, function(event) {
+							settings.$depthTitle1.on('focusin.' + settings.namespace, function(event) {
 								//풀다운1일때
-								if(options.type === 1) {
-									options.openMenu.call(this, event);
+								if(settings.type === 1) {
+									settings.openMenu.call(this, event);
 								}
-							}).on('focusout.' + options.namespace, function(event) {
+							}).on('focusout.' + settings.namespace, function(event) {
 								//풀다운1일때
-								if(options.type === 1) {
+								if(settings.type === 1) {
 									setSpy(this);
 								}
 							});
 
 							//타이틀2를 나갔을때
-							options.$depthTitle2.on('mouseout.' + options.namespace, function(event) {
+							settings.$depthTitle2.on('mouseout.' + settings.namespace, function(event) {
 								//풀다운1일때
-								if(options.type === 1) {
+								if(settings.type === 1) {
 									setSpy(this);
 								}								
 							});
 
 							//키보드 이벤트
-							options.$depthText.on('keydown.' + options.namespace, function(event) {
+							settings.$depthText.on('keydown.' + settings.namespace, function(event) {
 								var keyCode = event.keyCode || event.which;
 
 								//엔터키를 눌렀을때
 								if(keyCode === 13) {
-									options.toggleMenu.call(this, event);
+									settings.toggleMenu.call(this, event);
 								}
 							});
 						//클릭 이벤트일때
 						}else{
-							options.$depthText.on('click.' + options.namespace, options.toggleMenu);
+							settings.$depthText.on('click.' + settings.namespace, settings.toggleMenu);
 						}
 
 						//메뉴 보이기
-						options.$openElement.on('click.' + options.namespace, function(event) {
+						settings.$openElement.on('click.' + settings.namespace, function(event) {
 							//메뉴출력 클래스 토글
-							_$html.toggleClass(options.className.globalOpen);
+							_$html.toggleClass(settings.className.globalOpen);
 						});
 
 						//메뉴 숨기기
-						options.$closeElement.on('click.' + options.namespace, function(event) {						
+						settings.$closeElement.on('click.' + settings.namespace, function(event) {						
 							//메뉴 숨기기
-							_$html.removeClass(options.className.globalOpen);
+							_$html.removeClass(settings.className.globalOpen);
 						});
 
 						//요소 등록
 						_register.push({
 							element : thisFirst,
-							options : options
+							settings : settings
 						});
 
 						//추적시작
